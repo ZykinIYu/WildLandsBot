@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using WildLandsBot;
 using System.Windows;
+using System.Diagnostics;
 
 namespace Dreamer_Bot
 {
@@ -377,14 +378,20 @@ namespace Dreamer_Bot
         /// </summary>
         private static string missionAbandonmentID2;
 
-        private MainWindow w;
+        /// <summary>
+        /// Экземпляр окна
+        /// </summary>
+        static private MainWindow w;
 
         /// <summary>
         /// telegram бот клиент
         /// </summary>
         static TelegramBotClient dreamerBot;
 
-        public ObservableCollection<MessageLog> CartelBotMessageLog { get; set; }
+        /// <summary>
+        /// Коллекция для логов
+        /// </summary>
+        static public ObservableCollection<MessageLog> CartelBotMessageLog { get; set; }
 
         /// <summary>
         /// Определяем статическую встроенную клавиатуру
@@ -624,7 +631,18 @@ namespace Dreamer_Bot
             string text = $"{DateTime.Now.ToLongTimeString()}: {e.Message.Chat.FirstName} {e.Message.Chat.Id} {e.Message.Text}";
 
             //выводим на консоль время, кто, ид, текст сообщения
-            Console.WriteLine(text);
+            Debug.WriteLine($"{text} TypeMessage: {e.Message.Type.ToString()}");
+            var messageText = e.Message.Text;
+
+            w.Dispatcher.Invoke(() =>
+            {
+                CartelBotMessageLog.Add(
+                    new MessageLog(
+                        DateTime.Now.ToLongTimeString(),
+                        messageText,
+                        e.Message.Chat.FirstName,
+                        e.Message.Chat.Id));
+            });
 
             //выводим тип сообщения
             Console.WriteLine($"TypeMessage: {e.Message.Type.ToString()}");
@@ -1787,6 +1805,11 @@ namespace Dreamer_Bot
         /// </summary>
         public void CartelStart()
         {
+            CartelBotMessageLog = new ObservableCollection<MessageLog>();
+            Debug.WriteLine(dateStart);
+            Debug.WriteLine(dateStart.AddMinutes(1));
+            Debug.WriteLine(dateStart.AddHours(1));
+
             string token = File.ReadAllText("Dreamer.txt");
             cartelCashBalance = 200;
             cartelCashBalanceIntermediateStorage = 200;
@@ -1880,6 +1903,7 @@ namespace Dreamer_Bot
             dreamerBot.OnMessage += MessageListener;
 
             dreamerBot.StartReceiving();
+
 
         }
 
@@ -2866,16 +2890,30 @@ namespace Dreamer_Bot
             File.WriteAllText(pathUnityMissionCompleted3, json);
         }
 
-        public Dreamer_Bot_And_General_Baro_Bot(MainWindow w, string token)
+        //public Dreamer_Bot_And_General_Baro_Bot(MainWindow w, string cartelToken, string unityToken)
+        //{
+        //    this.CartelBotMessageLog = new ObservableCollection<MessageLog>();
+            
+        //    this.w = w;
+        //    Debug.WriteLine(dateStart);
+        //    Debug.WriteLine(dateStart.AddMinutes(1));
+        //    Debug.WriteLine(dateStart.AddHours(1));
+        //    dreamerBot = new TelegramBotClient(File.ReadAllText(cartelToken));
+        //    dreamerBot.OnMessage += MessageListener;
+
+        //    dreamerBot.StartReceiving();
+
+        //    generalBaroBot = new TelegramBotClient(File.ReadAllText(unityToken));
+        //    generalBaroBot.OnMessage += UnityMessageListener;
+
+        //    generalBaroBot.StartReceiving();
+
+        //}
+
+        public void CartelSendMessage(string Text, string Id)
         {
-            this.CartelBotMessageLog = new ObservableCollection<MessageLog>();
-            this.w = w;
-            token = File.ReadAllText("Dreamer.txt");
-            dreamerBot = new TelegramBotClient(token);
-            dreamerBot.OnMessage += MessageListener;
-
-            dreamerBot.StartReceiving();
-
+            long id = Convert.ToInt64(Id);
+            dreamerBot.SendTextMessageAsync(id, Text);
         }
     }
 }

@@ -5,30 +5,216 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WildLandsBot"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        Height="500" 
+        Width="800"
+        MinHeight="400"
+        MinWidth="750">
+        
     <Grid>
-        <TabControl Grid.ColumnSpan="4" 
-                    Grid.Column="0" 
-                    HorizontalAlignment="Left" 
-                    Height="409" 
-                    Grid.RowSpan="3" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.Column="0"
                     Grid.Row="0" 
-                    VerticalAlignment="Top" 
-                    Width="792">
+                    HorizontalAlignment="Stretch"                     
+                    VerticalAlignment="Stretch">
             <TabItem Header="Мечтатель">
                 <Grid Background="#FFE5E5E5" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="40*"/>
-                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="90*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
+                    <TextBlock 
+                               VerticalAlignment="Stretch"
+                               Grid.Row="0" 
+                               Grid.Column="0"
+                               Text="Сообщение пользователя"                               
+                               FontSize="14"
+                               Background="White"
+                               Margin="5" RenderTransformOrigin="0.5,0.5" TextAlignment="Center"
+                               >
+                        <TextBlock.ContextMenu>
+                            <ContextMenu/>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" 
+                               VerticalAlignment="Stretch"
+                               Grid.Row="0" 
+                               Grid.Column="1"
+                               Text="Ответ бота"                               
+                               FontSize="14"
+                               Background="White"  
+                               TextAlignment="Center"
+                               Margin="5"
+                               />
+                    <ListBox x:Name ="loglist" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch"
+                             Grid.Column="0"
+                             Grid.Row="1"
+                             Margin="5" 
+                             Grid.RowSpan="2">
+                    </ListBox>
+                    <ListBox HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch" 
+                             Grid.Column="1"
+                             Grid.Row="1"
+                             Margin="5" 
+                             Grid.RowSpan="2">
+                    </ListBox>
+                    <GroupBox Grid.Column="2" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch" 
+                              Margin="5" 
+                              Grid.RowSpan="2"
+                              Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="50*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Stretch" 
+                               Grid.Row="0" 
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Text="Отправка сообщения" 
+                               VerticalAlignment="Stretch"
+                               FontSize="14"
+                               Background="White"  
+                               TextAlignment="Center"
+                               Margin="5"
+                               />
+                            <TextBlock HorizontalAlignment="Stretch" 
+                               Grid.Row="1" 
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               VerticalAlignment="Stretch"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               Margin="5"
+                               />
+                            <TextBox Grid.ColumnSpan="2" 
+                                     HorizontalAlignment="Stretch" 
+                                     Margin="5" 
+                                     Grid.Row="2" 
+                                     VerticalAlignment="Stretch"/>
+                            <Button Content="Отправить" 
+                                    HorizontalAlignment="Stretch" 
+                                    Margin="5" 
+                                    Grid.Row="3" 
+                                    VerticalAlignment="Stretch" 
+                                    Grid.ColumnSpan="2"/>
+                            <TextBlock HorizontalAlignment="Stretch" 
+                               Grid.Row="4" 
+                               Grid.Column="0"
+                               Text="Баланс денег:" 
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="4" 
+                               Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="5" 
+                               Grid.Column="0"
+                               Text="Баланс Коки:" 
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="5" 
+                               Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="6" 
+                               Grid.Column="0"
+                               Text="Миссия 1:" 
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="6" 
+                               Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="7" 
+                               Grid.Column="0"
+                               Text="Миссия 2:" 
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="7" 
+                               Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="8" 
+                               Grid.Column="0"
+                               Text="Миссия 3:" 
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                            <TextBlock HorizontalAlignment="Center" 
+                               Grid.Row="8" 
+                               Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               Background="White" 
+                               TextAlignment="Center"
+                               />
+                        </Grid>
+                    </GroupBox>
+
+
                 </Grid>
             </TabItem>
             <TabItem Header="Генерал Баро">
