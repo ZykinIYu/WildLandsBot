@@ -22,15 +22,15 @@ namespace WildLandsBot
     /// </summary>
     public partial class MainWindow : Window
     {
-        Dreamer_Bot_And_General_Baro_Bot dreamerAndGeneralBaro;
-        Pac_Katari_Bot pacKatari = new Pac_Katari_Bot();
-        Karen_Bowman_Bot karenBowman = new Karen_Bowman_Bot();
+        Dreamer_Bot_And_General_Baro_Bot dreamerAndGeneralBaro;        
 
         public MainWindow()
         {
             InitializeComponent();
             dreamerAndGeneralBaro = new Dreamer_Bot_And_General_Baro_Bot();
-            loglist.ItemsSource = Dreamer_Bot_And_General_Baro_Bot.CartelBotMessageLog;
+            Pac_Katari_Bot pacKatari = new Pac_Katari_Bot();
+            Karen_Bowman_Bot karenBowman = new Karen_Bowman_Bot();
+            loglist.ItemsSource = dreamerAndGeneralBaro.CartelBotMessageLog;
 
 
             //параллельный запуск ботов
