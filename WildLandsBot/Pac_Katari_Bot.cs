@@ -12,169 +12,169 @@ using Newtonsoft.Json;
 
 namespace Dreamer_Bot
 {
-    struct Pac_Katari_Bot
+    class Pac_Katari_Bot
     {
         /// <summary>
         /// переменная показывающая смогли ли повстанцы выполнить миссию 1
         /// </summary>
-        private static bool insurgentsMissionCompleted1;
+        private bool insurgentsMissionCompleted1;
 
         /// <summary>
         /// переменная показывающая смогли ли повстанцы выполнить миссию 2
         /// </summary>
-        private static bool insurgentsMissionCompleted2;
+        private bool insurgentsMissionCompleted2;
 
         /// <summary>
         /// переменная показывающая смогли ли повстанцы выполнить миссию 3
         /// </summary>
-        private static bool insurgentsMissionCompleted3;
+        private bool insurgentsMissionCompleted3;
 
         /// <summary>
         /// Переменная для хранения введенного текста
         /// </summary>
-        private static string insurgentsMessageText;
+        private string insurgentsMessageText;
 
         /// <summary>
         /// Переменная для хранения названия фото
         /// </summary>
-        private static string insurgentsMessageTextCompletingTheMission;
+        private string insurgentsMessageTextCompletingTheMission;
 
         /// <summary>
         /// Коллекция для хранения миссий
         /// </summary>
-        private static List<string> insurgentsMissionPool;
+        private List<string> insurgentsMissionPool;
 
         /// <summary>
         /// Дата и время начала игры
         /// </summary>
-        private static DateTime insurgentsDateStart;
+        private DateTime insurgentsDateStart;
 
         /// <summary>
         /// Дата и время для сравнения с датой и временем начала игры
         /// </summary>
-        private static DateTime insurgentsComparisonDateFromStart;
+        private DateTime insurgentsComparisonDateFromStart;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 1
         /// </summary>
-        private static bool insurgentsGettingMission1;
+        private bool insurgentsGettingMission1;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 2
         /// </summary>
-        private static bool insurgentsGettingMission2;
+        private bool insurgentsGettingMission2;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 3
         /// </summary>
-        private static bool insurgentsGettingMission3;
+        private bool insurgentsGettingMission3;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 1
         /// </summary>
-        private static string insurgentsMission1ID;
+        private string insurgentsMission1ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 2
         /// </summary>
-        private static string insurgentsMission2ID;
+        private string insurgentsMission2ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 3
         /// </summary>
-        private static string insurgentsMission3ID;
+        private string insurgentsMission3ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 1
         /// </summary>
-        private static string insurgentsMissionFailedID1;
+        private string insurgentsMissionFailedID1;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 2
         /// </summary>
-        private static string insurgentsMissionFailedID2;
+        private string insurgentsMissionFailedID2;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 3
         /// </summary>
-        private static string insurgentsMissionFailedID3;
+        private string insurgentsMissionFailedID3;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 1
         /// </summary>
-        private static string insurgentsMissionComplete1ID;
+        private string insurgentsMissionComplete1ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 2
         /// </summary>
-        private static string insurgentsMissionComplete2ID;
+        private string insurgentsMissionComplete2ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 3
         /// </summary>
-        private static string insurgentsMissionComplete3ID;
+        private string insurgentsMissionComplete3ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла отказа от миссии 2
         /// </summary>
-        private static string insurgentsMissionAbandonmentID2;
+        private string insurgentsMissionAbandonmentID2;
 
         /// <summary>
         /// Время запуска мисии1
         /// </summary>
-        private static double insurgentsStartTimeMission1;
+        private double insurgentsStartTimeMission1;
 
         /// <summary>
         /// Время запуска мисии2
         /// </summary>
-        private static double insurgentsStartTimeMission2;
+        private double insurgentsStartTimeMission2;
 
         /// <summary>
         /// Время запуска мисии3
         /// </summary>
-        private static double insurgentsStartTimeMission3;
+        private double insurgentsStartTimeMission3;
 
         /// <summary>
         /// Время провала мисии1
         /// </summary>
-        private static double insurgentsFailedTimeMission1;
+        private double insurgentsFailedTimeMission1;
 
         /// <summary>
         /// Время провала мисии2
         /// </summary>
-        private static double insurgentsFailedTimeMission2;
+        private double insurgentsFailedTimeMission2;
 
         /// <summary>
         /// Время провала мисии3
         /// </summary>
-        private static double insurgentsFailedTimeMission3;
+        private double insurgentsFailedTimeMission3;
 
         /// <summary>
         /// Получение дополнительной миссии ровно 1 раз
         /// </summary>
-        private static bool insurgentsSupplementaryMission2;
+        private bool insurgentsSupplementaryMission2;
 
         /// <summary>
         /// telegram бот клиент
         /// </summary>
-        static TelegramBotClient pacKatariBot;
+        TelegramBotClient pacKatariBot;
 
         /// <summary>
         /// Определяем статическую встроенную клавиатуру повстанцев
         /// </summary>
-        private static ReplyKeyboardMarkup insurgentsOperationsMenu;
+        private ReplyKeyboardMarkup insurgentsOperationsMenu;
 
         /// <summary>
         /// Клавиатура принятия миссии
         /// </summary>
-        private static InlineKeyboardMarkup insurgentsKeyboardAcceptOrRefuseAMission;
+        private InlineKeyboardMarkup insurgentsKeyboardAcceptOrRefuseAMission;
 
         /// <summary>
         /// Метод для ответа на сообщения от пользователей
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static async void InsurgentsMessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
+        private async void InsurgentsMessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
         {
             insurgentsComparisonDateFromStart = DateTime.Now;
 
@@ -398,7 +398,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="fileId">ИД документа</param>
         /// <param name="path"> путь сохранения файла</param>
-        static async void InsurgentsDownLoad(string fileId, string path)
+        async void InsurgentsDownLoad(string fileId, string path)
         {
             var file = await pacKatariBot.GetFileAsync(fileId);
             FileStream fs = new FileStream("Insurgents\\MissionPhoto\\Insurgents_" + path, FileMode.Create);
@@ -411,7 +411,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Статическая клавиатура вопросов для повстанцев
         /// </summary>
-        private static void InsurgentsOperationsMenuOperation()
+        private void InsurgentsOperationsMenuOperation()
         {
             insurgentsOperationsMenu = new ReplyKeyboardMarkup(new[]
             {
@@ -426,7 +426,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Меню принятия/отказа дополнительной миссии
         /// </summary>
-        private static void InsurgentsAcceptOrRefuseAMission()
+        private void InsurgentsAcceptOrRefuseAMission()
         {
             insurgentsKeyboardAcceptOrRefuseAMission = new InlineKeyboardMarkup(new[]
             {
@@ -439,7 +439,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="ev"></param>
-        private static async void InsurgentsAcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        private async void InsurgentsAcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
             Console.WriteLine($"{ev.CallbackQuery.Data}");
@@ -496,7 +496,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Метод десерилизации данных для Единства
         /// </summary>
-        public static void InsurgentsDeserialization()
+        public void InsurgentsDeserialization()
         {
             string json;
 
@@ -615,7 +615,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Метод Серилизации данных для Единства
         /// </summary>
-        public static void InsurgentsSerialization()
+        public void InsurgentsSerialization()
         {
             string json;
 

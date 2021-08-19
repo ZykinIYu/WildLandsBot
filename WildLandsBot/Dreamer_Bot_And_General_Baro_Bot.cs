@@ -16,614 +16,614 @@ using System.Diagnostics;
 
 namespace Dreamer_Bot
 {
-    struct Dreamer_Bot_And_General_Baro_Bot
+    class Dreamer_Bot_And_General_Baro_Bot
     {
         /// <summary>
         /// переменная показывающая смог ли картель выполнить миссию 1
         /// </summary>
-        private static bool cartelMissionCompleted1;
+        private bool cartelMissionCompleted1;
 
         /// <summary>
         /// переменная показывающая смог ли картель выполнить миссию 2
         /// </summary>
-        private static bool cartelMissionCompleted2;
+        private bool cartelMissionCompleted2;
 
         /// <summary>
         /// переменная показывающая смог ли картель выполнить миссию 3
         /// </summary>
-        private static bool cartelMissionCompleted3;
+        private bool cartelMissionCompleted3;
 
         /// <summary>
         /// Переменная для хранения введенного текста
         /// </summary>
-        private static string messageText;
+        private string messageText;
 
         /// <summary>
         /// Переменная для хранения названия фото
         /// </summary>
-        private static string messageTextCompletingTheMission;
+        private string messageTextCompletingTheMission;
 
         /// <summary>
         /// Коллекция для хранения миссий
         /// </summary>
-        private static List<string> missionPool;
+        private List<string> missionPool;
 
         /// <summary>
         /// Денежный баланс картеля
         /// </summary>
-        private static double cartelCashBalance;
+        private double cartelCashBalance;
 
         /// <summary>
         /// Денежный баланс картеля для временного хранения для переводов
         /// </summary>
-        private static double cartelCashBalanceIntermediateStorage;
+        private double cartelCashBalanceIntermediateStorage;
 
         /// <summary>
         /// Денежный баланс картеля для сравнения
         /// </summary>
-        private static double cartelCashBalanceCheck;
+        private double cartelCashBalanceCheck;
 
         /// <summary>
         /// Денежный баланс картеля разница
         /// </summary>
-        private static double cartelCashBalanceDifference;
+        private double cartelCashBalanceDifference;
 
         /// <summary>
         /// коммисия которую берет себе банк
         /// </summary>
-        private static double percentForTranslation;
+        private double percentForTranslation;
 
         /// <summary>
         /// Хранилище коки картеля
         /// </summary>
-        private static double cartelCocaCash;
+        private double cartelCocaCash;
 
         /// <summary>
         /// Дата и время начала игры
         /// </summary>
-        private static DateTime dateStart;
+        private DateTime dateStart;
 
         /// <summary>
         /// Дата и время для сравнения с датой и временем начала игры
         /// </summary>
-        private static DateTime comparisonDateFromStart;
+        private DateTime comparisonDateFromStart;
 
         /// <summary>
         /// Дата и время для сравнения с датой и временем начала игры для зеленой плантации
         /// </summary>
-        private static DateTime cartelGreenPlantation;
+        private DateTime cartelGreenPlantation;
 
         /// <summary>
         /// Дата и время для сравнения с датой и временем начала игры для желтой плантации
         /// </summary>
-        private static DateTime cartelYellowPlantation;
+        private DateTime cartelYellowPlantation;
 
         /// <summary>
         /// Дата и время для сравнения с датой и временем начала игры для красной плантации
         /// </summary>
-        private static DateTime cartelRedPlantation;
+        private DateTime cartelRedPlantation;
 
         /// <summary>
         /// Массив даты и времени начала транспортировки грузовиков
         /// </summary>
-        private static DateTime[] cartelStartTransportationTruck;
+        private DateTime[] cartelStartTransportationTruck;
 
         /// <summary>
         /// Массив даты и времени начала транспортировки вертолетов
         /// </summary>
-        private static DateTime[] cartelStartTransportationHelicopters;
+        private DateTime[] cartelStartTransportationHelicopters;
 
         /// <summary>
         /// Массив даты и времени начала транспортировки самолетов
         /// </summary>
-        private static DateTime[] cartelStartTransportationAircraft;
+        private DateTime[] cartelStartTransportationAircraft;
 
         /// <summary>
         /// Дата и время выплаты дани Мечтателю
         /// </summary>
-        private static DateTime cartelTributeDreamer;
+        private DateTime cartelTributeDreamer;
 
         /// <summary>
         /// Сравнение дат для расчета времени созревания плантаций
         /// </summary>
-        private static TimeSpan cartelComparisonDateFromStart;
+        private TimeSpan cartelComparisonDateFromStart;
 
         /// <summary>
         /// Переменная записи общего количества свободных грузовиков
         /// </summary>
-        private static int cartelNumberTrucks;
+        private int cartelNumberTrucks;
 
         /// <summary>
         /// Переменная записи общего количества грузовиков
         /// </summary>
-        private static int cartelNumberTrucksCount;
+        private int cartelNumberTrucksCount;
 
         /// <summary>
         /// Переменная записи общего количества свободных вертолетов
         /// </summary>
-        private static int cartelNumberHelicopters;
+        private int cartelNumberHelicopters;
 
         /// <summary>
         /// Переменная записи общего количества вертолетов
         /// </summary>
-        private static int cartelNumberHelicoptersCount;
+        private int cartelNumberHelicoptersCount;
 
         /// <summary>
         /// Переменная записи общего количества свободных самолетов
         /// </summary>
-        private static int cartelNumberAircraft;
+        private int cartelNumberAircraft;
 
         /// <summary>
         /// Переменная записи общего количества самолетов
         /// </summary>
-        private static int cartelNumberAircraftCount;
+        private int cartelNumberAircraftCount;
 
         /// <summary>
         /// Переменная записи количества коки отправляемой на грузовике
         /// </summary>
-        private static double cartelNumberCocaTrucks;
+        private double cartelNumberCocaTrucks;
 
         /// <summary>
         /// Переменная записи количества коки отправляемой на вертолете
         /// </summary>
-        private static double cartelNumberCocaHelicopters;
+        private double cartelNumberCocaHelicopters;
 
         /// <summary>
         /// Переменная записи количества коки отправляемой на самолете
         /// </summary>
-        private static double cartelNumberCocaAircraft;
+        private double cartelNumberCocaAircraft;
 
         /// <summary>
         /// Переменная записи процента за транспортировку на грузовике
         /// </summary>
-        private static double cartelpercentForTranslationTrucks;
+        private double cartelpercentForTranslationTrucks;
 
         /// <summary>
         /// Переменная записи процента за транспортировку на вертолете
         /// </summary>
-        private static double cartelpercentForTranslationHelicopters;
+        private double cartelpercentForTranslationHelicopters;
 
         /// <summary>
         /// Переменная записи процента за транспортировку на самолете
         /// </summary>
-        private static double cartelpercentForTranslationAircraft;
+        private double cartelpercentForTranslationAircraft;
 
         /// <summary>
         /// Переменная записи времени доставки грузовиком
         /// </summary>
-        private static double cartelDeliveryTimeTrucks;
+        private double cartelDeliveryTimeTrucks;
 
         /// <summary>
         /// Переменная записи времени доставки Вертолетом
         /// </summary>
-        private static double cartelDeliveryTimeHelicopters;
+        private double cartelDeliveryTimeHelicopters;
 
         /// <summary>
         /// Переменная записи времени доставки Самолетом
         /// </summary>
-        private static double cartelDeliveryTimeAircraft;
+        private double cartelDeliveryTimeAircraft;
 
         /// <summary>
         /// Время запуска мисии1
         /// </summary>
-        private static double cartelStartTimeMission1;
+        private double cartelStartTimeMission1;
 
         /// <summary>
         /// Время запуска мисии2
         /// </summary>
-        private static double cartelStartTimeMission2;
+        private double cartelStartTimeMission2;
 
         /// <summary>
         /// Время запуска мисии3
         /// </summary>
-        private static double cartelStartTimeMission3;
+        private double cartelStartTimeMission3;
 
         /// <summary>
         /// Время провала мисии1
         /// </summary>
-        private static double cartelFailedTimeMission1;
+        private double cartelFailedTimeMission1;
 
         /// <summary>
         /// Время провала мисии2
         /// </summary>
-        private static double cartelFailedTimeMission2;
+        private double cartelFailedTimeMission2;
 
         /// <summary>
         /// Время провала мисии3
         /// </summary>
-        private static double cartelFailedTimeMission3;
+        private double cartelFailedTimeMission3;
 
         /// <summary>
         /// Получение дополнительной миссии ровно 1 раз
         /// </summary>
-        private static bool cartelSupplementaryMission2;
+        private bool cartelSupplementaryMission2;
 
         /// <summary>
         /// Время выплаты дани
         /// </summary>
-        private static double cartelTributePaymentTime;
+        private double cartelTributePaymentTime;
 
         /// <summary>
         /// Дань Мечтателю
         /// </summary>
-        private static double tribute;
+        private double tribute;
 
         /// <summary>
         /// Цена коки
         /// </summary>
-        private static double cartelCocaPrice;
+        private double cartelCocaPrice;
 
         /// <summary>
         /// массив определяющий доступность грузовиков
         /// </summary>
-        private static bool[] cartelBoolTruckBusy;
+        private bool[] cartelBoolTruckBusy;
 
         /// <summary>
         /// массив определяющий доступность вертолетов
         /// </summary>
-        private static bool[] cartelBoolHelicoptersBusy;
+        private bool[] cartelBoolHelicoptersBusy;
 
         /// <summary>
         /// массив определяющий доступность самолетов
         /// </summary>
-        private static bool[] cartelBoolAircraftBusy;
+        private bool[] cartelBoolAircraftBusy;
 
         /// <summary>
         /// массив определяющий доставку груза грузовиком
         /// </summary>
-        private static bool[] cartelBoolTruckBusyFinishe;
+        private bool[] cartelBoolTruckBusyFinishe;
 
         /// <summary>
         /// массив определяющий доставку груза вертолетом
         /// </summary>
-        private static bool[] cartelBoolHelicoptersBusyFinishe;
+        private bool[] cartelBoolHelicoptersBusyFinishe;
 
         /// <summary>
         /// массив определяющий доставку груза самолетом
         /// </summary>
-        private static bool[] cartelBoolAircraftBusyFinishe;
+        private bool[] cartelBoolAircraftBusyFinishe;
 
         /// <summary>
         /// Переменная определяющая что можно собирать коку на зеленой плантации
         /// </summary>
-        private static bool boolGreenPlantation;
+        private bool boolGreenPlantation;
 
         /// <summary>
         /// Переменная определяющая что можно собирать коку на желтой плантации
         /// </summary>
-        private static bool boolYellowPlantation;
+        private bool boolYellowPlantation;
 
         /// <summary>
         /// Переменная определяющая что можно собирать коку на зеленой плантации
         /// </summary>
-        private static bool boolRedPlantation;
+        private bool boolRedPlantation;
 
         /// <summary>
         /// Количество собераемой коки с зеленой плантации за раз
         /// </summary>
-        private static double amountCocaHarvestedGreenPlantation;
+        private double amountCocaHarvestedGreenPlantation;
 
         /// <summary>
         /// Количество собераемой коки с желтой плантации за раз
         /// </summary>
-        private static double amountCocaHarvestedYellowPlantation;
+        private double amountCocaHarvestedYellowPlantation;
 
         /// <summary>
         /// Количество собераемой коки с красной плантации за раз
         /// </summary>
-        private static double amountCocaHarvestedRedPlantation;
+        private double amountCocaHarvestedRedPlantation;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 1
         /// </summary>
-        private static bool gettingMission1;
+        private bool gettingMission1;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 2
         /// </summary>
-        private static bool gettingMission2;
+        private bool gettingMission2;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 3
         /// </summary>
-        private static bool gettingMission3;
+        private bool gettingMission3;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 1
         /// </summary>
-        private static string mission1ID;
+        private string mission1ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 2
         /// </summary>
-        private static string mission2ID;
+        private string mission2ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 3
         /// </summary>
-        private static string mission3ID;
+        private string mission3ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 1
         /// </summary>
-        private static string missionFailedID1;
+        private string missionFailedID1;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 2
         /// </summary>
-        private static string missionFailedID2;
+        private string missionFailedID2;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 3
         /// </summary>
-        private static string missionFailedID3;
+        private string missionFailedID3;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 1
         /// </summary>
-        private static string missionComplete1ID;
+        private string missionComplete1ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 2
         /// </summary>
-        private static string missionComplete2ID;
+        private string missionComplete2ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 3
         /// </summary>
-        private static string missionComplete3ID;
+        private string missionComplete3ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла отказа от миссии 2
         /// </summary>
-        private static string missionAbandonmentID2;
+        private string missionAbandonmentID2;
 
         /// <summary>
         /// Экземпляр окна
         /// </summary>
-        static private MainWindow w;
+        private MainWindow w;
 
         /// <summary>
         /// telegram бот клиент
         /// </summary>
-        static TelegramBotClient dreamerBot;
+        TelegramBotClient dreamerBot;
 
         /// <summary>
         /// Коллекция для логов
         /// </summary>
-        static public ObservableCollection<MessageLog> CartelBotMessageLog { get; set; }
+        public ObservableCollection<MessageLog> CartelBotMessageLog { get; set; }
 
         /// <summary>
         /// Определяем статическую встроенную клавиатуру
         /// </summary>
-        private static ReplyKeyboardMarkup cartelOperationsMenu;
+        private ReplyKeyboardMarkup cartelOperationsMenu;
 
         /// <summary>
         /// Меню выбора кому переводить
         /// </summary>
-        private static InlineKeyboardMarkup whoTranslateCartel;
+        private InlineKeyboardMarkup whoTranslateCartel;
 
         /// <summary>
         /// Клавиатура принятия миссии
         /// </summary>
-        private static InlineKeyboardMarkup keyboardAcceptOrRefuseAMission;
+        private InlineKeyboardMarkup keyboardAcceptOrRefuseAMission;
 
         /// <summary>
         /// Клавиатура выбора плантации картеля
         /// </summary>
-        private static InlineKeyboardMarkup cartelPlantationSelectionKeyboard;
+        private InlineKeyboardMarkup cartelPlantationSelectionKeyboard;
 
         /// <summary>
         /// Клавиатура выбора транспортировки коки
         /// </summary>
-        private static InlineKeyboardMarkup cartelCocaTransportationKeyboard;
+        private InlineKeyboardMarkup cartelCocaTransportationKeyboard;
 
         /// <summary>
         /// переменная показывающая смогло ли Единство выполнить миссию 1
         /// </summary>
-        private static bool unityMissionCompleted1;
+        private bool unityMissionCompleted1;
 
         /// <summary>
         /// переменная показывающая смогло ли Единство выполнить миссию 2
         /// </summary>
-        private static bool unityMissionCompleted2;
+        private bool unityMissionCompleted2;
 
         /// <summary>
         /// переменная показывающая смогло ли Единство выполнить миссию 3
         /// </summary>
-        private static bool unityMissionCompleted3;
+        private bool unityMissionCompleted3;
 
         /// <summary>
         /// Переменная для хранения введенного текста
         /// </summary>
-        private static string unityMessageText;
+        private string unityMessageText;
 
         /// <summary>
         /// Переменная для хранения названия фото
         /// </summary>
-        private static string unityMessageTextCompletingTheMission;
+        private string unityMessageTextCompletingTheMission;
 
         /// <summary>
         /// Коллекция для хранения миссий
         /// </summary>
-        private static List<string> unityMissionPool;
+        private List<string> unityMissionPool;
 
         /// <summary>
         /// Денежный баланс Единства
         /// </summary>
-        public static double unityCashBalance;
+        public double unityCashBalance;
 
         /// <summary>
         /// Денежный баланс единства для временного хранения для переводов
         /// </summary>
-        private static double unityCashBalanceIntermediateStorage;
+        private double unityCashBalanceIntermediateStorage;
 
         /// <summary>
         /// Денежный баланс единства для сравнения
         /// </summary>
-        private static double unityCashBalanceCheck;
+        private double unityCashBalanceCheck;
 
         /// <summary>
         /// Денежный баланс единства разница
         /// </summary>
-        private static double unityCashBalanceDifference;
+        private double unityCashBalanceDifference;
 
         /// <summary>
         /// коммисия которую берет себе банк
         /// </summary>
-        private static double unityPercentForTranslation;
+        private double unityPercentForTranslation;
 
         /// <summary>
         /// Дата и время начала игры
         /// </summary>
-        private static DateTime unityDateStart;
+        private DateTime unityDateStart;
 
         /// <summary>
         /// Дата и время для сравнения с датой и временем начала игры
         /// </summary>
-        private static DateTime unityComparisonDateFromStart;
+        private DateTime unityComparisonDateFromStart;
 
         /// <summary>
         /// Дата и время для сравнения с датой unityComparisonDateFromStart
         /// </summary>
-        private static DateTime unityDateSalary;
+        private DateTime unityDateSalary;
 
         /// <summary>
         /// Зарплата единства
         /// </summary>
-        private static double salary;
+        private double salary;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 1
         /// </summary>
-        private static bool unityGettingMission1;
+        private bool unityGettingMission1;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 2
         /// </summary>
-        private static bool unityGettingMission2;
+        private bool unityGettingMission2;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 3
         /// </summary>
-        private static bool unityGettingMission3;
+        private bool unityGettingMission3;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 1
         /// </summary>
-        private static string unityMission1ID;
+        private string unityMission1ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 2
         /// </summary>
-        private static string unityMission2ID;
+        private string unityMission2ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 3
         /// </summary>
-        private static string unityMission3ID;
+        private string unityMission3ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 1
         /// </summary>
-        private static string unityMissionFailedID1;
+        private string unityMissionFailedID1;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 2
         /// </summary>
-        private static string unityMissionFailedID2;
+        private string unityMissionFailedID2;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 3
         /// </summary>
-        private static string unityMissionFailedID3;
+        private string unityMissionFailedID3;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 1
         /// </summary>
-        private static string unityMissionComplete1ID;
+        private string unityMissionComplete1ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 2
         /// </summary>
-        private static string unityMissionComplete2ID;
+        private string unityMissionComplete2ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 3
         /// </summary>
-        private static string unityMissionComplete3ID;
+        private string unityMissionComplete3ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла отказа от миссии 2
         /// </summary>
-        private static string unityMissionAbandonmentID2;
+        private string unityMissionAbandonmentID2;
 
         /// <summary>
         /// Время запуска мисии1
         /// </summary>
-        private static double unityStartTimeMission1;
+        private double unityStartTimeMission1;
 
         /// <summary>
         /// Время запуска мисии2
         /// </summary>
-        private static double unityStartTimeMission2;
+        private double unityStartTimeMission2;
 
         /// <summary>
         /// Время запуска мисии3
         /// </summary>
-        private static double unityStartTimeMission3;
+        private double unityStartTimeMission3;
 
         /// <summary>
         /// Время провала мисии1
         /// </summary>
-        private static double unityFailedTimeMission1;
+        private double unityFailedTimeMission1;
 
         /// <summary>
         /// Время провала мисии2
         /// </summary>
-        private static double unityFailedTimeMission2;
+        private double unityFailedTimeMission2;
 
         /// <summary>
         /// Время провала мисии3
         /// </summary>
-        private static double unityFailedTimeMission3;
+        private double unityFailedTimeMission3;
 
         /// <summary>
         /// Получение дополнительной миссии ровно 1 раз
         /// </summary>
-        private static bool unitySupplementaryMission2;
+        private bool unitySupplementaryMission2;
 
         /// <summary>
         /// Время получения зарплаты
         /// </summary>
-        private static double unitySalaryPaymentTime;
+        private double unitySalaryPaymentTime;
 
         /// <summary>
         /// telegram бот клиент
         /// </summary>
-        static TelegramBotClient generalBaroBot;
+        TelegramBotClient generalBaroBot;
 
         /// <summary>
         /// Определяем статическую встроенную клавиатуру
         /// </summary>
-        private static ReplyKeyboardMarkup unityOperationsMenu;
+        private ReplyKeyboardMarkup unityOperationsMenu;
 
         /// <summary>
         /// Меню выбора кому переводить
         /// </summary>
-        private static InlineKeyboardMarkup whoTranslateUnity;
+        private InlineKeyboardMarkup whoTranslateUnity;
 
         /// <summary>
         /// Клавиатура принятия миссии
         /// </summary>
-        private static InlineKeyboardMarkup unityKeyboardAcceptOrRefuseAMission;
+        private InlineKeyboardMarkup unityKeyboardAcceptOrRefuseAMission;
 
         /// <summary>
         /// Метод для ответа на сообщения от пользователей картеля
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static async void MessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
+        private async void MessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
         {
             comparisonDateFromStart = DateTime.Now;
 
@@ -1008,7 +1008,7 @@ namespace Dreamer_Bot
                     break;
             }
 
-            CartelSerialization();
+            //CartelSerialization();
             Thread.Sleep(200);
 
             //Если сообщение не текстовое, то выходим из метода
@@ -1023,7 +1023,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="ev"></param>
-        private static void CartelTransfers(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        private void CartelTransfers(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
             if (ev.CallbackQuery.Data == "5")
@@ -1104,7 +1104,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="ev"></param>
-        private static async void CartelHittingThePlantation(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        private async void CartelHittingThePlantation(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
             if (ev.CallbackQuery.Data == "GreenPlantation")
@@ -1182,7 +1182,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="ev"></param>
-        private static void CartelSendingTheHarvestedCoca(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        private void CartelSendingTheHarvestedCoca(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
             if (ev.CallbackQuery.Data == "Truck")
@@ -1270,7 +1270,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="fileId">ИД документа</param>
         /// <param name="path"> путь сохранения файла</param>
-        static async void DownLoad(string fileId, string path)
+        async void DownLoad(string fileId, string path)
         {
             var file = await dreamerBot.GetFileAsync(fileId);
             FileStream fs = new FileStream("Cartel\\MissionPhoto\\Cartel_" + path + ".jpeg", FileMode.Create);
@@ -1283,7 +1283,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Статическая клавиатура вопросов для картеля
         /// </summary>
-        private static void CartelOperationsMenuOperation()
+        private void CartelOperationsMenuOperation()
         {
             cartelOperationsMenu = new ReplyKeyboardMarkup(new[]
             {
@@ -1299,7 +1299,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Меню переводов картеля
         /// </summary>
-        private static void WhoDoesTheCartelTranslateTo()
+        private void WhoDoesTheCartelTranslateTo()
         {
             whoTranslateCartel = new InlineKeyboardMarkup(new[]
             {
@@ -1312,7 +1312,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Меню принятия/отказа дополнительной миссии
         /// </summary>
-        private static void AcceptOrRefuseAMission()
+        private void AcceptOrRefuseAMission()
         {
             keyboardAcceptOrRefuseAMission = new InlineKeyboardMarkup(new[]
             {
@@ -1323,7 +1323,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Меню плантаций картеля
         /// </summary>
-        private static void CartelPlantationSelectionKeyboardInline()
+        private void CartelPlantationSelectionKeyboardInline()
         {
             cartelPlantationSelectionKeyboard = new InlineKeyboardMarkup(new[]
             {
@@ -1336,7 +1336,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Меню транспортировки коки
         /// </summary>
-        private static void CocaTransportationKeyboardInline()
+        private void CocaTransportationKeyboardInline()
         {
             cartelCocaTransportationKeyboard = new InlineKeyboardMarkup(new[]
             {
@@ -1351,7 +1351,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="ev"></param>
-        private static async void AcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        private async void AcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
             Console.WriteLine($"{ev.CallbackQuery.Data}");
@@ -1382,7 +1382,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static async void UnityMessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
+        private async void UnityMessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
         {
             unityComparisonDateFromStart = DateTime.Now;
 
@@ -1624,7 +1624,7 @@ namespace Dreamer_Bot
                     break;
             }
 
-            UnitySerialization();
+            //UnitySerialization();
             Thread.Sleep(200);
 
             //Если сообщение не текстовое, то выходим из метода
@@ -1639,7 +1639,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="ev"></param>
-        private static void UnityTransfers(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        private void UnityTransfers(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
             if (ev.CallbackQuery.Data == "5")
@@ -1720,7 +1720,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="fileId">ИД документа</param>
         /// <param name="path"> путь сохранения файла</param>
-        static async void UnityDownLoad(string fileId, string path)
+        async void UnityDownLoad(string fileId, string path)
         {
             var file = await generalBaroBot.GetFileAsync(fileId);
             FileStream fs = new FileStream("Unity\\MissionPhoto\\Unity_" + path, FileMode.Create);
@@ -1733,7 +1733,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Статическая клавиатура вопросов для Единства
         /// </summary>
-        private static void UnityOperationsMenuOperation()
+        private void UnityOperationsMenuOperation()
         {
             unityOperationsMenu = new ReplyKeyboardMarkup(new[]
             {
@@ -1749,7 +1749,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Меню переводов картеля
         /// </summary>
-        private static void WhoDoesTheUnityTranslateTo()
+        private void WhoDoesTheUnityTranslateTo()
         {
             whoTranslateUnity = new InlineKeyboardMarkup(new[]
             {
@@ -1762,7 +1762,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Меню принятия/отказа дополнительной миссии
         /// </summary>
-        private static void UnityAcceptOrRefuseAMission()
+        private void UnityAcceptOrRefuseAMission()
         {
             unityKeyboardAcceptOrRefuseAMission = new InlineKeyboardMarkup(new[]
             {
@@ -1775,7 +1775,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="ev"></param>
-        private static async void UnityAcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        private async void UnityAcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
             if (ev.CallbackQuery.Data == "Yes")
@@ -1805,7 +1805,7 @@ namespace Dreamer_Bot
         /// </summary>
         public void CartelStart()
         {
-            CartelBotMessageLog = new ObservableCollection<MessageLog>();
+                       
             Debug.WriteLine(dateStart);
             Debug.WriteLine(dateStart.AddMinutes(1));
             Debug.WriteLine(dateStart.AddHours(1));
@@ -1895,7 +1895,7 @@ namespace Dreamer_Bot
             cartelMissionCompleted1 = false;
             cartelMissionCompleted2 = false;
             cartelMissionCompleted3 = false;
-            CartelDeserialization();
+            //CartelDeserialization();
             Console.WriteLine(dateStart);
             Console.WriteLine(dateStart.AddMinutes(1));
             Console.WriteLine(dateStart.AddHours(1));
@@ -1935,7 +1935,7 @@ namespace Dreamer_Bot
             unityMissionCompleted1 = false;
             unityMissionCompleted2 = false;
             unityMissionCompleted3 = false;
-            UnityDeserialization();
+            //UnityDeserialization();
             Console.WriteLine(unityDateStart);
             Console.WriteLine(unityDateStart.AddMinutes(1));
             generalBaroBot = new TelegramBotClient(token);
@@ -1946,21 +1946,9 @@ namespace Dreamer_Bot
         }
 
         /// <summary>
-        /// Запуск обоих чат ботов
-        /// </summary>
-        public void CartelAndUnityStart()
-        {
-            Thread cartelStartTask = new Thread(CartelStart);
-            cartelStartTask.Start();
-
-            Thread unityStartTask = new Thread(UnityStart);
-            unityStartTask.Start();
-        }
-
-        /// <summary>
         /// Метод десерилизации данных для картеля
         /// </summary>
-        public static void CartelDeserialization()
+        public void CartelDeserialization()
         {
             string json;
 
@@ -2376,7 +2364,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Метод Серилизации данных для картеля
         /// </summary>
-        public static void CartelSerialization()
+        public void CartelSerialization()
         {
             string json;
 
@@ -2623,7 +2611,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Метод десерилизации данных для Единства
         /// </summary>
-        public static void UnityDeserialization()
+        public void UnityDeserialization()
         {
             string json;
 
@@ -2792,7 +2780,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Метод Серилизации данных для Единства
         /// </summary>
-        public static void UnitySerialization()
+        public void UnitySerialization()
         {
             string json;
 
@@ -2890,26 +2878,23 @@ namespace Dreamer_Bot
             File.WriteAllText(pathUnityMissionCompleted3, json);
         }
 
-        //public Dreamer_Bot_And_General_Baro_Bot(MainWindow w, string cartelToken, string unityToken)
-        //{
-        //    this.CartelBotMessageLog = new ObservableCollection<MessageLog>();
-            
-        //    this.w = w;
-        //    Debug.WriteLine(dateStart);
-        //    Debug.WriteLine(dateStart.AddMinutes(1));
-        //    Debug.WriteLine(dateStart.AddHours(1));
-        //    dreamerBot = new TelegramBotClient(File.ReadAllText(cartelToken));
-        //    dreamerBot.OnMessage += MessageListener;
+        public Dreamer_Bot_And_General_Baro_Bot(MainWindow w)
+        {
+            this.CartelBotMessageLog = new ObservableCollection<MessageLog>();
+            this.w = w;
+            Thread cartelStartTask = new Thread(CartelStart);
+            cartelStartTask.Start();
 
-        //    dreamerBot.StartReceiving();
+            Thread unityStartTask = new Thread(UnityStart);
+            unityStartTask.Start();
 
-        //    generalBaroBot = new TelegramBotClient(File.ReadAllText(unityToken));
-        //    generalBaroBot.OnMessage += UnityMessageListener;
+        }
 
-        //    generalBaroBot.StartReceiving();
-
-        //}
-
+        /// <summary>
+        /// Ручная рассылка
+        /// </summary>
+        /// <param name="Text">Текст</param>
+        /// <param name="Id">ИД</param>
         public void CartelSendMessage(string Text, string Id)
         {
             long id = Convert.ToInt64(Id);

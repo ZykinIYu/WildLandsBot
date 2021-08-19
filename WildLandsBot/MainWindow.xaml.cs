@@ -22,24 +22,31 @@ namespace WildLandsBot
     /// </summary>
     public partial class MainWindow : Window
     {
-        Dreamer_Bot_And_General_Baro_Bot dreamerAndGeneralBaro;        
+        Dreamer_Bot_And_General_Baro_Bot dreamerAndGeneralBaro;
+        Pac_Katari_Bot pacKatari;
+        Karen_Bowman_Bot karenBowman;
 
         public MainWindow()
         {
             InitializeComponent();
-            dreamerAndGeneralBaro = new Dreamer_Bot_And_General_Baro_Bot();
-            Pac_Katari_Bot pacKatari = new Pac_Katari_Bot();
-            Karen_Bowman_Bot karenBowman = new Karen_Bowman_Bot();
+            dreamerAndGeneralBaro = new Dreamer_Bot_And_General_Baro_Bot(this);
+            pacKatari = new Pac_Katari_Bot();
+            karenBowman = new Karen_Bowman_Bot();
             loglist.ItemsSource = dreamerAndGeneralBaro.CartelBotMessageLog;
 
 
-            //параллельный запуск ботов
-            Thread cartelAndUnityStartTask = new Thread(dreamerAndGeneralBaro.CartelAndUnityStart);
-            cartelAndUnityStartTask.Start();
-            Thread insurgentsStartTask = new Thread(pacKatari.InsurgentsStart);
-            insurgentsStartTask.Start();
-            Thread ghostsStartTask = new Thread(karenBowman.GhostsStart);
-            ghostsStartTask.Start();
+            ////параллельный запуск ботов
+            //Thread cartelAndUnityStartTask = new Thread(dreamerAndGeneralBaro.);
+            //cartelAndUnityStartTask.Start();
+            //Thread insurgentsStartTask = new Thread(pacKatari.InsurgentsStart);
+            //insurgentsStartTask.Start();
+            //Thread ghostsStartTask = new Thread(karenBowman.GhostsStart);
+            //ghostsStartTask.Start();
+        }
+
+        private void btnCartelClick(object sender, RoutedEventArgs e)
+        {
+            dreamerAndGeneralBaro.CartelSendMessage(carteltxtMsgSend.Text, cartelTargetSend.Text);
         }
     }
 }

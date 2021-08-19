@@ -63,6 +63,28 @@
                              Grid.Row="1"
                              Margin="5" 
                              Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" 
+                                        Margin="5" 
+                                        BorderThickness="1" 
+                                        CornerRadius="10">
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="{Binding FirstName}" 
+                                                   Margin="0" 
+                                                   FontSize="15"/>
+                                        <TextBlock Text="{Binding Msg}" 
+                                                   Margin="0" 
+                                                   FontSize="20"/>
+                                        <TextBlock Text="{Binding Time}" 
+                                                   Margin="10 0" 
+                                                   FontSize="10"
+                                                   Foreground="Gray" 
+                                                   TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate> 
                     </ListBox>
                     <ListBox HorizontalAlignment="Stretch" 
                              VerticalAlignment="Stretch" 
@@ -78,18 +100,18 @@
                               Grid.RowSpan="2"
                               Background="White">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="10*"/>
-                            </Grid.RowDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="10*"/>
+                                </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50*"/>
                                 <ColumnDefinition Width="50*"/>
@@ -105,28 +127,31 @@
                                TextAlignment="Center"
                                Margin="5"
                                />
-                            <TextBlock HorizontalAlignment="Stretch" 
-                               Grid.Row="1" 
-                               Grid.Column="0"
-                               Grid.ColumnSpan="2"
-                               VerticalAlignment="Stretch"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               Margin="5"
-                               />
-                            <TextBox Grid.ColumnSpan="2" 
+                                <TextBlock x:Name="cartelTargetSend"
+                                       Text="{Binding ElementName=logList, Path=SelectedItem.Id}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="1" 
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"
+                                       Margin="5"
+                                       />
+                                <TextBox x:Name="carteltxtMsgSend" 
+                                     Grid.ColumnSpan="2" 
                                      HorizontalAlignment="Stretch" 
                                      Margin="5" 
                                      Grid.Row="2" 
                                      VerticalAlignment="Stretch"/>
-                            <Button Content="Отправить" 
+                                <Button Content="Отправить" 
                                     HorizontalAlignment="Stretch" 
                                     Margin="5" 
                                     Grid.Row="3" 
                                     VerticalAlignment="Stretch" 
-                                    Grid.ColumnSpan="2"/>
-                            <TextBlock HorizontalAlignment="Stretch" 
+                                    Grid.ColumnSpan="2" Click="btnCartelClick"/>
+                                <TextBlock HorizontalAlignment="Stretch" 
                                Grid.Row="4" 
                                Grid.Column="0"
                                Text="Баланс денег:" 
@@ -135,7 +160,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="4" 
                                Grid.Column="1"
                                VerticalAlignment="Center"
@@ -143,7 +168,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="5" 
                                Grid.Column="0"
                                Text="Баланс Коки:" 
@@ -152,7 +177,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="5" 
                                Grid.Column="1"
                                VerticalAlignment="Center"
@@ -160,7 +185,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="6" 
                                Grid.Column="0"
                                Text="Миссия 1:" 
@@ -169,7 +194,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="6" 
                                Grid.Column="1"
                                VerticalAlignment="Center"
@@ -177,7 +202,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="7" 
                                Grid.Column="0"
                                Text="Миссия 2:" 
@@ -186,7 +211,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="7" 
                                Grid.Column="1"
                                VerticalAlignment="Center"
@@ -194,7 +219,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="8" 
                                Grid.Column="0"
                                Text="Миссия 3:" 
@@ -203,7 +228,7 @@
                                Background="White" 
                                TextAlignment="Center"
                                />
-                            <TextBlock HorizontalAlignment="Center" 
+                                <TextBlock HorizontalAlignment="Center" 
                                Grid.Row="8" 
                                Grid.Column="1"
                                VerticalAlignment="Center"

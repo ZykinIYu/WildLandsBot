@@ -12,169 +12,169 @@ using Newtonsoft.Json;
 
 namespace Dreamer_Bot
 {
-    struct Karen_Bowman_Bot
+    class Karen_Bowman_Bot
     {
         /// <summary>
         /// переменная показывающая смогли ли призраки выполнить миссию 1
         /// </summary>
-        private static bool ghostsMissionCompleted1;
+        private bool ghostsMissionCompleted1;
 
         /// <summary>
         /// переменная показывающая смогли ли призраки выполнить миссию 2
         /// </summary>
-        private static bool ghostsMissionCompleted2;
+        private bool ghostsMissionCompleted2;
 
         /// <summary>
         /// переменная показывающая смогли ли призраки выполнить миссию 3
         /// </summary>
-        private static bool ghostsMissionCompleted3;
+        private bool ghostsMissionCompleted3;
 
         /// <summary>
         /// Переменная для хранения введенного текста
         /// </summary>
-        private static string ghostsMessageText;
+        private string ghostsMessageText;
 
         /// <summary>
         /// Переменная для хранения названия фото
         /// </summary>
-        private static string ghostsMessageTextCompletingTheMission;
+        private string ghostsMessageTextCompletingTheMission;
 
         /// <summary>
         /// Коллекция для хранения миссий
         /// </summary>
-        private static List<string> ghostsMissionPool;
+        private List<string> ghostsMissionPool;
 
         /// <summary>
         /// Дата и время начала игры
         /// </summary>
-        private static DateTime ghostsDateStart;
+        private DateTime ghostsDateStart;
 
         /// <summary>
         /// Дата и время для сравнения с датой и временем начала игры
         /// </summary>
-        private static DateTime ghostsComparisonDateFromStart;
+        private DateTime ghostsComparisonDateFromStart;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 1
         /// </summary>
-        private static bool ghostsGettingMission1;
+        private bool ghostsGettingMission1;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 2
         /// </summary>
-        private static bool ghostsGettingMission2;
+        private bool ghostsGettingMission2;
 
         /// <summary>
         /// переменная определяет срабатывание получения миссии 3
         /// </summary>
-        private static bool ghostsGettingMission3;
+        private bool ghostsGettingMission3;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 1
         /// </summary>
-        private static string ghostsMission1ID;
+        private string ghostsMission1ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 2
         /// </summary>
-        private static string ghostsMission2ID;
+        private string ghostsMission2ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла задач миссии 3
         /// </summary>
-        private static string ghostsMission3ID;
+        private string ghostsMission3ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 1
         /// </summary>
-        private static string ghostsMissionFailedID1;
+        private string ghostsMissionFailedID1;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 2
         /// </summary>
-        private static string ghostsMissionFailedID2;
+        private string ghostsMissionFailedID2;
 
         /// <summary>
         /// Переменная для записи ID аудио файла провала миссии 3
         /// </summary>
-        private static string ghostsMissionFailedID3;
+        private string ghostsMissionFailedID3;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 1
         /// </summary>
-        private static string ghostsMissionComplete1ID;
+        private string ghostsMissionComplete1ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 2
         /// </summary>
-        private static string ghostsMissionComplete2ID;
+        private string ghostsMissionComplete2ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла выполнения миссии 3
         /// </summary>
-        private static string ghostsMissionComplete3ID;
+        private string ghostsMissionComplete3ID;
 
         /// <summary>
         /// Переменная для записи ID аудио файла отказа от миссии 2
         /// </summary>
-        private static string ghostsMissionAbandonmentID2;
+        private string ghostsMissionAbandonmentID2;
 
         /// <summary>
         /// Время запуска мисии1
         /// </summary>
-        private static double ghostsStartTimeMission1;
+        private double ghostsStartTimeMission1;
 
         /// <summary>
         /// Время запуска мисии2
         /// </summary>
-        private static double ghostsStartTimeMission2;
+        private double ghostsStartTimeMission2;
 
         /// <summary>
         /// Время запуска мисии3
         /// </summary>
-        private static double ghostsStartTimeMission3;
+        private double ghostsStartTimeMission3;
 
         /// <summary>
         /// Время провала мисии1
         /// </summary>
-        private static double ghostsFailedTimeMission1;
+        private double ghostsFailedTimeMission1;
 
         /// <summary>
         /// Время провала мисии2
         /// </summary>
-        private static double ghostsFailedTimeMission2;
+        private double ghostsFailedTimeMission2;
 
         /// <summary>
         /// Время провала мисии3
         /// </summary>
-        private static double ghostsFailedTimeMission3;
+        private double ghostsFailedTimeMission3;
 
         /// <summary>
         /// Получение дополнительной миссии ровно 1 раз
         /// </summary>
-        private static bool ghostsSupplementaryMission2;
+        private bool ghostsSupplementaryMission2;
 
         /// <summary>
         /// telegram бот клиент
         /// </summary>
-        static TelegramBotClient karenBowmanBot;
+        TelegramBotClient karenBowmanBot;
 
         /// <summary>
         /// Определяем статическую встроенную клавиатуру повстанцев
         /// </summary>
-        private static ReplyKeyboardMarkup ghostsOperationsMenu;
+        private ReplyKeyboardMarkup ghostsOperationsMenu;
 
         /// <summary>
         /// Клавиатура принятия миссии
         /// </summary>
-        private static InlineKeyboardMarkup ghostsKeyboardAcceptOrRefuseAMission;
+        private InlineKeyboardMarkup ghostsKeyboardAcceptOrRefuseAMission;
 
         /// <summary>
         /// Метод для ответа на сообщения от пользователей
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static async void GhostsMessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
+        private async void GhostsMessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
         {
             ghostsComparisonDateFromStart = DateTime.Now;
 
@@ -400,7 +400,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="fileId">ИД документа</param>
         /// <param name="path"> путь сохранения файла</param>
-        static async void GhostsDownLoad(string fileId, string path)
+        async void GhostsDownLoad(string fileId, string path)
         {
             var file = await karenBowmanBot.GetFileAsync(fileId);
             FileStream fs = new FileStream("Ghosts\\MissionPhoto\\Ghosts_" + path, FileMode.Create);
@@ -413,7 +413,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Статическая клавиатура вопросов для повстанцев
         /// </summary>
-        private static void GhostsOperationsMenuOperation()
+        private void GhostsOperationsMenuOperation()
         {
             ghostsOperationsMenu = new ReplyKeyboardMarkup(new[]
             {
@@ -428,7 +428,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Меню принятия/отказа дополнительной миссии
         /// </summary>
-        private static void GhostsAcceptOrRefuseAMission()
+        private void GhostsAcceptOrRefuseAMission()
         {
             ghostsKeyboardAcceptOrRefuseAMission = new InlineKeyboardMarkup(new[]
             {
@@ -441,7 +441,7 @@ namespace Dreamer_Bot
         /// </summary>
         /// <param name="sc"></param>
         /// <param name="ev"></param>
-        private static async void GhostsAcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        private async void GhostsAcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
             Console.WriteLine($"{ev.CallbackQuery.Data}");
@@ -498,7 +498,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Метод десерилизации данных для Единства
         /// </summary>
-        public static void GhostsDeserialization()
+        public void GhostsDeserialization()
         {
             string json;
 
@@ -617,7 +617,7 @@ namespace Dreamer_Bot
         /// <summary>
         /// Метод Серилизации данных для Единства
         /// </summary>
-        public static void GhostsSerialization()
+        public void GhostsSerialization()
         {
             string json;
 
