@@ -7,14 +7,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
-using Dreamer_Bot;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using WildLandsBot;
 using System.Windows;
 using System.Diagnostics;
 
-namespace Dreamer_Bot
+namespace WildLandsBot
 {
     class Dreamer_Bot_And_General_Baro_Bot
     {
@@ -24,14 +23,41 @@ namespace Dreamer_Bot
         private bool cartelMissionCompleted1;
 
         /// <summary>
+        /// Свойство для привязки выполнения миссии 1
+        /// </summary>
+        public bool СartelMissionCompleted1
+        {
+            get { return this.cartelMissionCompleted1; }
+            set { this.cartelMissionCompleted1 = value; }
+        }
+
+        /// <summary>
         /// переменная показывающая смог ли картель выполнить миссию 2
         /// </summary>
         private bool cartelMissionCompleted2;
 
         /// <summary>
+        /// Свойство для привязки выполнения миссии 2
+        /// </summary>
+        public bool СartelMissionCompleted2
+        {
+            get { return this.cartelMissionCompleted2; }
+            set { this.cartelMissionCompleted2 = value; }
+        }
+
+        /// <summary>
         /// переменная показывающая смог ли картель выполнить миссию 3
         /// </summary>
         private bool cartelMissionCompleted3;
+
+        /// <summary>
+        /// Свойство для привязки выполнения миссии 3
+        /// </summary>
+        public bool СartelMissionCompleted3
+        {
+            get { return this.cartelMissionCompleted3; }
+            set { this.cartelMissionCompleted3 = value; }
+        }
 
         /// <summary>
         /// Переменная для хранения введенного текста
@@ -52,6 +78,15 @@ namespace Dreamer_Bot
         /// Денежный баланс картеля
         /// </summary>
         private double cartelCashBalance;
+
+        /// <summary>
+        /// Свойство для привязка денежного баланса в приложение
+        /// </summary>
+        public double CartelCashBalance 
+        {
+            get { return this.cartelCashBalance; }
+            set { this.cartelCashBalance = value; }
+        }
 
         /// <summary>
         /// Денежный баланс картеля для временного хранения для переводов
@@ -77,6 +112,15 @@ namespace Dreamer_Bot
         /// Хранилище коки картеля
         /// </summary>
         private double cartelCocaCash;
+
+        /// <summary>
+        /// Свойство для привязки баланса коки
+        /// </summary>
+        public double CartelCocaCash
+        {
+            get { return this.cartelCocaCash; }
+            set { this.cartelCocaCash = value; }
+        }
 
         /// <summary>
         /// Дата и время начала игры
@@ -389,9 +433,19 @@ namespace Dreamer_Bot
         TelegramBotClient dreamerBot;
 
         /// <summary>
-        /// Коллекция для логов
+        /// Коллекция для логов пользователя
         /// </summary>
         public ObservableCollection<MessageLog> CartelBotMessageLog { get; set; }
+
+        /// <summary>
+        /// Коллекция для логов бота
+        /// </summary>
+        public ObservableCollection<MessageLog> CartelDreamerBotMessageLog { get; set; }
+
+        /// <summary>
+        /// Общая коллекция
+        /// </summary>
+        public ObservableCollection<MessageLog> AllBotMessageLog { get; set; }
 
         /// <summary>
         /// Определяем статическую встроенную клавиатуру
@@ -424,14 +478,41 @@ namespace Dreamer_Bot
         private bool unityMissionCompleted1;
 
         /// <summary>
+        /// Свойство для привязки выполнения миссии 1 у Единства
+        /// </summary>
+        public bool UnityMissionCompleted1
+        {
+            get { return this.unityMissionCompleted1; }
+            set { this.unityMissionCompleted1 = value; }
+        }
+
+        /// <summary>
         /// переменная показывающая смогло ли Единство выполнить миссию 2
         /// </summary>
         private bool unityMissionCompleted2;
 
         /// <summary>
+        /// Свойство для привязки выполнения миссии 2 у Единства
+        /// </summary>
+        public bool UnityMissionCompleted2
+        {
+            get { return this.unityMissionCompleted2; }
+            set { this.unityMissionCompleted2 = value; }
+        }
+
+        /// <summary>
         /// переменная показывающая смогло ли Единство выполнить миссию 3
         /// </summary>
         private bool unityMissionCompleted3;
+
+        /// <summary>
+        /// Свойство для привязки выполнения миссии 3 у Единства
+        /// </summary>
+        public bool UnityMissionCompleted3
+        {
+            get { return this.unityMissionCompleted3; }
+            set { this.unityMissionCompleted3 = value; }
+        }
 
         /// <summary>
         /// Переменная для хранения введенного текста
@@ -451,7 +532,16 @@ namespace Dreamer_Bot
         /// <summary>
         /// Денежный баланс Единства
         /// </summary>
-        public double unityCashBalance;
+        private double unityCashBalance;
+
+        /// <summary>
+        /// Свойство для привязка денежного баланса в приложение для Единства
+        /// </summary>
+        public double UnityCashBalance
+        {
+            get { return this.unityCashBalance; }
+            set { this.unityCashBalance = value; }
+        }
 
         /// <summary>
         /// Денежный баланс единства для временного хранения для переводов
@@ -604,6 +694,16 @@ namespace Dreamer_Bot
         TelegramBotClient generalBaroBot;
 
         /// <summary>
+        /// Коллекция для логов пользователя
+        /// </summary>
+        public ObservableCollection<MessageLog> UnityBotMessageLog { get; set; }
+
+        /// <summary>
+        /// Коллекция для логов бота Единства
+        /// </summary>
+        public ObservableCollection<MessageLog> UnityGeneralBaroBotMessageLog { get; set; }
+
+        /// <summary>
         /// Определяем статическую встроенную клавиатуру
         /// </summary>
         private ReplyKeyboardMarkup unityOperationsMenu;
@@ -632,21 +732,9 @@ namespace Dreamer_Bot
 
             //выводим на консоль время, кто, ид, текст сообщения
             Debug.WriteLine($"{text} TypeMessage: {e.Message.Type.ToString()}");
-            var messageText = e.Message.Text;
+            var dreamerMessageText = "NULL";
 
-            w.Dispatcher.Invoke(() =>
-            {
-                CartelBotMessageLog.Add(
-                    new MessageLog(
-                        DateTime.Now.ToLongTimeString(),
-                        messageText,
-                        e.Message.Chat.FirstName,
-                        e.Message.Chat.Id));
-            });
-
-            //выводим тип сообщения
-            Console.WriteLine($"TypeMessage: {e.Message.Type.ToString()}");
-            Console.WriteLine();
+            Logging(CartelBotMessageLog, e.Message.Text, e.Message.Chat.FirstName, e.Message.Chat.Id);
 
             //Выводим меню
             if (e.Message.Type == Telegram.Bot.Types.Enums.MessageType.Text && e.Message.Text == "/меню")
@@ -660,6 +748,8 @@ namespace Dreamer_Bot
                 //Выводим основную клавиатуру картеля
                 CartelOperationsMenuOperation();
                 dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, "Добро пожаловать в Картель", replyMarkup: cartelOperationsMenu);
+                dreamerMessageText = $"Добро пожаловать в Картель";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
             }
 
             //если фото в виде документа то проводим ряд операций
@@ -676,6 +766,8 @@ namespace Dreamer_Bot
                             if (missionPool.Contains("Миссия 1"))
                             {
                                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 Выполнена");
+                                dreamerMessageText = $"Миссия 1 Выполнена";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                                 await dreamerBot.SendAudioAsync(e.Message.Chat.Id, missionComplete1ID);
                                 missionPool.Remove($"Миссия 1");
                                 cartelMissionCompleted1 = true;
@@ -687,6 +779,8 @@ namespace Dreamer_Bot
                             if (missionPool.Contains("Миссия 2"))
                             {
                                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 Выполнена");
+                                dreamerMessageText = $"Миссия 2 Выполнена";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                                 await dreamerBot.SendAudioAsync(e.Message.Chat.Id, missionComplete2ID);
                                 missionPool.Remove($"Миссия 2");
                                 cartelMissionCompleted2 = true;
@@ -698,6 +792,8 @@ namespace Dreamer_Bot
                             if (missionPool.Contains("Миссия 3"))
                             {
                                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 Выполнена");
+                                dreamerMessageText = $"Миссия 3 Выполнена";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                                 await dreamerBot.SendAudioAsync(e.Message.Chat.Id, missionComplete3ID);
                                 missionPool.Remove($"Миссия 3");
                                 cartelMissionCompleted3 = true;
@@ -712,6 +808,8 @@ namespace Dreamer_Bot
                                 cartelCocaCash += amountCocaHarvestedGreenPlantation;
                                 boolGreenPlantation = false;
                                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Кока с плантации собрана.\nУ вас {cartelCocaCash} т. коки");
+                                dreamerMessageText = $"Кока с плантации собрана.\nУ вас {cartelCocaCash} т. коки";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                             }
                             break;
 
@@ -723,6 +821,8 @@ namespace Dreamer_Bot
                                 cartelCocaCash += amountCocaHarvestedYellowPlantation;
                                 boolYellowPlantation = false;
                                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Кока с плантации собрана.\nУ вас {cartelCocaCash} т. коки");
+                                dreamerMessageText = $"Кока с плантации собрана.\nУ вас {cartelCocaCash} т. коки";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                             }
                             break;
 
@@ -734,6 +834,8 @@ namespace Dreamer_Bot
                                 cartelCocaCash += amountCocaHarvestedRedPlantation;
                                 boolRedPlantation = false;
                                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Кока с плантации собрана.\nУ вас {cartelCocaCash} т. коки");
+                                dreamerMessageText = $"Кока с плантации собрана.\nУ вас {cartelCocaCash} т. коки";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                             }
                             break;
 
@@ -742,6 +844,8 @@ namespace Dreamer_Bot
                 else
                 {
                     await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Данное фото без подписи, вышлите фото с подписью");
+                    dreamerMessageText = $"Данное фото без подписи, вышлите фото с подписью";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
 
             }
@@ -793,18 +897,14 @@ namespace Dreamer_Bot
                         break;
 
                 }
-                Console.WriteLine(e.Message.Audio.FileId);
-                Console.WriteLine(e.Message.Audio.FileName);
-                Console.WriteLine(e.Message.Audio.FileSize);
-                Console.WriteLine(e.Message.Audio.MimeType);
-                Console.WriteLine(e.Message.Audio.Thumb);
-
             }
 
             //Получаем обязательную миссию 1
             if (comparisonDateFromStart >= dateStart.AddMinutes(cartelStartTimeMission1) && gettingMission1 == false)
             {
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 1");
+                dreamerMessageText = $"Получена миссия 1";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 await dreamerBot.SendAudioAsync(e.Message.Chat.Id, mission1ID);
                 gettingMission1 = true;
 
@@ -822,6 +922,8 @@ namespace Dreamer_Bot
                 AcceptOrRefuseAMission();
                 dreamerBot.OnCallbackQuery -= AcceptanceOrRefusalOfAMission;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Поступила дополнительная миссия 2. Принять миссию?", replyMarkup: keyboardAcceptOrRefuseAMission);
+                dreamerMessageText = $"Поступила дополнительная миссия 2. Принять миссию?";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 dreamerBot.OnCallbackQuery += AcceptanceOrRefusalOfAMission;
             }
 
@@ -829,6 +931,8 @@ namespace Dreamer_Bot
             if (comparisonDateFromStart >= dateStart.AddMinutes(cartelStartTimeMission3) && gettingMission3 == false)
             {
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 3");
+                dreamerMessageText = $"Получена миссия 3";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 await dreamerBot.SendAudioAsync(e.Message.Chat.Id, mission3ID);
                 gettingMission3 = true;
 
@@ -843,6 +947,8 @@ namespace Dreamer_Bot
             if (comparisonDateFromStart >= dateStart.AddMinutes(cartelFailedTimeMission1) && missionPool.Contains("Миссия 1"))
             {
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 провалена");
+                dreamerMessageText = $"Миссия 1 провалена";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 await dreamerBot.SendAudioAsync(e.Message.Chat.Id, missionFailedID1);
                 missionPool.Remove($"Миссия 1");
             }
@@ -851,6 +957,8 @@ namespace Dreamer_Bot
             if (comparisonDateFromStart >= dateStart.AddMinutes(cartelFailedTimeMission2) && missionPool.Contains("Миссия 2"))
             {
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 провалена");
+                dreamerMessageText = $"Миссия 2 провалена";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 await dreamerBot.SendAudioAsync(e.Message.Chat.Id, missionFailedID2);
                 missionPool.Remove($"Миссия 2");
             }
@@ -859,6 +967,8 @@ namespace Dreamer_Bot
             if (comparisonDateFromStart >= dateStart.AddMinutes(cartelFailedTimeMission3) && missionPool.Contains("Миссия 3"))
             {
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 провалена");
+                dreamerMessageText = $"Миссия 3 провалена";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 await dreamerBot.SendAudioAsync(e.Message.Chat.Id, missionFailedID3);
                 missionPool.Remove($"Миссия 3");
             }
@@ -870,6 +980,8 @@ namespace Dreamer_Bot
                 cartelCashBalance = cartelCashBalanceIntermediateStorage;
                 cartelCashBalanceCheck = cartelCashBalance;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Ваш счет пополнился на {cartelCashBalanceDifference}\nСумма на кошельке: {cartelCashBalance}");
+                dreamerMessageText = $"Ваш счет пополнился на {cartelCashBalanceDifference}\nСумма на кошельке: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
             }
 
             //Приехал грузовик 1
@@ -878,6 +990,8 @@ namespace Dreamer_Bot
                 var profit = (cartelNumberCocaTrucks * cartelCocaPrice) - (cartelNumberCocaTrucks * cartelCocaPrice * cartelpercentForTranslationTrucks);
                 cartelCashBalance += profit;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 cartelBoolTruckBusyFinishe[0] = false;
             }
 
@@ -887,6 +1001,8 @@ namespace Dreamer_Bot
                 var profit = (cartelNumberCocaTrucks * cartelCocaPrice) - (cartelNumberCocaTrucks * cartelCocaPrice * cartelpercentForTranslationTrucks);
                 cartelCashBalance += profit;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 cartelBoolTruckBusyFinishe[1] = false;
             }
 
@@ -896,6 +1012,8 @@ namespace Dreamer_Bot
                 var profit = (cartelNumberCocaTrucks * cartelCocaPrice) - (cartelNumberCocaTrucks * cartelCocaPrice * cartelpercentForTranslationTrucks);
                 cartelCashBalance += profit;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 cartelBoolTruckBusyFinishe[2] = false;
             }
 
@@ -905,6 +1023,8 @@ namespace Dreamer_Bot
                 var profit = (cartelNumberCocaTrucks * cartelCocaPrice) - (cartelNumberCocaTrucks * cartelCocaPrice * cartelpercentForTranslationTrucks);
                 cartelCashBalance += profit;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 cartelBoolTruckBusyFinishe[3] = false;
             }
 
@@ -914,6 +1034,8 @@ namespace Dreamer_Bot
                 var profit = (cartelNumberCocaTrucks * cartelCocaPrice) - (cartelNumberCocaTrucks * cartelCocaPrice * cartelpercentForTranslationTrucks);
                 cartelCashBalance += profit;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Грузовик доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 cartelBoolTruckBusyFinishe[4] = false;
             }
 
@@ -923,6 +1045,8 @@ namespace Dreamer_Bot
                 var profit = (cartelNumberCocaHelicopters * cartelCocaPrice) - (cartelNumberCocaHelicopters * cartelCocaPrice * cartelpercentForTranslationHelicopters);
                 cartelCashBalance += profit;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Вертолет доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Вертолет доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 cartelBoolHelicoptersBusyFinishe[0] = false;
             }
 
@@ -932,6 +1056,8 @@ namespace Dreamer_Bot
                 var profit = (cartelNumberCocaHelicopters * cartelCocaPrice) - (cartelNumberCocaHelicopters * cartelCocaPrice * cartelpercentForTranslationHelicopters);
                 cartelCashBalance += profit;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Вертолет доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Вертолет доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 cartelBoolHelicoptersBusyFinishe[1] = false;
             }
 
@@ -941,6 +1067,8 @@ namespace Dreamer_Bot
                 var profit = (cartelNumberCocaAircraft * cartelCocaPrice) - (cartelNumberCocaAircraft * cartelCocaPrice * cartelpercentForTranslationAircraft);
                 cartelCashBalance += profit;
                 await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Самолет доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Самолет доставил груз, ваша прибыль: {profit}\nВаш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 cartelBoolAircraftBusyFinishe[0] = false;
             }
 
@@ -955,10 +1083,14 @@ namespace Dreamer_Bot
                     cartelCashBalanceCheck -= tribute;
                     cartelCashBalanceIntermediateStorage -= tribute;
                     await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Вы заплатили дань Мечтателю в размере: {tribute}\nСумма на кошельке: {cartelCashBalance}");
+                    dreamerMessageText = $"Вы заплатили дань Мечтателю в размере: {tribute}\nСумма на кошельке: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
                 else
                 {
                     await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Вы не смогли выплатить дань, убейте с особой жестокостью 2 членов Картеля, а трупы отнесите Кашевару на переработку");
+                    dreamerMessageText = $"Вы не смогли выплатить дань, убейте с особой жестокостью 2 членов Картеля, а трупы отнесите Кашевару на переработку";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
 
             }
@@ -974,6 +1106,8 @@ namespace Dreamer_Bot
                 //Проверяем баланс кошелька
                 case "Кошелек":
                     await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Сумма на кошельке: {cartelCashBalance}");
+                    dreamerMessageText = $"Сумма на кошельке: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                     break;
 
                 //Организуем переводы между картелем и единством
@@ -981,6 +1115,8 @@ namespace Dreamer_Bot
                     WhoDoesTheCartelTranslateTo();
                     dreamerBot.OnCallbackQuery -= CartelTransfers;
                     await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести Единству?", replyMarkup: whoTranslateCartel);
+                    dreamerMessageText = $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести Единству?";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                     dreamerBot.OnCallbackQuery += CartelTransfers;
                     break;
 
@@ -989,12 +1125,16 @@ namespace Dreamer_Bot
                     if (missionPool.Count == 0)
                     {
                         await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Здраствуйте, Активных квестов нет");
+                        dreamerMessageText = $"Здраствуйте, Активных квестов нет";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                     }
                     else
                     {
                         for (int i = 0; i < missionPool.Count; i++)
                         {
                             await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"{missionPool[i]}");
+                            dreamerMessageText = $"{missionPool[i]}";
+                            Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                         }
                     }
                     break;
@@ -1004,11 +1144,13 @@ namespace Dreamer_Bot
                     CartelPlantationSelectionKeyboardInline();
                     dreamerBot.OnCallbackQuery -= CartelHittingThePlantation;
                     await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Ваше хранилище содержит {cartelCocaCash}т. коки.\nВыберите необходимую плантацию", replyMarkup: cartelPlantationSelectionKeyboard);
+                    dreamerMessageText = $"Ваше хранилище содержит {cartelCocaCash}т. коки.\nВыберите необходимую плантацию";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                     dreamerBot.OnCallbackQuery += CartelHittingThePlantation;
                     break;
             }
 
-            //CartelSerialization();
+            CartelSerialization();
             Thread.Sleep(200);
 
             //Если сообщение не текстовое, то выходим из метода
@@ -1016,6 +1158,7 @@ namespace Dreamer_Bot
             {
                 return;
             }
+           
         }
 
         /// <summary>
@@ -1025,6 +1168,7 @@ namespace Dreamer_Bot
         /// <param name="ev"></param>
         private void CartelTransfers(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
+            var dreamerMessageText = $"NULL";
             var message = ev.CallbackQuery.Message;
             if (ev.CallbackQuery.Data == "5")
             {
@@ -1040,8 +1184,12 @@ namespace Dreamer_Bot
                 else
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                    dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
                 dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
             }
             else
             if (ev.CallbackQuery.Data == "10")
@@ -1058,8 +1206,12 @@ namespace Dreamer_Bot
                 else
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                    dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
                 dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
             }
             else
             if (ev.CallbackQuery.Data == "15")
@@ -1076,8 +1228,12 @@ namespace Dreamer_Bot
                 else
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                    dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
                 dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
             }
             else
             if (ev.CallbackQuery.Data == "20")
@@ -1094,8 +1250,12 @@ namespace Dreamer_Bot
                 else
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                    dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
                 dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
             }
         }
 
@@ -1107,6 +1267,7 @@ namespace Dreamer_Bot
         private async void CartelHittingThePlantation(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
             var message = ev.CallbackQuery.Message;
+            var dreamerMessageText = $"NULL";
             if (ev.CallbackQuery.Data == "GreenPlantation")
             {
                 dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
@@ -1114,6 +1275,8 @@ namespace Dreamer_Bot
                 if (comparisonDateFromStart >= cartelGreenPlantation.AddMinutes(1))
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Плантация созрела можно начинать собирать\n для подтверждения сбора необходимо выслать фотографию с урожаем, фото высылается как документ. Подпись к фотографии дожна быть \"green\" без ковычек");
+                    dreamerMessageText = $"Плантация созрела можно начинать собирать\n для подтверждения сбора необходимо выслать фотографию с урожаем, фото высылается как документ. Подпись к фотографии дожна быть \"green\" без ковычек";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                     boolGreenPlantation = true;
                 }
                 else
@@ -1124,6 +1287,8 @@ namespace Dreamer_Bot
                     int minutes = (fullSeconds / 60) % 60;
                     int seconds = fullSeconds % 60;
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Плантация созреет через {timepiece} ч. {minutes} мин. {seconds} сек.");
+                    dreamerMessageText = $"Плантация созреет через {timepiece} ч. {minutes} мин. {seconds} сек.";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
             }
             else
@@ -1134,6 +1299,8 @@ namespace Dreamer_Bot
                 if (comparisonDateFromStart >= cartelYellowPlantation.AddMinutes(2))
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Плантация созрела можно начинать собирать\n для подтверждения сбора необходимо выслать фотографию с урожаем, фото высылается как документ. Подпись к фотографии дожна быть \"yellow\" без ковычек");
+                    dreamerMessageText = $"Плантация созрела можно начинать собирать\n для подтверждения сбора необходимо выслать фотографию с урожаем, фото высылается как документ. Подпись к фотографии дожна быть \"yellow\" без ковычек";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                     boolYellowPlantation = true;
                 }
                 else
@@ -1144,6 +1311,8 @@ namespace Dreamer_Bot
                     int minutes = (fullSeconds / 60) % 60;
                     int seconds = fullSeconds % 60;
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Плантация созреет через {timepiece} ч. {minutes} мин. {seconds} сек.");
+                    dreamerMessageText = $"Плантация созреет через {timepiece} ч. {minutes} мин. {seconds} сек.";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
             }
             else
@@ -1154,6 +1323,8 @@ namespace Dreamer_Bot
                 if (comparisonDateFromStart >= cartelRedPlantation.AddMinutes(3))
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Плантация созрела можно начинать собирать\n для подтверждения сбора необходимо выслать фотографию с урожаем, фото высылается как документ. Подпись к фотографии дожна быть \"red\" без ковычек");
+                    dreamerMessageText = $"Плантация созрела можно начинать собирать\n для подтверждения сбора необходимо выслать фотографию с урожаем, фото высылается как документ. Подпись к фотографии дожна быть \"red\" без ковычек";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                     boolRedPlantation = true;
                 }
                 else
@@ -1164,6 +1335,8 @@ namespace Dreamer_Bot
                     int minutes = (fullSeconds / 60) % 60;
                     int seconds = fullSeconds % 60;
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Плантация созреет через {timepiece} ч. {minutes} мин. {seconds} сек.");
+                    dreamerMessageText = $"Плантация созреет через {timepiece} ч. {minutes} мин. {seconds} сек.";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
             }
             else
@@ -1173,6 +1346,8 @@ namespace Dreamer_Bot
                 CocaTransportationKeyboardInline();
                 dreamerBot.OnCallbackQuery -= CartelSendingTheHarvestedCoca;
                 await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Каким видом транспорта будете отправлять коку?\nСвободных грузовиков: {cartelNumberTrucks}, водитель возмет {cartelpercentForTranslationTrucks * 100} % с продажи коки, вместимость {cartelNumberCocaTrucks} т. коки\nСвободных вертолетов: {cartelNumberHelicopters}, пилот возмет {cartelpercentForTranslationHelicopters * 100} % с продажи коки, вместимость {cartelNumberCocaHelicopters} т. коки\nСвободных самолетов: {cartelNumberAircraft}, пилот возмет {cartelpercentForTranslationAircraft * 100} % с продажи коки, вместимость {cartelNumberCocaAircraft} т. коки\nВодители и пилоты транспортируют груз, только если ТС полностью заполнено кокой", replyMarkup: cartelCocaTransportationKeyboard);
+                dreamerMessageText = $"Каким видом транспорта будете отправлять коку?\nСвободных грузовиков: {cartelNumberTrucks}, водитель возмет {cartelpercentForTranslationTrucks * 100} % с продажи коки, вместимость {cartelNumberCocaTrucks} т. коки\nСвободных вертолетов: {cartelNumberHelicopters}, пилот возмет {cartelpercentForTranslationHelicopters * 100} % с продажи коки, вместимость {cartelNumberCocaHelicopters} т. коки\nСвободных самолетов: {cartelNumberAircraft}, пилот возмет {cartelpercentForTranslationAircraft * 100} % с продажи коки, вместимость {cartelNumberCocaAircraft} т. коки\nВодители и пилоты транспортируют груз, только если ТС полностью заполнено кокой";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 dreamerBot.OnCallbackQuery += CartelSendingTheHarvestedCoca;
             }
         }
@@ -1184,6 +1359,7 @@ namespace Dreamer_Bot
         /// <param name="ev"></param>
         private void CartelSendingTheHarvestedCoca(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
+            var dreamerMessageText = "NULL";
             var message = ev.CallbackQuery.Message;
             if (ev.CallbackQuery.Data == "Truck")
             {
@@ -1201,6 +1377,8 @@ namespace Dreamer_Bot
                             cartelCocaCash -= cartelNumberCocaTrucks;
                             cartelStartTransportationTruck[i] = DateTime.Now;
                             dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"В грузовик погрузили {cartelNumberCocaTrucks} т. коки, груз будет доствален через {cartelDeliveryTimeTrucks} мин.\nВаше хранилище содержит {cartelCocaCash} т. коки");
+                            dreamerMessageText = $"В грузовик погрузили {cartelNumberCocaTrucks} т. коки, груз будет доствален через {cartelDeliveryTimeTrucks} мин.\nВаше хранилище содержит {cartelCocaCash} т. коки";
+                            Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                             break;
                         }
                     }
@@ -1208,6 +1386,8 @@ namespace Dreamer_Bot
                 else
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Свободных грузовиков больше нет, выберите другой вид транспортировки");
+                    dreamerMessageText = $"Свободных грузовиков больше нет, выберите другой вид транспортировки";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
 
             }
@@ -1228,6 +1408,8 @@ namespace Dreamer_Bot
                             cartelCocaCash -= cartelNumberCocaHelicopters;
                             cartelStartTransportationHelicopters[i] = DateTime.Now;
                             dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"В вертолет погрузили {cartelNumberCocaHelicopters} т. коки, груз будет доствален через {cartelDeliveryTimeHelicopters} мин.\nВаше хранилище содержит {cartelCocaCash} т. коки");
+                            dreamerMessageText = $"В вертолет погрузили {cartelNumberCocaHelicopters} т. коки, груз будет доствален через {cartelDeliveryTimeHelicopters} мин.\nВаше хранилище содержит {cartelCocaCash} т. коки";
+                            Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                             break;
                         }
                     }
@@ -1235,6 +1417,8 @@ namespace Dreamer_Bot
                 else
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Свободных вертолетов больше нет, выберите другой вид транспортировки");
+                    dreamerMessageText = $"Свободных вертолетов больше нет, выберите другой вид транспортировки";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
             }
             else
@@ -1254,6 +1438,8 @@ namespace Dreamer_Bot
                             cartelCocaCash -= cartelNumberCocaAircraft;
                             cartelStartTransportationAircraft[i] = DateTime.Now;
                             dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"В самолет погрузили {cartelNumberCocaAircraft} т. коки, груз будет доствален через {cartelDeliveryTimeAircraft} мин.\nВаше хранилище содержит {cartelCocaCash} т. коки");
+                            dreamerMessageText = $"В самолет погрузили {cartelNumberCocaAircraft} т. коки, груз будет доствален через {cartelDeliveryTimeAircraft} мин.\nВаше хранилище содержит {cartelCocaCash} т. коки";
+                            Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                             break;
                         }
                     }
@@ -1261,6 +1447,8 @@ namespace Dreamer_Bot
                 else
                 {
                     dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Свободных самолетов больше нет, выберите другой вид транспортировки");
+                    dreamerMessageText = $"Свободных самолетов больше нет, выберите другой вид транспортировки";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
             }
         }
@@ -1353,12 +1541,15 @@ namespace Dreamer_Bot
         /// <param name="ev"></param>
         private async void AcceptanceOrRefusalOfAMission(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
+            var dreamerMessageText = "NULL";
             var message = ev.CallbackQuery.Message;
             Console.WriteLine($"{ev.CallbackQuery.Data}");
             if (ev.CallbackQuery.Data == "Yes")
             {
                 dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
                 await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Получена миссия 2");
+                dreamerMessageText = $"Получена миссия 2";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 await dreamerBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, mission2ID);
                 gettingMission2 = true;
 
@@ -1372,6 +1563,8 @@ namespace Dreamer_Bot
             {
                 dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
                 await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ты точно уверен, что это хороший выбор? Привет семье");
+                dreamerMessageText = $"Ты точно уверен, что это хороший выбор? Привет семье";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 await dreamerBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, missionAbandonmentID2);
                 gettingMission2 = true;
             }
@@ -1390,11 +1583,10 @@ namespace Dreamer_Bot
             string text = $"{DateTime.Now.ToLongTimeString()}: {e.Message.Chat.FirstName} {e.Message.Chat.Id} {e.Message.Text}";
 
             //выводим на консоль время, кто, ид, текст сообщения
-            Console.WriteLine(text);
+            Debug.WriteLine($"{text} TypeMessage: {e.Message.Type.ToString()}");
+            var unityMessageText = $"NULL";
 
-            //выводим тип сообщения
-            Console.WriteLine($"TypeMessage: {e.Message.Type.ToString()}");
-            Console.WriteLine();
+            Logging(UnityBotMessageLog, e.Message.Text, e.Message.Chat.FirstName, e.Message.Chat.Id);
 
             //Выводим меню
             if (e.Message.Type == Telegram.Bot.Types.Enums.MessageType.Text && e.Message.Text == "/меню")
@@ -1408,6 +1600,8 @@ namespace Dreamer_Bot
                 //Выводим основную клавиатуру Единства
                 UnityOperationsMenuOperation();
                 generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, "Добро пожаловать в Единство", replyMarkup: unityOperationsMenu);
+                unityMessageText = $"Добро пожаловать в Единство";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
             }
 
             //если фото в виде документа, выводим его параметры и выполняем миссию соответствующую названию фото
@@ -1422,6 +1616,8 @@ namespace Dreamer_Bot
                             if (unityMissionPool.Contains("Миссия 1"))
                             {
                                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 Выполнена");
+                                unityMessageText = $"Миссия 1 Выполнена";
+                                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                                 await generalBaroBot.SendAudioAsync(e.Message.Chat.Id, unityMissionComplete1ID);
                                 unityMissionPool.Remove($"Миссия 1");
                                 unityMissionCompleted1 = true;
@@ -1432,6 +1628,8 @@ namespace Dreamer_Bot
                             if (unityMissionPool.Contains("Миссия 2"))
                             {
                                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 Выполнена");
+                                unityMessageText = $"Миссия 2 Выполнена";
+                                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                                 await generalBaroBot.SendAudioAsync(e.Message.Chat.Id, unityMissionComplete2ID);
                                 unityMissionPool.Remove($"Миссия 2");
                                 unityMissionCompleted2 = true;
@@ -1442,6 +1640,8 @@ namespace Dreamer_Bot
                             if (unityMissionPool.Contains("Миссия 3"))
                             {
                                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 Выполнена");
+                                unityMessageText = $"Миссия 3 Выполнена";
+                                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                                 await generalBaroBot.SendAudioAsync(e.Message.Chat.Id, unityMissionComplete3ID);
                                 unityMissionPool.Remove($"Миссия 3");
                                 unityMissionCompleted3 = true;
@@ -1514,6 +1714,8 @@ namespace Dreamer_Bot
             if (unityComparisonDateFromStart >= unityDateStart.AddMinutes(unityStartTimeMission1) && unityGettingMission1 == false)
             {
                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 1");
+                unityMessageText = $"Получена миссия 1";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 await generalBaroBot.SendAudioAsync(e.Message.Chat.Id, unityMission1ID);
                 unityGettingMission1 = true;
 
@@ -1531,6 +1733,8 @@ namespace Dreamer_Bot
                 UnityAcceptOrRefuseAMission();
                 generalBaroBot.OnCallbackQuery -= UnityAcceptanceOrRefusalOfAMission;
                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Поступила дополнительная миссия 2. Принять миссию?", replyMarkup: unityKeyboardAcceptOrRefuseAMission);
+                unityMessageText = $"Поступила дополнительная миссия 2. Принять миссию?";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 generalBaroBot.OnCallbackQuery += UnityAcceptanceOrRefusalOfAMission;
             }
 
@@ -1538,6 +1742,8 @@ namespace Dreamer_Bot
             if (unityComparisonDateFromStart >= unityDateStart.AddMinutes(unityStartTimeMission3) && unityGettingMission3 == false)
             {
                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 3");
+                unityMessageText = $"Получена миссия 3";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 await generalBaroBot.SendAudioAsync(e.Message.Chat.Id, unityMission3ID);
                 unityGettingMission3 = true;
 
@@ -1552,6 +1758,8 @@ namespace Dreamer_Bot
             if (unityComparisonDateFromStart >= unityDateStart.AddMinutes(unityFailedTimeMission1) && unityMissionPool.Contains("Миссия 1"))
             {
                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 провалена");
+                unityMessageText = $"Миссия 1 провалена";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 await generalBaroBot.SendAudioAsync(e.Message.Chat.Id, unityMissionFailedID1);
                 unityMissionPool.Remove($"Миссия 1");
             }
@@ -1560,6 +1768,8 @@ namespace Dreamer_Bot
             if (unityComparisonDateFromStart >= unityDateStart.AddMinutes(unityFailedTimeMission2) && unityMissionPool.Contains("Миссия 2"))
             {
                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 провалена");
+                unityMessageText = $"Миссия 2 провалена";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 await generalBaroBot.SendAudioAsync(e.Message.Chat.Id, unityMissionFailedID2);
                 unityMissionPool.Remove($"Миссия 2");
             }
@@ -1568,6 +1778,8 @@ namespace Dreamer_Bot
             if (unityComparisonDateFromStart >= unityDateStart.AddMinutes(unityFailedTimeMission3) && unityMissionPool.Contains("Миссия 3"))
             {
                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 провалена");
+                unityMessageText = $"Миссия 3 провалена";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 await generalBaroBot.SendAudioAsync(e.Message.Chat.Id, unityMissionFailedID3);
                 unityMissionPool.Remove($"Миссия 3");
             }
@@ -1580,6 +1792,8 @@ namespace Dreamer_Bot
                 unityCashBalanceCheck += salary;
                 unityCashBalanceIntermediateStorage += salary;
                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Начислена заработная плата в размере: {salary}\nСумма на кошельке: {unityCashBalance}");
+                unityMessageText = $"Начислена заработная плата в размере: {salary}\nСумма на кошельке: {unityCashBalance}";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
             }
 
             //Проверяем изменения баланса
@@ -1589,6 +1803,8 @@ namespace Dreamer_Bot
                 unityCashBalance = unityCashBalanceIntermediateStorage;
                 unityCashBalanceCheck = unityCashBalance;
                 await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Ваш счет пополнился на {unityCashBalanceDifference}\nСумма на кошельке: {unityCashBalance}");
+                unityMessageText = $"Ваш счет пополнился на {unityCashBalanceDifference}\nСумма на кошельке: {unityCashBalance}";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
             }
 
             //если сообщение текстовое, то записываем в переменную текст сообщения и проводим операции КОШЕЛЕК, ПЕРЕВОДЫ, КВЕСТЫ
@@ -1598,6 +1814,8 @@ namespace Dreamer_Bot
                 //Проверяем баланс кошелька
                 case "Кошелек":
                     await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Сумма на кошельке: {unityCashBalance}");
+                    unityMessageText = $"Сумма на кошельке: {unityCashBalance}";
+                    Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                     break;
 
                 //Организуем переводы между картелем и единством
@@ -1605,6 +1823,8 @@ namespace Dreamer_Bot
                     WhoDoesTheUnityTranslateTo();
                     generalBaroBot.OnCallbackQuery -= UnityTransfers;
                     await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Банк возьмет коммисию в размере {unityPercentForTranslation * 100}%. Какую сумму хотите перевести Картелю?", replyMarkup: whoTranslateUnity);
+                    unityMessageText = $"Банк возьмет коммисию в размере {unityPercentForTranslation * 100}%. Какую сумму хотите перевести Картелю?";
+                    Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                     generalBaroBot.OnCallbackQuery += UnityTransfers;
                     break;
 
@@ -1613,18 +1833,22 @@ namespace Dreamer_Bot
                     if (unityMissionPool.Count == 0)
                     {
                         await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"Здраствуйте, Активных квестов нет");
+                        unityMessageText = $"Здраствуйте, Активных квестов нет";
+                        Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                     }
                     else
                     {
                         for (int i = 0; i < unityMissionPool.Count; i++)
                         {
                             await generalBaroBot.SendTextMessageAsync(e.Message.Chat.Id, $"{unityMissionPool[i]}");
+                            unityMessageText = $"{unityMissionPool[i]}";
+                            Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                         }
                     }
                     break;
             }
 
-            //UnitySerialization();
+            UnitySerialization();
             Thread.Sleep(200);
 
             //Если сообщение не текстовое, то выходим из метода
@@ -1656,8 +1880,12 @@ namespace Dreamer_Bot
                 else
                 {
                     generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                    unityMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                    Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 }
                 generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {unityCashBalance}");
+                unityMessageText = $"Ваш баланс: {unityCashBalance}";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
             }
             else
             if (ev.CallbackQuery.Data == "10")
@@ -1674,8 +1902,12 @@ namespace Dreamer_Bot
                 else
                 {
                     generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                    unityMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                    Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 }
                 generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {unityCashBalance}");
+                unityMessageText = $"Ваш баланс: {unityCashBalance}";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
             }
             else
             if (ev.CallbackQuery.Data == "15")
@@ -1692,8 +1924,12 @@ namespace Dreamer_Bot
                 else
                 {
                     generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                    unityMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                    Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 }
                 generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {unityCashBalance}");
+                unityMessageText = $"Ваш баланс: {unityCashBalance}";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
             }
             else
             if (ev.CallbackQuery.Data == "20")
@@ -1710,8 +1946,12 @@ namespace Dreamer_Bot
                 else
                 {
                     generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                    unityMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                    Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 }
                 generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {unityCashBalance}");
+                unityMessageText = $"Ваш баланс: {unityCashBalance}";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
             }
         }
 
@@ -1782,6 +2022,8 @@ namespace Dreamer_Bot
             {
                 generalBaroBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
                 await generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Получена миссия 2");
+                unityMessageText = $"Получена миссия 2";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 await generalBaroBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, unityMission2ID);
                 unityGettingMission2 = true;
 
@@ -1795,6 +2037,8 @@ namespace Dreamer_Bot
             {
                 generalBaroBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
                 await generalBaroBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ты точно уверен, что это хороший выбор? Привет семье");
+                unityMessageText = $"Ты точно уверен, что это хороший выбор? Привет семье";
+                Logging(UnityGeneralBaroBotMessageLog, unityMessageText, "Генерал Баро", 2);
                 await generalBaroBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, unityMissionAbandonmentID2);
                 unityGettingMission2 = true;
             }
@@ -1805,11 +2049,6 @@ namespace Dreamer_Bot
         /// </summary>
         public void CartelStart()
         {
-                       
-            Debug.WriteLine(dateStart);
-            Debug.WriteLine(dateStart.AddMinutes(1));
-            Debug.WriteLine(dateStart.AddHours(1));
-
             string token = File.ReadAllText("Dreamer.txt");
             cartelCashBalance = 200;
             cartelCashBalanceIntermediateStorage = 200;
@@ -1883,9 +2122,9 @@ namespace Dreamer_Bot
             cartelDeliveryTimeTrucks = 1;
             cartelDeliveryTimeHelicopters = 1;
             cartelDeliveryTimeAircraft = 1;
-            cartelStartTimeMission1 = 10;
-            cartelStartTimeMission2 = 20;
-            cartelStartTimeMission3 = 30;
+            cartelStartTimeMission1 = 1;
+            cartelStartTimeMission2 = 1;
+            cartelStartTimeMission3 = 1;
             cartelFailedTimeMission1 = 240;
             cartelFailedTimeMission2 = 300;
             cartelFailedTimeMission3 = 360;
@@ -1895,7 +2134,7 @@ namespace Dreamer_Bot
             cartelMissionCompleted1 = false;
             cartelMissionCompleted2 = false;
             cartelMissionCompleted3 = false;
-            //CartelDeserialization();
+            CartelDeserialization();
             Console.WriteLine(dateStart);
             Console.WriteLine(dateStart.AddMinutes(1));
             Console.WriteLine(dateStart.AddHours(1));
@@ -1924,9 +2163,9 @@ namespace Dreamer_Bot
             unityGettingMission2 = false;
             unityGettingMission3 = false;
             unitySupplementaryMission2 = false;
-            unityStartTimeMission1 = 10;
-            unityStartTimeMission2 = 20;
-            unityStartTimeMission3 = 30;
+            unityStartTimeMission1 = 1;
+            unityStartTimeMission2 = 1;
+            unityStartTimeMission3 = 1;
             unityFailedTimeMission1 = 240;
             unityFailedTimeMission2 = 300;
             unityFailedTimeMission3 = 360;
@@ -1935,7 +2174,7 @@ namespace Dreamer_Bot
             unityMissionCompleted1 = false;
             unityMissionCompleted2 = false;
             unityMissionCompleted3 = false;
-            //UnityDeserialization();
+            UnityDeserialization();
             Console.WriteLine(unityDateStart);
             Console.WriteLine(unityDateStart.AddMinutes(1));
             generalBaroBot = new TelegramBotClient(token);
@@ -2878,10 +3117,18 @@ namespace Dreamer_Bot
             File.WriteAllText(pathUnityMissionCompleted3, json);
         }
 
+        /// <summary>
+        /// конструктро
+        /// </summary>
+        /// <param name="w"></param>
         public Dreamer_Bot_And_General_Baro_Bot(MainWindow w)
         {
             this.CartelBotMessageLog = new ObservableCollection<MessageLog>();
+            this.CartelDreamerBotMessageLog = new ObservableCollection<MessageLog>();
+            this.UnityBotMessageLog = new ObservableCollection<MessageLog>();
+            this.UnityGeneralBaroBotMessageLog = new ObservableCollection<MessageLog>();
             this.w = w;
+
             Thread cartelStartTask = new Thread(CartelStart);
             cartelStartTask.Start();
 
@@ -2891,7 +3138,7 @@ namespace Dreamer_Bot
         }
 
         /// <summary>
-        /// Ручная рассылка
+        /// Ручная рассылка от Мечтателя
         /// </summary>
         /// <param name="Text">Текст</param>
         /// <param name="Id">ИД</param>
@@ -2899,6 +3146,38 @@ namespace Dreamer_Bot
         {
             long id = Convert.ToInt64(Id);
             dreamerBot.SendTextMessageAsync(id, Text);
+        }
+
+        /// <summary>
+        /// Ручная рассылка от Генерала Баро
+        /// </summary>
+        /// <param name="Text">Текст</param>
+        /// <param name="Id">ИД</param>
+        public void UnitySendMessage(string Text, string Id)
+        {
+            long id = Convert.ToInt64(Id);
+            generalBaroBot.SendTextMessageAsync(id, Text);
+        }
+
+        /// <summary>
+        /// Метод для наполнения коллекции логов сообщений
+        /// </summary>
+        /// <param name="MessageLog">название коллекции</param>
+        /// <param name="messageText">текст сообщения</param>
+        /// <param name="firstName">кто отправил сообщение</param>
+        /// <param name="id">идентификатор того кто направил сообщение</param>
+        public void Logging(ObservableCollection<MessageLog> MessageLog, string messageText, string firstName, long id)
+        {
+            AllBotMessageLog = MessageLog;
+            w.Dispatcher.Invoke(() =>
+            {
+                AllBotMessageLog.Add(
+                    new MessageLog(
+                        DateTime.Now.ToLongTimeString(),
+                        messageText,
+                        firstName,
+                        id));
+            });
         }
     }
 }

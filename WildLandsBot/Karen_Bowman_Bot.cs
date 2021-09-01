@@ -7,10 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
-using Dreamer_Bot;
 using Newtonsoft.Json;
+using WildLandsBot;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
-namespace Dreamer_Bot
+namespace WildLandsBot
 {
     class Karen_Bowman_Bot
     {
@@ -20,14 +22,41 @@ namespace Dreamer_Bot
         private bool ghostsMissionCompleted1;
 
         /// <summary>
+        /// Свойство для привязки выполнения миссии 1 у призраков
+        /// </summary>
+        public bool GhostsMissionCompleted1
+        {
+            get { return this.ghostsMissionCompleted1; }
+            set { this.ghostsMissionCompleted1 = value; }
+        }
+
+        /// <summary>
         /// переменная показывающая смогли ли призраки выполнить миссию 2
         /// </summary>
         private bool ghostsMissionCompleted2;
 
         /// <summary>
+        /// Свойство для привязки выполнения миссии 2 у призраков
+        /// </summary>
+        public bool GhostsMissionCompleted2
+        {
+            get { return this.ghostsMissionCompleted2; }
+            set { this.ghostsMissionCompleted2 = value; }
+        }
+
+        /// <summary>
         /// переменная показывающая смогли ли призраки выполнить миссию 3
         /// </summary>
         private bool ghostsMissionCompleted3;
+
+        /// <summary>
+        /// Свойство для привязки выполнения миссии 3 у призраков
+        /// </summary>
+        public bool GhostsMissionCompleted3
+        {
+            get { return this.ghostsMissionCompleted3; }
+            set { this.ghostsMissionCompleted3 = value; }
+        }
 
         /// <summary>
         /// Переменная для хранения введенного текста
@@ -155,9 +184,29 @@ namespace Dreamer_Bot
         private bool ghostsSupplementaryMission2;
 
         /// <summary>
+        /// Экземпляр окна
+        /// </summary>
+        private MainWindow w;
+
+        /// <summary>
         /// telegram бот клиент
         /// </summary>
         TelegramBotClient karenBowmanBot;
+
+        /// <summary>
+        /// Коллекция для логов
+        /// </summary>
+        public ObservableCollection<MessageLog> GhostsBotMessageLog { get; set; }
+
+        /// <summary>
+        /// Коллекция для логов бота призраков
+        /// </summary>
+        public ObservableCollection<MessageLog> GhostsKarenBowmanBotMessageLog { get; set; }
+
+        /// <summary>
+        /// Общая коллекция
+        /// </summary>
+        public ObservableCollection<MessageLog> AllBotMessageLog { get; set; }
 
         /// <summary>
         /// Определяем статическую встроенную клавиатуру повстанцев
@@ -182,18 +231,16 @@ namespace Dreamer_Bot
             string text = $"{DateTime.Now.ToLongTimeString()}: {e.Message.Chat.FirstName} {e.Message.Chat.Id} {e.Message.Text}";
 
             //выводим на консоль время, кто, ид, текст сообщения
-            Console.WriteLine(text);
+            Debug.WriteLine($"{text} TypeMessage: {e.Message.Type.ToString()}");
+            var ghostsMessageText = "NULL";
 
-            //выводим тип сообщения
-            Console.WriteLine($"TypeMessage: {e.Message.Type.ToString()}");
-            Console.WriteLine();
+            Logging(GhostsBotMessageLog, e.Message.Text, e.Message.Chat.FirstName, e.Message.Chat.Id);
 
             //Выводим меню
             if (e.Message.Type == Telegram.Bot.Types.Enums.MessageType.Text && e.Message.Text == "/меню")
             {
                 //Выводим основную клавиатуру картеля
                 GhostsOperationsMenuOperation();
-                karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, "Меню активировано", replyMarkup: ghostsOperationsMenu);
             }
 
             if (e.Message.Type == Telegram.Bot.Types.Enums.MessageType.Text && e.Message.Text == "/start")
@@ -201,6 +248,8 @@ namespace Dreamer_Bot
                 //Выводим основную клавиатуру повстанцев
                 GhostsOperationsMenuOperation();
                 karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, "Добро пожаловать в призраки", replyMarkup: ghostsOperationsMenu);
+                ghostsMessageText = $"Добро пожаловать в призраки";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
             }
 
             //если фото в виде документа, выводим его параметры и выполняем миссию соответствующую названию фото
@@ -215,6 +264,8 @@ namespace Dreamer_Bot
                             if (ghostsMissionPool.Contains("Миссия 1"))
                             {
                                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 Выполнена");
+                                ghostsMessageText = $"Миссия 1 Выполнена";
+                                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                                 await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete1ID);
                                 ghostsMissionPool.Remove($"Миссия 1");
                                 ghostsMissionCompleted1 = true;
@@ -225,6 +276,8 @@ namespace Dreamer_Bot
                             if (ghostsMissionPool.Contains("Миссия 2"))
                             {
                                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 Выполнена");
+                                ghostsMessageText = $"Миссия 2 Выполнена";
+                                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                                 await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete2ID);
                                 ghostsMissionPool.Remove($"Миссия 2");
                                 ghostsMissionCompleted2 = true;
@@ -235,6 +288,8 @@ namespace Dreamer_Bot
                             if (ghostsMissionPool.Contains("Миссия 3"))
                             {
                                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 Выполнена");
+                                ghostsMessageText = $"Миссия 3 Выполнена";
+                                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                                 await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete3ID);
                                 ghostsMissionPool.Remove($"Миссия 3");
                                 ghostsMissionCompleted3 = true;
@@ -307,6 +362,8 @@ namespace Dreamer_Bot
             if (ghostsComparisonDateFromStart >= ghostsDateStart.AddMinutes(ghostsStartTimeMission1) && ghostsGettingMission1 == false)
             {
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 1");
+                ghostsMessageText = $"Получена миссия 1";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                 await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMission1ID);
                 ghostsGettingMission1 = true;
 
@@ -324,6 +381,8 @@ namespace Dreamer_Bot
                 GhostsAcceptOrRefuseAMission();
                 karenBowmanBot.OnCallbackQuery -= GhostsAcceptanceOrRefusalOfAMission;
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Поступила дополнительная миссия 2. Принять миссию?", replyMarkup: ghostsKeyboardAcceptOrRefuseAMission);
+                ghostsMessageText = $"Поступила дополнительная миссия 2. Принять миссию?";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                 karenBowmanBot.OnCallbackQuery += GhostsAcceptanceOrRefusalOfAMission;
             }
 
@@ -331,6 +390,8 @@ namespace Dreamer_Bot
             if (ghostsComparisonDateFromStart >= ghostsDateStart.AddMinutes(ghostsStartTimeMission3) && ghostsGettingMission3 == false)
             {
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 3");
+                ghostsMessageText = $"Получена миссия 3";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                 await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMission3ID);
                 ghostsGettingMission3 = true;
 
@@ -345,6 +406,8 @@ namespace Dreamer_Bot
             if (ghostsComparisonDateFromStart >= ghostsDateStart.AddMinutes(ghostsFailedTimeMission1) && ghostsMissionPool.Contains("Миссия 1"))
             {
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 провалена");
+                ghostsMessageText = $"Миссия 1 провалена";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                 await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID1);
                 ghostsMissionPool.Remove($"Миссия 1");
             }
@@ -353,6 +416,8 @@ namespace Dreamer_Bot
             if (ghostsComparisonDateFromStart >= ghostsDateStart.AddMinutes(ghostsFailedTimeMission2) && ghostsMissionPool.Contains("Миссия 2"))
             {
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 провалена");
+                ghostsMessageText = $"Миссия 2 провалена";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                 await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID2);
                 ghostsMissionPool.Remove($"Миссия 2");
             }
@@ -361,6 +426,8 @@ namespace Dreamer_Bot
             if (ghostsComparisonDateFromStart >= ghostsDateStart.AddMinutes(ghostsFailedTimeMission3) && ghostsMissionPool.Contains("Миссия 3"))
             {
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 провалена");
+                ghostsMessageText = $"Миссия 3 провалена";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                 await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID3);
                 ghostsMissionPool.Remove($"Миссия 3");
             }
@@ -374,12 +441,16 @@ namespace Dreamer_Bot
                     if (ghostsMissionPool.Count == 0)
                     {
                         await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Здраствуйте, Активных квестов нет");
+                        ghostsMessageText = $"Здраствуйте, Активных квестов нет";
+                        Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                     }
                     else
                     {
                         for (int i = 0; i < ghostsMissionPool.Count; i++)
                         {
                             await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"{ghostsMissionPool[i]}");
+                            ghostsMessageText = $"{ghostsMissionPool[i]}";
+                            Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                         }
                     }
                     break;
@@ -449,6 +520,8 @@ namespace Dreamer_Bot
             {
                 karenBowmanBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
                 await karenBowmanBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Получена миссия 2");
+                ghostsMessageText = $"Получена миссия 2";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                 await karenBowmanBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, ghostsMission2ID);
                 ghostsGettingMission2 = true;
 
@@ -461,6 +534,8 @@ namespace Dreamer_Bot
             {
                 karenBowmanBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
                 await karenBowmanBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ты точно уверен, что это хороший выбор? Привет семье");
+                ghostsMessageText = $"Ты точно уверен, что это хороший выбор? Привет семье";
+                Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
                 await karenBowmanBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, ghostsMissionAbandonmentID2);
                 ghostsGettingMission2 = true;
             }
@@ -477,9 +552,9 @@ namespace Dreamer_Bot
             ghostsGettingMission2 = false;
             ghostsGettingMission3 = false;
             ghostsSupplementaryMission2 = false;
-            ghostsStartTimeMission1 = 10;
-            ghostsStartTimeMission2 = 20;
-            ghostsStartTimeMission3 = 30;
+            ghostsStartTimeMission1 = 1;
+            ghostsStartTimeMission2 = 1;
+            ghostsStartTimeMission3 = 1;
             ghostsFailedTimeMission1 = 240;
             ghostsFailedTimeMission2 = 300;
             ghostsFailedTimeMission3 = 360;
@@ -686,6 +761,51 @@ namespace Dreamer_Bot
             json = JsonConvert.SerializeObject(ghostsMissionCompleted3);
             File.WriteAllText(pathGhostsMissionCompleted3, json);
 
+        }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="w"></param>
+        public Karen_Bowman_Bot(MainWindow w)
+        {
+            this.GhostsBotMessageLog = new ObservableCollection<MessageLog>();
+            this.GhostsKarenBowmanBotMessageLog = new ObservableCollection<MessageLog>();
+            this.w = w;
+            Thread ghostsStartTask = new Thread(GhostsStart);
+            ghostsStartTask.Start();
+        }
+
+        /// <summary>
+        /// Ручная рассылка
+        /// </summary>
+        /// <param name="Text">Текст</param>
+        /// <param name="Id">ИД</param>
+        public void GhostsSendMessage(string Text, string Id)
+        {
+            long id = Convert.ToInt64(Id);
+            karenBowmanBot.SendTextMessageAsync(id, Text);
+        }
+
+        /// <summary>
+        /// Метод для наполнения коллекции логов сообщений
+        /// </summary>
+        /// <param name="MessageLog">название коллекции</param>
+        /// <param name="messageText">текст сообщения</param>
+        /// <param name="firstName">кто отправил сообщение</param>
+        /// <param name="id">идентификатор того кто направил сообщение</param>
+        public void Logging(ObservableCollection<MessageLog> MessageLog, string messageText, string firstName, long id)
+        {
+            AllBotMessageLog = MessageLog;
+            w.Dispatcher.Invoke(() =>
+            {
+                AllBotMessageLog.Add(
+                    new MessageLog(
+                        DateTime.Now.ToLongTimeString(),
+                        messageText,
+                        firstName,
+                        id));
+            });
         }
     }
 }

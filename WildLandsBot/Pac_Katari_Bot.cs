@@ -7,10 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
-using Dreamer_Bot;
 using Newtonsoft.Json;
+using WildLandsBot;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
-namespace Dreamer_Bot
+namespace WildLandsBot
 {
     class Pac_Katari_Bot
     {
@@ -20,14 +22,41 @@ namespace Dreamer_Bot
         private bool insurgentsMissionCompleted1;
 
         /// <summary>
+        /// Свойство для привязки выполнения миссии 1 у повстанцев
+        /// </summary>
+        public bool InsurgentsMissionCompleted1
+        {
+            get { return this.insurgentsMissionCompleted1; }
+            set { this.insurgentsMissionCompleted1 = value; }
+        }
+
+        /// <summary>
         /// переменная показывающая смогли ли повстанцы выполнить миссию 2
         /// </summary>
         private bool insurgentsMissionCompleted2;
 
         /// <summary>
+        /// Свойство для привязки выполнения миссии 2 у повстанцев
+        /// </summary>
+        public bool InsurgentsMissionCompleted2
+        {
+            get { return this.insurgentsMissionCompleted2; }
+            set { this.insurgentsMissionCompleted2 = value; }
+        }
+
+        /// <summary>
         /// переменная показывающая смогли ли повстанцы выполнить миссию 3
         /// </summary>
         private bool insurgentsMissionCompleted3;
+
+        /// <summary>
+        /// Свойство для привязки выполнения миссии 3 у повстанцев
+        /// </summary>
+        public bool InsurgentsMissionCompleted3
+        {
+            get { return this.insurgentsMissionCompleted3; }
+            set { this.insurgentsMissionCompleted3 = value; }
+        }
 
         /// <summary>
         /// Переменная для хранения введенного текста
@@ -155,9 +184,29 @@ namespace Dreamer_Bot
         private bool insurgentsSupplementaryMission2;
 
         /// <summary>
+        /// Экземпляр окна
+        /// </summary>
+        private MainWindow w;
+
+        /// <summary>
         /// telegram бот клиент
         /// </summary>
         TelegramBotClient pacKatariBot;
+
+        /// <summary>
+        /// Коллекция для логов пользователей повстанцев
+        /// </summary>
+        public ObservableCollection<MessageLog> InsurgentBotMessageLog { get; set; }
+
+        /// <summary>
+        /// Коллекция для логов бота повстанцев
+        /// </summary>
+        public ObservableCollection<MessageLog> InsurgentPacKatariBotMessageLog { get; set; }
+
+        /// <summary>
+        /// Общая коллекция
+        /// </summary>
+        public ObservableCollection<MessageLog> AllBotMessageLog { get; set; }
 
         /// <summary>
         /// Определяем статическую встроенную клавиатуру повстанцев
@@ -182,11 +231,10 @@ namespace Dreamer_Bot
             string text = $"{DateTime.Now.ToLongTimeString()}: {e.Message.Chat.FirstName} {e.Message.Chat.Id} {e.Message.Text}";
 
             //выводим на консоль время, кто, ид, текст сообщения
-            Console.WriteLine(text);
+            Debug.WriteLine($"{text} TypeMessage: {e.Message.Type.ToString()}");
+            var insurgentsMessageText = "NULL";
 
-            //выводим тип сообщения
-            Console.WriteLine($"TypeMessage: {e.Message.Type.ToString()}");
-            Console.WriteLine();
+            Logging(InsurgentBotMessageLog, e.Message.Text, e.Message.Chat.FirstName, e.Message.Chat.Id);
 
             //Выводим меню
             if (e.Message.Type == Telegram.Bot.Types.Enums.MessageType.Text && e.Message.Text == "/меню")
@@ -200,6 +248,8 @@ namespace Dreamer_Bot
                 //Выводим основную клавиатуру повстанцев
                 InsurgentsOperationsMenuOperation();
                 pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, "Добро пожаловать к повстанцам", replyMarkup: insurgentsOperationsMenu);
+                insurgentsMessageText = $"Добро пожаловать к повстанцам";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
             }
 
             //если фото в виде документа, выводим его параметры и выполняем миссию соответствующую названию фото
@@ -214,6 +264,8 @@ namespace Dreamer_Bot
                             if (insurgentsMissionPool.Contains("Миссия 1"))
                             {
                                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 Выполнена");
+                                insurgentsMessageText = $"Миссия 1 Выполнена";
+                                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                                 await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete1ID);
                                 insurgentsMissionPool.Remove($"Миссия 1");
                                 insurgentsMissionCompleted1 = true;
@@ -224,6 +276,8 @@ namespace Dreamer_Bot
                             if (insurgentsMissionPool.Contains("Миссия 2"))
                             {
                                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 Выполнена");
+                                insurgentsMessageText = $"Миссия 2 Выполнена";
+                                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                                 await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete2ID);
                                 insurgentsMissionPool.Remove($"Миссия 2");
                                 insurgentsMissionCompleted2 = true;
@@ -234,6 +288,8 @@ namespace Dreamer_Bot
                             if (insurgentsMissionPool.Contains("Миссия 3"))
                             {
                                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 Выполнена");
+                                insurgentsMessageText = $"Миссия 3 Выполнена";
+                                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                                 await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete3ID);
                                 insurgentsMissionPool.Remove($"Миссия 3");
                                 insurgentsMissionCompleted3 = true;
@@ -306,6 +362,8 @@ namespace Dreamer_Bot
             if (insurgentsComparisonDateFromStart >= insurgentsDateStart.AddMinutes(insurgentsStartTimeMission1) && insurgentsGettingMission1 == false)
             {
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 1");
+                insurgentsMessageText = $"Получена миссия 1";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                 await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMission1ID);
                 insurgentsGettingMission1 = true;
 
@@ -322,6 +380,8 @@ namespace Dreamer_Bot
                 InsurgentsAcceptOrRefuseAMission();
                 pacKatariBot.OnCallbackQuery -= InsurgentsAcceptanceOrRefusalOfAMission;
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Поступила дополнительная миссия 2. Принять миссию?", replyMarkup: insurgentsKeyboardAcceptOrRefuseAMission);
+                insurgentsMessageText = $"Поступила дополнительная миссия 2. Принять миссию?";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                 pacKatariBot.OnCallbackQuery += InsurgentsAcceptanceOrRefusalOfAMission;
             }
 
@@ -329,6 +389,8 @@ namespace Dreamer_Bot
             if (insurgentsComparisonDateFromStart >= insurgentsDateStart.AddMinutes(insurgentsStartTimeMission3) && insurgentsGettingMission3 == false)
             {
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 3");
+                insurgentsMessageText = $"Получена миссия 3";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                 await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMission3ID);
                 insurgentsGettingMission3 = true;
 
@@ -343,6 +405,8 @@ namespace Dreamer_Bot
             if (insurgentsComparisonDateFromStart >= insurgentsDateStart.AddMinutes(insurgentsFailedTimeMission1) && insurgentsMissionPool.Contains("Миссия 1"))
             {
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 провалена");
+                insurgentsMessageText = $"Миссия 1 провалена";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                 await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID1);
                 insurgentsMissionPool.Remove($"Миссия 1");
             }
@@ -351,6 +415,8 @@ namespace Dreamer_Bot
             if (insurgentsComparisonDateFromStart >= insurgentsDateStart.AddMinutes(insurgentsFailedTimeMission2) && insurgentsMissionPool.Contains("Миссия 2"))
             {
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 провалена");
+                insurgentsMessageText = $"Миссия 2 провалена";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                 await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID2);
                 insurgentsMissionPool.Remove($"Миссия 2");
             }
@@ -359,6 +425,8 @@ namespace Dreamer_Bot
             if (insurgentsComparisonDateFromStart >= insurgentsDateStart.AddMinutes(insurgentsFailedTimeMission3) && insurgentsMissionPool.Contains("Миссия 3"))
             {
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 провалена");
+                insurgentsMessageText = $"Миссия 3 провалена";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                 await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID3);
                 insurgentsMissionPool.Remove($"Миссия 3");
             }
@@ -372,12 +440,16 @@ namespace Dreamer_Bot
                     if (insurgentsMissionPool.Count == 0)
                     {
                         await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Здраствуйте, Активных квестов нет");
+                        insurgentsMessageText = $"Здраствуйте, Активных квестов нет";
+                        Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                     }
                     else
                     {
                         for (int i = 0; i < insurgentsMissionPool.Count; i++)
                         {
                             await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"{insurgentsMissionPool[i]}");
+                            insurgentsMessageText = $"{insurgentsMissionPool[i]}";
+                            Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                         }
                     }
                     break;
@@ -447,6 +519,8 @@ namespace Dreamer_Bot
             {
                 pacKatariBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
                 await pacKatariBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Получена миссия 2");
+                insurgentsMessageText = $"Получена миссия 2";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                 await pacKatariBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, insurgentsMission2ID);
                 insurgentsGettingMission2 = true;
 
@@ -459,6 +533,8 @@ namespace Dreamer_Bot
             {
                 pacKatariBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
                 await pacKatariBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ты точно уверен, что это хороший выбор? Привет семье");
+                insurgentsMessageText = $"Ты точно уверен, что это хороший выбор? Привет семье";
+                Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
                 await pacKatariBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, insurgentsMissionAbandonmentID2);
                 insurgentsGettingMission2 = true;
             }
@@ -475,9 +551,9 @@ namespace Dreamer_Bot
             insurgentsGettingMission2 = false;
             insurgentsGettingMission3 = false;
             insurgentsSupplementaryMission2 = false;
-            insurgentsStartTimeMission1 = 10;
-            insurgentsStartTimeMission2 = 20;
-            insurgentsStartTimeMission3 = 30;
+            insurgentsStartTimeMission1 = 1;
+            insurgentsStartTimeMission2 = 1;
+            insurgentsStartTimeMission3 = 1;
             insurgentsFailedTimeMission1 = 240;
             insurgentsFailedTimeMission2 = 300;
             insurgentsFailedTimeMission3 = 360;
@@ -684,6 +760,51 @@ namespace Dreamer_Bot
             json = JsonConvert.SerializeObject(insurgentsMissionCompleted3);
             File.WriteAllText(pathInsurgentsMissionCompleted3, json);
 
+        }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="w"></param>
+        public Pac_Katari_Bot(MainWindow w)
+        {
+            this.InsurgentBotMessageLog = new ObservableCollection<MessageLog>();
+            this.InsurgentPacKatariBotMessageLog = new ObservableCollection<MessageLog>();
+            this.w = w;
+            Thread insurgentsStartTask = new Thread(InsurgentsStart);
+            insurgentsStartTask.Start();
+        }
+
+        /// <summary>
+        /// Ручная рассылка
+        /// </summary>
+        /// <param name="Text">Текст</param>
+        /// <param name="Id">ИД</param>
+        public void InsurgentsSendMessage(string Text, string Id)
+        {
+            long id = Convert.ToInt64(Id);
+            pacKatariBot.SendTextMessageAsync(id, Text);
+        }
+
+        /// <summary>
+        /// Метод для наполнения коллекции логов сообщений
+        /// </summary>
+        /// <param name="MessageLog">название коллекции</param>
+        /// <param name="messageText">текст сообщения</param>
+        /// <param name="firstName">кто отправил сообщение</param>
+        /// <param name="id">идентификатор того кто направил сообщение</param>
+        public void Logging(ObservableCollection<MessageLog> MessageLog, string messageText, string firstName, long id)
+        {
+            AllBotMessageLog = MessageLog;
+            w.Dispatcher.Invoke(() =>
+            {
+                AllBotMessageLog.Add(
+                    new MessageLog(
+                        DateTime.Now.ToLongTimeString(),
+                        messageText,
+                        firstName,
+                        id));
+            });
         }
     }
 }

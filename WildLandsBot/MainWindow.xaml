@@ -3,14 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WildLandsBot"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="500" 
-        Width="800"
+        Width="500"
         MinHeight="400"
         MinWidth="750">
-        
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,11 +17,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+               
         <TabControl Grid.Column="0"
                     Grid.Row="0" 
                     HorizontalAlignment="Stretch"                     
                     VerticalAlignment="Stretch">
-            <TabItem Header="Мечтатель">
+            <TabItem Header="Мечтатель" Height="22" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10*"/>
@@ -30,7 +30,9 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock 
@@ -40,8 +42,7 @@
                                Text="Сообщение пользователя"                               
                                FontSize="14"
                                Background="White"
-                               Margin="5" RenderTransformOrigin="0.5,0.5" TextAlignment="Center"
-                               >
+                               Margin="5" RenderTransformOrigin="0.5,0.5" TextAlignment="Center">
                         <TextBlock.ContextMenu>
                             <ContextMenu/>
                         </TextBlock.ContextMenu>
@@ -49,14 +50,13 @@
                     <TextBlock HorizontalAlignment="Stretch" 
                                VerticalAlignment="Stretch"
                                Grid.Row="0" 
-                               Grid.Column="1"
+                               Grid.Column="2"
                                Text="Ответ бота"                               
                                FontSize="14"
                                Background="White"  
                                TextAlignment="Center"
-                               Margin="5"
-                               />
-                    <ListBox x:Name ="loglist" 
+                               Margin="5"/>
+                    <ListBox x:Name ="cartelLoglist"
                              HorizontalAlignment="Stretch" 
                              VerticalAlignment="Stretch"
                              Grid.Column="0"
@@ -73,9 +73,11 @@
                                         <TextBlock Text="{Binding FirstName}" 
                                                    Margin="0" 
                                                    FontSize="15"/>
+                                        
                                         <TextBlock Text="{Binding Msg}" 
                                                    Margin="0" 
                                                    FontSize="20"/>
+                                        
                                         <TextBlock Text="{Binding Time}" 
                                                    Margin="10 0" 
                                                    FontSize="10"
@@ -84,51 +86,95 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                        </ListBox.ItemTemplate> 
+                        </ListBox.ItemTemplate>
                     </ListBox>
-                    <ListBox HorizontalAlignment="Stretch" 
+                    <ListBox x:Name="cartelLoglistBot" 
+                             HorizontalAlignment="Stretch" 
                              VerticalAlignment="Stretch" 
-                             Grid.Column="1"
+                             Grid.Column="2"
                              Grid.Row="1"
                              Margin="5" 
                              Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" 
+                                        Margin="5" 
+                                        BorderThickness="1" 
+                                        CornerRadius="10">
+                                    <StackPanel Margin="10">
+                                        
+                                        <TextBlock Text="{Binding FirstName}" 
+                                                   Margin="0" 
+                                                   FontSize="15"/>
+                                        
+                                        <TextBlock Text="{Binding Msg}" 
+                                                   Margin="0" 
+                                                   FontSize="20"/>
+                                        
+                                        <TextBlock Text="{Binding Time}" 
+                                                   Margin="10 0" 
+                                                   FontSize="10"
+                                                   Foreground="Gray" 
+                                                   TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
-                    <GroupBox Grid.Column="2" 
+                    
+                    <GridSplitter Grid.Column="3" 
+                                  Grid.RowSpan="5" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" 
+                                  Background="Gray" 
+                                  Opacity="50"
+                                  Width="3"/>
+
+                    <GridSplitter Grid.Column="1" 
+                                  Grid.RowSpan="5" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" 
+                                  Background="Gray" 
+                                  Opacity="50"
+                                  Width="3"/>
+
+                    <GroupBox x:Name="textCartel" 
+                              Grid.Column="4" 
                               HorizontalAlignment="Stretch" 
                               VerticalAlignment="Stretch" 
                               Margin="5" 
                               Grid.RowSpan="2"
                               Background="White">
                         <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50*"/>
                                 <ColumnDefinition Width="50*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock HorizontalAlignment="Stretch" 
-                               Grid.Row="0" 
-                               Grid.Column="0"
-                               Grid.ColumnSpan="2"
-                               Text="Отправка сообщения" 
-                               VerticalAlignment="Stretch"
-                               FontSize="14"
-                               Background="White"  
-                               TextAlignment="Center"
-                               Margin="5"
-                               />
-                                <TextBlock x:Name="cartelTargetSend"
-                                       Text="{Binding ElementName=logList, Path=SelectedItem.Id}"
+                                       Grid.Row="0" 
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Text="Отправка сообщения" 
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14"
+                                       Background="White"  
+                                       TextAlignment="Center"
+                                       Margin="5"/>
+                            
+                            <TextBlock x:Name="cartelTargetSend"
+                                       Text="{Binding ElementName=cartelLoglist, Path=SelectedItem.Id}"
                                        HorizontalAlignment="Stretch" 
                                        Grid.Row="1" 
                                        Grid.Column="0"
@@ -137,105 +183,127 @@
                                        FontSize="14"
                                        Background="White" 
                                        TextAlignment="Center"
-                                       Margin="5"
-                                       />
-                                <TextBox x:Name="carteltxtMsgSend" 
+                                       Margin="5"/>
+                            
+                            <TextBox x:Name="cartelTxtMsgSend" 
                                      Grid.ColumnSpan="2" 
                                      HorizontalAlignment="Stretch" 
                                      Margin="5" 
                                      Grid.Row="2" 
                                      VerticalAlignment="Stretch"/>
-                                <Button Content="Отправить" 
+                            
+                            <Button x:Name="cartelBtnMsgSend" 
+                                    Content="Отправить" 
                                     HorizontalAlignment="Stretch" 
                                     Margin="5" 
                                     Grid.Row="3" 
                                     VerticalAlignment="Stretch" 
-                                    Grid.ColumnSpan="2" Click="btnCartelClick"/>
-                                <TextBlock HorizontalAlignment="Stretch" 
-                               Grid.Row="4" 
-                               Grid.Column="0"
-                               Text="Баланс денег:" 
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="4" 
-                               Grid.Column="1"
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="5" 
-                               Grid.Column="0"
-                               Text="Баланс Коки:" 
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="5" 
-                               Grid.Column="1"
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="6" 
-                               Grid.Column="0"
-                               Text="Миссия 1:" 
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="6" 
-                               Grid.Column="1"
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="7" 
-                               Grid.Column="0"
-                               Text="Миссия 2:" 
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="7" 
-                               Grid.Column="1"
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="8" 
-                               Grid.Column="0"
-                               Text="Миссия 3:" 
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
-                                <TextBlock HorizontalAlignment="Center" 
-                               Grid.Row="8" 
-                               Grid.Column="1"
-                               VerticalAlignment="Center"
-                               FontSize="14"
-                               Background="White" 
-                               TextAlignment="Center"
-                               />
+                                    Grid.Column="0" 
+                                    Click="CartelBtnCartelClick"/>
+
+                            <Button x:Name="cartelBtnRefresh" 
+                                    Content="Обновить" 
+                                    HorizontalAlignment="Stretch" 
+                                    Margin="5" 
+                                    Grid.Row="3" 
+                                    VerticalAlignment="Stretch" 
+                                    Grid.Column="1" 
+                                    Click="cartelBtnRefresh_Click"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="4" 
+                                       Grid.Column="0"
+                                       Text="Баланс денег:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+                            
+                            <TextBlock x:Name="textCartelCashBalance"
+                                       Text="{Binding CartelCashBalance}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="4" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+                            
+                            <TextBlock HorizontalAlignment="Center" 
+                                       Grid.Row="5" 
+                                       Grid.Column="0"
+                                       Text="Баланс Коки:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textCartelCocaCash"
+                                       Text="{Binding CartelCocaCash}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="5" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+                            
+                            <TextBlock HorizontalAlignment="Center" 
+                                       Grid.Row="6" 
+                                       Grid.Column="0"
+                                       Text="Миссия 1:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textСartelMissionCompleted1"
+                                       Text="{Binding СartelMissionCompleted1}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="6" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+                            
+                            <TextBlock HorizontalAlignment="Center" 
+                                       Grid.Row="7" 
+                                       Grid.Column="0"
+                                       Text="Миссия 2:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textСartelMissionCompleted2"
+                                       Text="{Binding СartelMissionCompleted2}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="7" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+                            
+                            <TextBlock HorizontalAlignment="Center" 
+                                       Grid.Row="8" 
+                                       Grid.Column="0"
+                                       Text="Миссия 3:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textСartelMissionCompleted3"
+                                       Text="{Binding СartelMissionCompleted3}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="8" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
                         </Grid>
                     </GroupBox>
 
@@ -243,13 +311,778 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Генерал Баро">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="90*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Stretch"
+                               Grid.Row="0" 
+                               Grid.Column="0"
+                               Text="Сообщение пользователя"                               
+                               FontSize="14"
+                               Background="White"
+                               Margin="5" 
+                               RenderTransformOrigin="0.5,0.5" 
+                               TextAlignment="Center">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu/>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" 
+                               VerticalAlignment="Stretch"
+                               Grid.Row="0" 
+                               Grid.Column="2"
+                               Text="Ответ бота"                               
+                               FontSize="14"
+                               Background="White"  
+                               TextAlignment="Center"
+                               Margin="5"/>
+                    
+                    <ListBox x:Name ="unityLoglist" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch"
+                             Grid.Column="0"
+                             Grid.Row="1"
+                             Margin="5" 
+                             Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" 
+                                        Margin="5" 
+                                        BorderThickness="1" 
+                                        CornerRadius="10">
+                                    
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="{Binding FirstName}" 
+                                                   Margin="0" 
+                                                   FontSize="15"/>
+                                        
+                                        <TextBlock Text="{Binding Msg}" 
+                                                   Margin="0" 
+                                                   FontSize="20"/>
+                                        
+                                        <TextBlock Text="{Binding Time}" 
+                                                   Margin="10 0" 
+                                                   FontSize="10"
+                                                   Foreground="Gray" 
+                                                   TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <ListBox x:Name="unityLoglistBot" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch" 
+                             Grid.Column="2"
+                             Grid.Row="1"
+                             Margin="5" 
+                             Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" 
+                                        Margin="5" 
+                                        BorderThickness="1" 
+                                        CornerRadius="10">
+
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="{Binding FirstName}" 
+                                                   Margin="0" 
+                                                   FontSize="15"/>
+
+                                        <TextBlock Text="{Binding Msg}" 
+                                                   Margin="0" 
+                                                   FontSize="20"/>
+
+                                        <TextBlock Text="{Binding Time}" 
+                                                   Margin="10 0" 
+                                                   FontSize="10"
+                                                   Foreground="Gray" 
+                                                   TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <GridSplitter Grid.Column="3" 
+                                  Grid.RowSpan="5" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" 
+                                  Background="Gray" 
+                                  Opacity="50"
+                                  Width="3"/>
+
+                    <GridSplitter Grid.Column="1" 
+                                  Grid.RowSpan="5" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" 
+                                  Background="Gray" 
+                                  Opacity="50"
+                                  Width="3"/>
+
+                    <GroupBox x:Name="textUnity"
+                              Grid.Column="4" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch" 
+                              Margin="5" 
+                              Grid.RowSpan="2"
+                              Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="50*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="0" 
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Text="Отправка сообщения" 
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14"
+                                       Background="White"  
+                                       TextAlignment="Center"
+                                       Margin="5"/>
+
+                            <TextBlock x:Name="unityTargetSend"
+                                       Text="{Binding ElementName=unityLoglist, Path=SelectedItem.Id}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="1" 
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"
+                                       Margin="5"/>
+
+                            <TextBox x:Name="unityTxtMsgSend" 
+                                     Grid.ColumnSpan="2" 
+                                     HorizontalAlignment="Stretch" 
+                                     Margin="5" 
+                                     Grid.Row="2" 
+                                     VerticalAlignment="Stretch"/>
+
+                            <Button x:Name="unityBtnMsgSend"
+                                    Content="Отправить" 
+                                    HorizontalAlignment="Stretch" 
+                                    Margin="5" 
+                                    Grid.Row="3" 
+                                    VerticalAlignment="Stretch" 
+                                    Grid.Column="0" 
+                                    Click="UnityBtnUnityClick"/>
+
+                            <Button x:Name="unityBtnRefresh" 
+                                    Content="Обновить" 
+                                    HorizontalAlignment="Stretch" 
+                                    Margin="5" 
+                                    Grid.Row="3" 
+                                    VerticalAlignment="Stretch" 
+                                    Grid.Column="1" 
+                                    Click="cartelBtnRefresh_Click"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="4" 
+                                       Grid.Column="0"
+                                       Text="Баланс денег:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textUnityCashBalance"
+                                       Text="{Binding UnityCashBalance}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="4" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="5" 
+                                       Grid.Column="0"
+                                       Text="Миссия 1:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textUnityMissionCompleted1"
+                                       Text="{Binding UnityMissionCompleted1}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="5" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="6" 
+                                       Grid.Column="0"
+                                       Text="Миссия 2:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textUnityMissionCompleted2"
+                                       Text="{Binding UnityMissionCompleted2}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="6" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="7" 
+                                       Grid.Column="0"
+                                       Text="Миссия 3:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textUnityMissionCompleted3"
+                                       Text="{Binding UnityMissionCompleted3}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="7" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
             </TabItem>
             <TabItem Header="Пак Катари">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="90*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock VerticalAlignment="Stretch"
+                               Grid.Row="0" 
+                               Grid.Column="0"
+                               Text="Сообщение пользователя"                               
+                               FontSize="14"
+                               Background="White"
+                               Margin="5" 
+                               RenderTransformOrigin="0.5,0.5" 
+                               TextAlignment="Center">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu/>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" 
+                               VerticalAlignment="Stretch"
+                               Grid.Row="0" 
+                               Grid.Column="2"
+                               Text="Ответ бота"                               
+                               FontSize="14"
+                               Background="White"  
+                               TextAlignment="Center"
+                               Margin="5"/>
+                    
+                    <ListBox x:Name ="insurgentLoglist" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch"
+                             Grid.Column="0"
+                             Grid.Row="1"
+                             Margin="5" 
+                             Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" 
+                                        Margin="5" 
+                                        BorderThickness="1" 
+                                        CornerRadius="10">
+                                    <StackPanel Margin="10">
+                                        
+                                        <TextBlock Text="{Binding FirstName}" 
+                                                   Margin="0" 
+                                                   FontSize="15"/>
+                                        
+                                        <TextBlock Text="{Binding Msg}" 
+                                                   Margin="0" 
+                                                   FontSize="20"/>
+                                        
+                                        <TextBlock Text="{Binding Time}" 
+                                                   Margin="10 0" 
+                                                   FontSize="10"
+                                                   Foreground="Gray" 
+                                                   TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <ListBox x:Name="insurgentLoglistBot"
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch" 
+                             Grid.Column="2"
+                             Grid.Row="1"
+                             Margin="5" 
+                             Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" 
+                                        Margin="5" 
+                                        BorderThickness="1" 
+                                        CornerRadius="10">
+
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="{Binding FirstName}" 
+                                                   Margin="0" 
+                                                   FontSize="15"/>
+
+                                        <TextBlock Text="{Binding Msg}" 
+                                                   Margin="0" 
+                                                   FontSize="20"/>
+
+                                        <TextBlock Text="{Binding Time}" 
+                                                   Margin="10 0" 
+                                                   FontSize="10"
+                                                   Foreground="Gray" 
+                                                   TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <GridSplitter Grid.Column="3" 
+                                  Grid.RowSpan="5" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" 
+                                  Background="Gray" 
+                                  Opacity="50"
+                                  Width="3"/>
+
+                    <GridSplitter Grid.Column="1" 
+                                  Grid.RowSpan="5" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" 
+                                  Background="Gray" 
+                                  Opacity="50"
+                                  Width="3"/>
+
+                    <GroupBox Grid.Column="4" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch" 
+                              Margin="5" 
+                              Grid.RowSpan="2"
+                              Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="50*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="0" 
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Text="Отправка сообщения" 
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14"
+                                       Background="White"  
+                                       TextAlignment="Center"
+                                       Margin="5"/>
+                            
+                            <TextBlock x:Name="insurgentTargetSend"
+                                       Text="{Binding ElementName=insurgentLoglist, Path=SelectedItem.Id}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="1" 
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"
+                                       Margin="5"/>
+                            
+                            <TextBox x:Name="insurgentTxtMsgSend" 
+                                     Grid.ColumnSpan="2" 
+                                     HorizontalAlignment="Stretch" 
+                                     Margin="5" 
+                                     Grid.Row="2" 
+                                     VerticalAlignment="Stretch"/>
+
+                            <Button x:Name="insurgentBtnMsgSend"
+                                    Content="Отправить" 
+                                    HorizontalAlignment="Stretch" 
+                                    Margin="5" 
+                                    Grid.Row="3" 
+                                    VerticalAlignment="Stretch" 
+                                    Grid.Column="0" 
+                                    Click="InsurgentsBtnInsurgentsClick"/>
+
+                            <Button x:Name="insurgentBtnRefresh" 
+                                    Content="Обновить" 
+                                    HorizontalAlignment="Stretch" 
+                                    Margin="5" 
+                                    Grid.Row="3" 
+                                    VerticalAlignment="Stretch" 
+                                    Grid.Column="1" 
+                                    Click="cartelBtnRefresh_Click"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="4" 
+                                       Grid.Column="0"
+                                       Text="Миссия 1:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textInsurgentsMissionCompleted1"
+                                       Text="{Binding InsurgentsMissionCompleted1}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="4" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="5" 
+                                       Grid.Column="0"
+                                       Text="Миссия 2:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textInsurgentsMissionCompleted2"
+                                       Text="{Binding InsurgentsMissionCompleted2}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="5" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="6" 
+                                       Grid.Column="0"
+                                       Text="Миссия 3:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textInsurgentsMissionCompleted3"
+                                       Text="{Binding InsurgentsMissionCompleted3}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="6" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
             </TabItem>
             <TabItem Header="Карен Боуман">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="90*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock VerticalAlignment="Stretch"
+                               Grid.Row="0" 
+                               Grid.Column="0"
+                               Text="Сообщение пользователя"                               
+                               FontSize="14"
+                               Background="White"
+                               Margin="5" 
+                               RenderTransformOrigin="0.5,0.5" 
+                               TextAlignment="Center">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu/>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Stretch" 
+                               VerticalAlignment="Stretch"
+                               Grid.Row="0" 
+                               Grid.Column="2"
+                               Text="Ответ бота"                               
+                               FontSize="14"
+                               Background="White"  
+                               TextAlignment="Center"
+                               Margin="5"/>
+                    
+                    <ListBox x:Name ="ghostsLoglist" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch"
+                             Grid.Column="0"
+                             Grid.Row="1"
+                             Margin="5" 
+                             Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" 
+                                        Margin="5" 
+                                        BorderThickness="1" 
+                                        CornerRadius="10">
+                                    <StackPanel Margin="10">
+                                        
+                                        <TextBlock Text="{Binding FirstName}" 
+                                                   Margin="0" 
+                                                   FontSize="15"/>
+                                        
+                                        <TextBlock Text="{Binding Msg}" 
+                                                   Margin="0" 
+                                                   FontSize="20"/>
+                                        
+                                        <TextBlock Text="{Binding Time}" 
+                                                   Margin="10 0" 
+                                                   FontSize="10"
+                                                   Foreground="Gray" 
+                                                   TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <ListBox x:Name="ghostsLoglistBot"
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch" 
+                             Grid.Column="2"
+                             Grid.Row="1"
+                             Margin="5" 
+                             Grid.RowSpan="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" 
+                                        Margin="5" 
+                                        BorderThickness="1" 
+                                        CornerRadius="10">
+
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="{Binding FirstName}" 
+                                                   Margin="0" 
+                                                   FontSize="15"/>
+
+                                        <TextBlock Text="{Binding Msg}" 
+                                                   Margin="0" 
+                                                   FontSize="20"/>
+
+                                        <TextBlock Text="{Binding Time}" 
+                                                   Margin="10 0" 
+                                                   FontSize="10"
+                                                   Foreground="Gray" 
+                                                   TextAlignment="Right"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <GridSplitter Grid.Column="3" 
+                                  Grid.RowSpan="5" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" 
+                                  Background="Gray" 
+                                  Opacity="50"
+                                  Width="3"/>
+
+                    <GridSplitter Grid.Column="1" 
+                                  Grid.RowSpan="5" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" 
+                                  Background="Gray" 
+                                  Opacity="50"
+                                  Width="3"/>
+
+                    <GroupBox Grid.Column="4" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch" 
+                              Margin="5" 
+                              Grid.RowSpan="2"
+                              Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="50*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="0" 
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Text="Отправка сообщения" 
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14"
+                                       Background="White"  
+                                       TextAlignment="Center"
+                                       Margin="5"/>
+                            
+                            <TextBlock x:Name="ghostsTargetSend"
+                                       Text="{Binding ElementName=ghostsLoglist, Path=SelectedItem.Id}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="1" 
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"
+                                       Margin="5"/>
+                            
+                            <TextBox x:Name="ghostsTxtMsgSend" 
+                                     Grid.ColumnSpan="2" 
+                                     HorizontalAlignment="Stretch" 
+                                     Margin="5" 
+                                     Grid.Row="2" 
+                                     VerticalAlignment="Stretch"/>
+                            
+                            <Button Content="Отправить" 
+                                    HorizontalAlignment="Stretch" 
+                                    Margin="5" 
+                                    Grid.Row="3" 
+                                    VerticalAlignment="Stretch" 
+                                    Grid.Column="0" 
+                                    Click="GhostsBtnGhostsClick"/>
+
+                            <Button x:Name="ghostsBtnRefresh" 
+                                    Content="Обновить" 
+                                    HorizontalAlignment="Stretch" 
+                                    Margin="5" 
+                                    Grid.Row="3" 
+                                    VerticalAlignment="Stretch" 
+                                    Grid.Column="1" 
+                                    Click="cartelBtnRefresh_Click"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="4" 
+                                       Grid.Column="0"
+                                       Text="Миссия 1:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textGhostsMissionCompleted1"
+                                       Text="{Binding GhostsMissionCompleted1}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="4" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="5" 
+                                       Grid.Column="0"
+                                       Text="Миссия 2:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textGhostsMissionCompleted2"
+                                       Text="{Binding GhostsMissionCompleted2}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="5" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock HorizontalAlignment="Stretch" 
+                                       Grid.Row="6" 
+                                       Grid.Column="0"
+                                       Text="Миссия 3:" 
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+
+                            <TextBlock x:Name="textGhostsMissionCompleted3"
+                                       Text="{Binding GhostsMissionCompleted3}"
+                                       HorizontalAlignment="Stretch" 
+                                       Grid.Row="6" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       Background="White" 
+                                       TextAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
