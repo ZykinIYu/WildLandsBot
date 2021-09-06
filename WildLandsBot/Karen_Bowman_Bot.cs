@@ -546,7 +546,7 @@ namespace WildLandsBot
         /// </summary>
         public void GhostsStart()
         {
-            string token = File.ReadAllText("KarenBowmanBot.txt");
+            string tokenKarenBowman = "KarenBowmanBot.txt";
             ghostsDateStart = DateTime.Now;
             ghostsGettingMission1 = false;
             ghostsGettingMission2 = false;
@@ -563,7 +563,7 @@ namespace WildLandsBot
             ghostsMissionCompleted2 = false;
             ghostsMissionCompleted3 = false;
             GhostsDeserialization();
-            karenBowmanBot = new TelegramBotClient(token);
+            karenBowmanBot = new TelegramBotClient(NewDoc(tokenKarenBowman));
             karenBowmanBot.OnMessage += GhostsMessageListener;
 
             karenBowmanBot.StartReceiving();
@@ -806,6 +806,29 @@ namespace WildLandsBot
                         firstName,
                         id));
             });
+        }
+
+        /// <summary>
+        /// Создание документа и вывод токена
+        /// </summary>
+        /// <param name="tokenText"></param>
+        /// <returns></returns>
+        public string NewDoc(string tokenText)
+        {
+            string token;
+            if (File.Exists(tokenText) == true)
+            {
+                token = File.ReadAllText(tokenText);
+            }
+            else
+            {
+                using (StreamWriter sw = new StreamWriter(tokenText, true, Encoding.Unicode))
+                {
+                    sw.WriteLine($"");
+                }
+                token = File.ReadAllText(tokenText);
+            }
+            return token;
         }
     }
 }

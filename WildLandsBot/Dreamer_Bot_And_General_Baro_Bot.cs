@@ -2049,7 +2049,8 @@ namespace WildLandsBot
         /// </summary>
         public void CartelStart()
         {
-            string token = File.ReadAllText("Dreamer.txt");
+            string tokenDreamer = "Dreamer.txt";
+
             cartelCashBalance = 200;
             cartelCashBalanceIntermediateStorage = 200;
             cartelCashBalanceCheck = 200;
@@ -2138,7 +2139,7 @@ namespace WildLandsBot
             Console.WriteLine(dateStart);
             Console.WriteLine(dateStart.AddMinutes(1));
             Console.WriteLine(dateStart.AddHours(1));
-            dreamerBot = new TelegramBotClient(token);
+            dreamerBot = new TelegramBotClient(NewDoc(tokenDreamer));
             dreamerBot.OnMessage += MessageListener;
 
             dreamerBot.StartReceiving();
@@ -2151,7 +2152,7 @@ namespace WildLandsBot
         /// </summary>
         public void UnityStart()
         {
-            string token = File.ReadAllText("GeneralBaro.txt");
+            string tokenGeneralBaro = "GeneralBaro.txt";
             unityCashBalance = 100000;
             unityCashBalanceIntermediateStorage = 100000;
             unityCashBalanceCheck = 100000;
@@ -2177,7 +2178,7 @@ namespace WildLandsBot
             UnityDeserialization();
             Console.WriteLine(unityDateStart);
             Console.WriteLine(unityDateStart.AddMinutes(1));
-            generalBaroBot = new TelegramBotClient(token);
+            generalBaroBot = new TelegramBotClient(NewDoc(tokenGeneralBaro));
             generalBaroBot.OnMessage += UnityMessageListener;
 
             generalBaroBot.StartReceiving();
@@ -3178,6 +3179,29 @@ namespace WildLandsBot
                         firstName,
                         id));
             });
+        }
+
+        /// <summary>
+        /// Создание документа и вывод токена
+        /// </summary>
+        /// <param name="tokenText"></param>
+        /// <returns></returns>
+        public string NewDoc(string tokenText)
+        {
+            string token;
+            if (File.Exists(tokenText) == true)
+            {
+                token = File.ReadAllText(tokenText);
+            }
+            else
+            {
+                using (StreamWriter sw = new StreamWriter(tokenText, true, Encoding.Unicode))
+                {
+                    sw.WriteLine($"");
+                }
+                token = File.ReadAllText(tokenText);
+            }
+            return token;
         }
     }
 }

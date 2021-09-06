@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using WildLandsBot;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 
 namespace WildLandsBot
 {
@@ -545,7 +546,8 @@ namespace WildLandsBot
         /// </summary>
         public void InsurgentsStart()
         {
-            string token = File.ReadAllText("PacKatari.txt");
+            string tokenPacKatari = "PacKatari.txt";
+
             insurgentsDateStart = DateTime.Now;
             insurgentsGettingMission1 = false;
             insurgentsGettingMission2 = false;
@@ -562,7 +564,7 @@ namespace WildLandsBot
             insurgentsMissionCompleted2 = false;
             insurgentsMissionCompleted3 = false;
             InsurgentsDeserialization();
-            pacKatariBot = new TelegramBotClient(token);
+            pacKatariBot = new TelegramBotClient(NewDoc(tokenPacKatari));
             pacKatariBot.OnMessage += InsurgentsMessageListener;
 
             pacKatariBot.StartReceiving();
@@ -770,7 +772,7 @@ namespace WildLandsBot
         {
             this.InsurgentBotMessageLog = new ObservableCollection<MessageLog>();
             this.InsurgentPacKatariBotMessageLog = new ObservableCollection<MessageLog>();
-            this.w = w;
+            this.w = w;            
             Thread insurgentsStartTask = new Thread(InsurgentsStart);
             insurgentsStartTask.Start();
         }
@@ -805,6 +807,29 @@ namespace WildLandsBot
                         firstName,
                         id));
             });
+        }
+
+        /// <summary>
+        /// Создание документа и вывод токена
+        /// </summary>
+        /// <param name="tokenText"></param>
+        /// <returns></returns>
+        public string NewDoc(string tokenText)
+        {
+            string token;
+            if (File.Exists(tokenText) == true)
+            {
+                token = File.ReadAllText(tokenText);
+            }
+            else
+            {
+                using (StreamWriter sw = new StreamWriter(tokenText, true, Encoding.Unicode))
+                {
+                    sw.WriteLine($"");
+                }
+                token = File.ReadAllText(tokenText);
+            }
+            return token;
         }
     }
 }
