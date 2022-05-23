@@ -25,6 +25,8 @@ namespace WildLandsBot
         Dreamer_Bot_And_General_Baro_Bot dreamerAndGeneralBaro;
         Pac_Katari_Bot pacKatari;
         Karen_Bowman_Bot karenBowman;
+        //Click click;
+        Chemist_Bot chemist;
 
 
         public MainWindow()
@@ -34,6 +36,8 @@ namespace WildLandsBot
             dreamerAndGeneralBaro = new Dreamer_Bot_And_General_Baro_Bot(this);
             pacKatari = new Pac_Katari_Bot(this);
             karenBowman = new Karen_Bowman_Bot(this);
+            //click = new Click(this);
+            chemist = new Chemist_Bot(this);
 
             cartelLoglist.ItemsSource = dreamerAndGeneralBaro.CartelBotMessageLog;
             cartelLoglistBot.ItemsSource = dreamerAndGeneralBaro.CartelDreamerBotMessageLog;

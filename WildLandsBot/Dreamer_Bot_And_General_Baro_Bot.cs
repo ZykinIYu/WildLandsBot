@@ -82,7 +82,7 @@ namespace WildLandsBot
         /// <summary>
         /// Свойство для привязка денежного баланса в приложение
         /// </summary>
-        public double CartelCashBalance 
+        public double CartelCashBalance
         {
             get { return this.cartelCashBalance; }
             set { this.cartelCashBalance = value; }
@@ -133,6 +133,19 @@ namespace WildLandsBot
         private DateTime comparisonDateFromStart;
 
         /// <summary>
+        /// Дата и время покупки химика для сравнения с датой и временем начала игры
+        /// </summary>
+        private DateTime comparisonChemistDateFromStart;
+
+        /// <summary>
+        /// Дата и время покупки химика
+        /// </summary>
+        private DateTime comparisonChemistDateFromStartTime;
+
+
+
+
+        /// <summary>
         /// Дата и время для сравнения с датой и временем начала игры для зеленой плантации
         /// </summary>
         private DateTime cartelGreenPlantation;
@@ -166,6 +179,11 @@ namespace WildLandsBot
         /// Дата и время выплаты дани Мечтателю
         /// </summary>
         private DateTime cartelTributeDreamer;
+
+        /// <summary>
+        /// Дата и время доступности нового химика
+        /// </summary>
+        private DateTime cartelChemistSaleDate;
 
         /// <summary>
         /// Сравнение дат для расчета времени созревания плантаций
@@ -288,6 +306,11 @@ namespace WildLandsBot
         private double cartelTributePaymentTime;
 
         /// <summary>
+        /// Время доступности нового химика
+        /// </summary>
+        private double cartelChemistPaymentTime;
+
+        /// <summary>
         /// Дань Мечтателю
         /// </summary>
         private double tribute;
@@ -296,6 +319,11 @@ namespace WildLandsBot
         /// Цена коки
         /// </summary>
         private double cartelCocaPrice;
+
+        /// <summary>
+        /// Время через которое можно купить нового химика
+        /// </summary>
+        private double cartelNowTimeChemist;
 
         /// <summary>
         /// массив определяющий доступность грузовиков
@@ -423,6 +451,163 @@ namespace WildLandsBot
         private string missionAbandonmentID2;
 
         /// <summary>
+        /// Переменная для определения куплен ли химик
+        /// </summary>
+        private bool cartelChemistTry;
+
+        /// <summary>
+        /// Переменная для определения можно ли заменить химика
+        /// </summary>
+        private bool cartelChemistNowTry;
+
+        /// <summary>
+        /// Переменная определяющая цену химика
+        /// </summary>
+        private double cartelСhemistPrice;
+
+        /// <summary>
+        /// Переменная определяющая загрузку кокой Химика
+        /// </summary>
+        private double cartelLoadingCocaToTheChemist;
+
+        /// <summary>
+        /// Переменная определяющая время обработки 1 т. коки
+        /// </summary>
+        private double cartelCocaProcessingTimeByChemist;
+
+        /// <summary>
+        /// Переменная определяющая массу коки после обработки химиком
+        /// </summary>
+        private double cartelMassOfCocaAfterTreatmentByAChemist;
+
+        /// <summary>
+        /// Переменная определяющая цену коки после обработки химиком
+        /// </summary>
+        private double cartelPriceOfCocaAfterChemicalTreatment;
+
+        /// <summary>
+        /// Переменная определяющая наличие для покупки химика 1
+        /// </summary>
+        private bool chemistBool1;
+
+        /// <summary>
+        /// Переменная определяющая цену химика 1 
+        /// </summary>
+        private double cartelСhemistPrice1;
+
+        /// <summary>
+        /// Переменная определяющая загрузку кокой Химика 1
+        /// </summary>
+        private double cartelLoadingCocaToTheChemist1;
+
+        /// <summary>
+        /// Переменная определяющая время обработки 1 т. коки 1
+        /// </summary>
+        private double cartelCocaProcessingTimeByChemist1;
+
+        /// <summary>
+        /// Переменная определяющая массу коки после обработки химиком 1
+        /// </summary>
+        private double cartelMassOfCocaAfterTreatmentByAChemist1;
+
+        /// <summary>
+        /// Переменная определяющая цену коки после обработки химиком 1
+        /// </summary>
+        private double cartelPriceOfCocaAfterChemicalTreatment1;
+
+        /// <summary>
+        /// Переменная определяющая наличие для покупки химика 2
+        /// </summary>
+        private bool chemistBool2;
+
+        /// <summary>
+        /// Переменная определяющая цену химика 2
+        /// </summary>
+        private double cartelСhemistPrice2;
+
+        /// <summary>
+        /// Переменная определяющая загрузку кокой Химика 2
+        /// </summary>
+        private double cartelLoadingCocaToTheChemist2;
+
+        /// <summary>
+        /// Переменная определяющая время обработки 1 т. коки 2
+        /// </summary>
+        private double cartelCocaProcessingTimeByChemist2;
+
+        /// <summary>
+        /// Переменная определяющая массу коки после обработки химиком 2
+        /// </summary>
+        private double cartelMassOfCocaAfterTreatmentByAChemist2;
+
+        /// <summary>
+        /// Переменная определяющая цену коки после обработки химиком 2
+        /// </summary>
+        private double cartelPriceOfCocaAfterChemicalTreatment2;
+
+        /// <summary>
+        /// Переменная определяющая наличие для покупки химика 3
+        /// </summary>
+        private bool chemistBool3;
+
+        /// <summary>
+        /// Переменная определяющая цену химика 3
+        /// </summary>
+        private double cartelСhemistPrice3;
+
+        /// <summary>
+        /// Переменная определяющая загрузку кокой Химика 3
+        /// </summary>
+        private double cartelLoadingCocaToTheChemist3;
+
+        /// <summary>
+        /// Переменная определяющая время обработки 1 т. коки 3
+        /// </summary>
+        private double cartelCocaProcessingTimeByChemist3;
+
+        /// <summary>
+        /// Переменная определяющая массу коки после обработки химиком 3
+        /// </summary>
+        private double cartelMassOfCocaAfterTreatmentByAChemist3;
+
+        /// <summary>
+        /// Переменная определяющая цену коки после обработки химиком 3
+        /// </summary>
+        private double cartelPriceOfCocaAfterChemicalTreatment3;
+
+        /// <summary>
+        /// Переменная определяющая наличие для покупки химика 4
+        /// </summary>
+        private bool chemistBool4;
+
+        /// <summary>
+        /// Переменная определяющая цену химика 4
+        /// </summary>
+        private double cartelСhemistPrice4;
+
+        /// <summary>
+        /// Переменная определяющая загрузку кокой Химика 4
+        /// </summary>
+        private double cartelLoadingCocaToTheChemist4;
+
+        /// <summary>
+        /// Переменная определяющая время обработки 1 т. коки 4
+        /// </summary>
+        private double cartelCocaProcessingTimeByChemist4;
+
+        /// <summary>
+        /// Переменная определяющая массу коки после обработки химиком 4
+        /// </summary>
+        private double cartelMassOfCocaAfterTreatmentByAChemist4;
+
+        /// <summary>
+        /// Переменная определяющая цену коки после обработки химиком 4
+        /// </summary>
+        private double cartelPriceOfCocaAfterChemicalTreatment4;
+
+        private int translationsID;
+
+        /// <summary>
         /// Экземпляр окна
         /// </summary>
         private MainWindow w;
@@ -471,6 +656,16 @@ namespace WildLandsBot
         /// Клавиатура выбора транспортировки коки
         /// </summary>
         private InlineKeyboardMarkup cartelCocaTransportationKeyboard;
+
+        /// <summary>
+        /// Клавиатура выбора кому переводить
+        /// </summary>
+        private InlineKeyboardMarkup whoDoesTheTranslateToWhoCartel;
+
+        /// <summary>
+        /// Клавиатура покупки химика
+        /// </summary>
+        private InlineKeyboardMarkup chemistShoppingCartel;
 
         /// <summary>
         /// переменная показывающая смогло ли Единство выполнить миссию 1
@@ -726,6 +921,8 @@ namespace WildLandsBot
         private async void MessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
         {
             comparisonDateFromStart = DateTime.Now;
+
+            //dreamerBot.SendTextMessageAsync("-549065909", $"Привет", replyMarkup: cartelOperationsMenu);
 
             //записываем время, кто, ид, текст сообщения
             string text = $"{DateTime.Now.ToLongTimeString()}: {e.Message.Chat.FirstName} {e.Message.Chat.Id} {e.Message.Text}";
@@ -1095,70 +1292,35 @@ namespace WildLandsBot
 
             }
 
-            Thread.Sleep(500);
+            //Ждем доступности покупки нового химика
+            if (comparisonDateFromStart >= cartelChemistSaleDate.AddMinutes(cartelChemistPaymentTime) && cartelChemistNowTry == false && cartelChemistTry == true)
+            {
+                cartelChemistNowTry = true;
+                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Появились новые химики для наема. Можете заменить старого на нового.");
+                dreamerMessageText = $"Появились новые химики для наема. Можете заменить старого на нового.";
+                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+
+            }
+
+            //Thread.Sleep(500);
             //Удаляем все введенные запросы от пользователя
             dreamerBot.DeleteMessageAsync(e.Message.Chat.Id, e.Message.MessageId);
 
             //если сообщение текстовое, то записываем в переменную текст сообщения и проводим операции КОШЕЛЕК, ПЕРЕВОДЫ, КВЕСТЫ, ПЛАНТАЦИИ
             messageText = e.Message.Text;
-            switch (messageText)
-            {
-                //Проверяем баланс кошелька
-                case "Кошелек":
-                    await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Сумма на кошельке: {cartelCashBalance}");
-                    dreamerMessageText = $"Сумма на кошельке: {cartelCashBalance}";
-                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                    break;
+            CartelMainKeyboardActions(messageText, dreamerMessageText, e);
 
-                //Организуем переводы между картелем и единством
-                case "Переводы":
-                    WhoDoesTheCartelTranslateTo();
-                    dreamerBot.OnCallbackQuery -= CartelTransfers;
-                    await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести Единству?", replyMarkup: whoTranslateCartel);
-                    dreamerMessageText = $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести Единству?";
-                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                    dreamerBot.OnCallbackQuery += CartelTransfers;
-                    break;
-
-                //Проверяем текущие квесты
-                case "Квесты":
-                    if (missionPool.Count == 0)
-                    {
-                        await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Здраствуйте, Активных квестов нет");
-                        dreamerMessageText = $"Здраствуйте, Активных квестов нет";
-                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                    }
-                    else
-                    {
-                        for (int i = 0; i < missionPool.Count; i++)
-                        {
-                            await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"{missionPool[i]}");
-                            dreamerMessageText = $"{missionPool[i]}";
-                            Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                        }
-                    }
-                    break;
-
-                //Проверяем зрелость плантаций
-                case "Плантации":
-                    CartelPlantationSelectionKeyboardInline();
-                    dreamerBot.OnCallbackQuery -= CartelHittingThePlantation;
-                    await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Ваше хранилище содержит {cartelCocaCash}т. коки.\nВыберите необходимую плантацию", replyMarkup: cartelPlantationSelectionKeyboard);
-                    dreamerMessageText = $"Ваше хранилище содержит {cartelCocaCash}т. коки.\nВыберите необходимую плантацию";
-                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                    dreamerBot.OnCallbackQuery += CartelHittingThePlantation;
-                    break;
-            }
-
-            CartelSerialization();
+            //CartelSerialization();
             Thread.Sleep(200);
+
+
 
             //Если сообщение не текстовое, то выходим из метода
             if (e.Message.Text == null)
             {
                 return;
             }
-           
+
         }
 
         /// <summary>
@@ -1168,95 +1330,488 @@ namespace WildLandsBot
         /// <param name="ev"></param>
         private void CartelTransfers(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
         {
+            switch (translationsID)
+            {
+                case 1:
+                    CartelTransfersID1(sc, ev);
+                    break;
+
+                case 2:
+                    CartelTransfersID2(sc, ev);
+                    break;
+
+                case 3:
+                    CartelTransfersID3(sc, ev);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Логика переводов от картеля в Единство
+        /// </summary>
+        /// <param name="sc"></param>
+        /// <param name="ev"></param>
+        private void CartelTransfersID1(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        {
             var dreamerMessageText = $"NULL";
             var message = ev.CallbackQuery.Message;
-            if (ev.CallbackQuery.Data == "5")
+            double withdrawalAmount = 0.0;
+            switch (ev.CallbackQuery.Data)
             {
-                dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
-                double withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
-                if (withdrawalAmount <= cartelCashBalance)
-                {
-                    cartelCashBalance -= withdrawalAmount;
-                    cartelCashBalanceCheck = cartelCashBalance;
-                    cartelCashBalanceIntermediateStorage = cartelCashBalance;
-                    unityCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
-                }
-                else
-                {
-                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
-                    dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                case "5":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        unityCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
                     Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                }
-                dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
-                dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
-                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "10":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        unityCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "15":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        unityCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "20":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        unityCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
             }
-            else
-            if (ev.CallbackQuery.Data == "10")
+        }
+
+        /// <summary>
+        /// Логика переводов от картеля в Черный рынок
+        /// </summary>
+        /// <param name="sc"></param>
+        /// <param name="ev"></param>
+        private void CartelTransfersID2(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        {
+            var dreamerMessageText = $"NULL";
+            var message = ev.CallbackQuery.Message;
+            double withdrawalAmount = 0.0;
+            switch (ev.CallbackQuery.Data)
             {
-                dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
-                double withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
-                if (withdrawalAmount <= cartelCashBalance)
-                {
-                    cartelCashBalance -= withdrawalAmount;
-                    cartelCashBalanceCheck = cartelCashBalance;
-                    cartelCashBalanceIntermediateStorage = cartelCashBalance;
-                    unityCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
-                }
-                else
-                {
-                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
-                    dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                case "5":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        //blackMarketCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
                     Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                }
-                dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
-                dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
-                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "10":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        //blackMarketCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "15":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        //blackMarketCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "20":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        //blackMarketCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
             }
-            else
-            if (ev.CallbackQuery.Data == "15")
+        }
+
+        /// <summary>
+        /// Логика переводов от картеля Химику
+        /// </summary>
+        /// <param name="sc"></param>
+        /// <param name="ev"></param>
+        private void CartelTransfersID3(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        {
+            var dreamerMessageText = $"NULL";
+            var message = ev.CallbackQuery.Message;
+            double withdrawalAmount = 0.0;
+            switch (ev.CallbackQuery.Data)
             {
-                dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
-                double withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
-                if (withdrawalAmount <= cartelCashBalance)
-                {
-                    cartelCashBalance -= withdrawalAmount;
-                    cartelCashBalanceCheck = cartelCashBalance;
-                    cartelCashBalanceIntermediateStorage = cartelCashBalance;
-                    unityCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
-                }
-                else
-                {
-                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
-                    dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                case "5":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        Chemist_Bot.chemistCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
                     Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                }
-                dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
-                dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
-                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "10":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        Chemist_Bot.chemistCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "15":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        Chemist_Bot.chemistCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                case "20":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
+                    if (withdrawalAmount <= cartelCashBalance)
+                    {
+                        cartelCashBalance -= withdrawalAmount;
+                        cartelCashBalanceCheck = cartelCashBalance;
+                        cartelCashBalanceIntermediateStorage = cartelCashBalance;
+                        Chemist_Bot.chemistCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
+                    }
+                    else
+                    {
+                        dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
+                        dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
+                    dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
             }
-            else
-            if (ev.CallbackQuery.Data == "20")
+        }
+
+        /// <summary>
+        /// Метод для отображения действий при выборе кнопки кому переводить
+        /// </summary>
+        /// <param name="sc"></param>
+        /// <param name="ev"></param>
+        async private void CartelSelectTransferAction(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        {
+            var dreamerMessageText = $"NULL";
+            var message = ev.CallbackQuery.Message;
+
+
+            switch (ev.CallbackQuery.Data)
             {
-                dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
-                double withdrawalAmount = Convert.ToDouble(ev.CallbackQuery.Data) + (Convert.ToDouble(ev.CallbackQuery.Data) * percentForTranslation);
-                if (withdrawalAmount <= cartelCashBalance)
-                {
-                    cartelCashBalance -= withdrawalAmount;
-                    cartelCashBalanceCheck = cartelCashBalance;
-                    cartelCashBalanceIntermediateStorage = cartelCashBalance;
-                    unityCashBalanceIntermediateStorage += Convert.ToDouble(ev.CallbackQuery.Data);
-                }
-                else
-                {
-                    dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Перевод невозможно осуществить, так как на счете недостаточно средств");
-                    dreamerMessageText = $"Перевод невозможно осуществить, так как на счете недостаточно средств";
+                case "Unity":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    translationsID = 1;
+                    WhoDoesTheCartelTranslateTo();
+                    dreamerBot.OnCallbackQuery -= CartelTransfers;
+                    await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести Единству?", replyMarkup: whoTranslateCartel);
+                    dreamerMessageText = $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести Единству?";
                     Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                }
-                dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ваш баланс: {cartelCashBalance}");
-                dreamerMessageText = $"Ваш баланс: {cartelCashBalance}";
-                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    dreamerBot.OnCallbackQuery += CartelTransfers;
+                    break;
+
+                case "BlackMarket":
+                    dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                    translationsID = 2;
+                    WhoDoesTheCartelTranslateTo();
+                    dreamerBot.OnCallbackQuery -= CartelTransfers;
+                    await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести в Черный рынок?", replyMarkup: whoTranslateCartel);
+                    dreamerMessageText = $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести в черный рынок?";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    dreamerBot.OnCallbackQuery += CartelTransfers;
+                    break;
+
+                case "Chemist":
+                    if (cartelChemistTry)
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        translationsID = 3;
+                        WhoDoesTheCartelTranslateTo();
+                        dreamerBot.OnCallbackQuery -= CartelTransfers;
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Химик возьмет себе {percentForTranslation * 100}% Какую сумму хотите перевести Химику?", replyMarkup: whoTranslateCartel);
+                        dreamerMessageText = $"Банк возьмет коммисию в размере {percentForTranslation * 100}%. Какую сумму хотите перевести Химику?";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        dreamerBot.OnCallbackQuery += CartelTransfers;
+                    }
+                    break;
+
             }
+
+        }
+
+        /// <summary>
+        /// Метод для отображения действий при выборе химика
+        /// </summary>
+        /// <param name="sc"></param>
+        /// <param name="ev"></param>
+        async private void CartelSelectChemist(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        {
+            var dreamerMessageText = $"NULL";
+            var message = ev.CallbackQuery.Message;
+
+
+            switch (ev.CallbackQuery.Data)
+            {
+                case "Chemist1":
+                    if (cartelCashBalance >= cartelСhemistPrice1)
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        cartelСhemistPrice = cartelСhemistPrice1;
+                        cartelLoadingCocaToTheChemist = cartelLoadingCocaToTheChemist1;
+                        cartelCocaProcessingTimeByChemist = cartelCocaProcessingTimeByChemist1;
+                        cartelMassOfCocaAfterTreatmentByAChemist = cartelMassOfCocaAfterTreatmentByAChemist1;
+                        cartelPriceOfCocaAfterChemicalTreatment = cartelPriceOfCocaAfterChemicalTreatment1;
+                        cartelCashBalance -= cartelСhemistPrice;
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Вы преобрели химика с параметрами:\n\nЦена химика: {cartelСhemistPrice}\nЗагрузка коки: {cartelLoadingCocaToTheChemist}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment}\n\nВаш баланс {CartelCashBalance}");
+                        dreamerMessageText = $"Вы преобрели химика с параметрами:\n\nЦена химика: {cartelСhemistPrice}\nЗагрузка коки: {cartelLoadingCocaToTheChemist}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment}\n\nВаш баланс {CartelCashBalance}";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        cartelChemistTry = true;
+                        chemistBool1 = false;
+                        cartelChemistSaleDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"На балансе недостаточно средств для покупки\nВаш баланс {CartelCashBalance}");
+                        dreamerMessageText = $"На балансе недостаточно средств для покупки\nВаш баланс {CartelCashBalance}";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    break;
+
+                case "Chemist2":
+                    if (cartelCashBalance >= cartelСhemistPrice2)
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        cartelСhemistPrice = cartelСhemistPrice2;
+                        cartelLoadingCocaToTheChemist = cartelLoadingCocaToTheChemist2;
+                        cartelCocaProcessingTimeByChemist = cartelCocaProcessingTimeByChemist2;
+                        cartelMassOfCocaAfterTreatmentByAChemist = cartelMassOfCocaAfterTreatmentByAChemist2;
+                        cartelPriceOfCocaAfterChemicalTreatment = cartelPriceOfCocaAfterChemicalTreatment2;
+                        cartelCashBalance -= cartelСhemistPrice;
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Вы преобрели химика с параметрами:\n\nЦена химика: {cartelСhemistPrice}\nЗагрузка коки: {cartelLoadingCocaToTheChemist}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment}\n\nВаш баланс {CartelCashBalance}");
+                        dreamerMessageText = $"Вы преобрели химика с параметрами:\n\nЦена химика: {cartelСhemistPrice}\nЗагрузка коки: {cartelLoadingCocaToTheChemist}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment}\n\nВаш баланс {CartelCashBalance}";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        cartelChemistTry = true;
+                        chemistBool2 = false;
+                        cartelChemistSaleDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"На балансе недостаточно средств для покупки\nВаш баланс {CartelCashBalance}");
+                        dreamerMessageText = $"На балансе недостаточно средств для покупки\nВаш баланс {CartelCashBalance}";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    break;
+
+                case "Chemist3":
+                    if (cartelCashBalance >= cartelСhemistPrice3)
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        cartelСhemistPrice = cartelСhemistPrice3;
+                        cartelLoadingCocaToTheChemist = cartelLoadingCocaToTheChemist3;
+                        cartelCocaProcessingTimeByChemist = cartelCocaProcessingTimeByChemist3;
+                        cartelMassOfCocaAfterTreatmentByAChemist = cartelMassOfCocaAfterTreatmentByAChemist3;
+                        cartelPriceOfCocaAfterChemicalTreatment = cartelPriceOfCocaAfterChemicalTreatment3;
+                        cartelCashBalance -= cartelСhemistPrice;
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Вы преобрели химика с параметрами:\n\nЦена химика: {cartelСhemistPrice}\nЗагрузка коки: {cartelLoadingCocaToTheChemist}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment}\n\nВаш баланс {CartelCashBalance}");
+                        dreamerMessageText = $"Вы преобрели химика с параметрами:\n\nЦена химика: {cartelСhemistPrice}\nЗагрузка коки: {cartelLoadingCocaToTheChemist}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment}\n\nВаш баланс {CartelCashBalance}";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        cartelChemistTry = true;
+                        chemistBool3 = false;
+                        cartelChemistSaleDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"На балансе недостаточно средств для покупки\nВаш баланс {CartelCashBalance}");
+                        dreamerMessageText = $"На балансе недостаточно средств для покупки\nВаш баланс {CartelCashBalance}";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    break;
+
+                case "Chemist4":
+                    if (cartelCashBalance >= cartelСhemistPrice4)
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        cartelСhemistPrice = cartelСhemistPrice4;
+                        cartelLoadingCocaToTheChemist = cartelLoadingCocaToTheChemist4;
+                        cartelCocaProcessingTimeByChemist = cartelCocaProcessingTimeByChemist4;
+                        cartelMassOfCocaAfterTreatmentByAChemist = cartelMassOfCocaAfterTreatmentByAChemist4;
+                        cartelPriceOfCocaAfterChemicalTreatment = cartelPriceOfCocaAfterChemicalTreatment4;
+                        cartelCashBalance -= cartelСhemistPrice;
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Вы преобрели химика с параметрами:\n\nЦена химика: {cartelСhemistPrice}\nЗагрузка коки: {cartelLoadingCocaToTheChemist}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment}\n\nВаш баланс {CartelCashBalance}");
+                        dreamerMessageText = $"Вы преобрели химика с параметрами:\n\nЦена химика: {cartelСhemistPrice}\nЗагрузка коки: {cartelLoadingCocaToTheChemist}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment}\n\nВаш баланс {CartelCashBalance}";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        cartelChemistTry = true;
+                        chemistBool4 = false;
+                        cartelChemistSaleDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
+                        await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"На балансе недостаточно средств для покупки\nВаш баланс {CartelCashBalance}");
+                        dreamerMessageText = $"На балансе недостаточно средств для покупки\nВаш баланс {CartelCashBalance}";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    break;
+
+            }
+
         }
 
         /// <summary>
@@ -1453,6 +2008,243 @@ namespace WildLandsBot
             }
         }
 
+        //Метод описывающий нажатия основных кнопок клавиатуры
+        async private void CartelMainKeyboardActions(string messageText, string dreamerMessageText, Telegram.Bot.Args.MessageEventArgs e)
+        {
+            switch (messageText)
+            {
+                //Проверяем баланс кошелька
+                case "Кошелек":
+                    await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Сумма на кошельке: {cartelCashBalance}");
+                    dreamerMessageText = $"Сумма на кошельке: {cartelCashBalance}";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    break;
+
+                //Организуем переводы
+                case "Переводы":
+                    if (cartelChemistTry)
+                    {
+                        WhoDoesTheCartelTranslateToWho(1);
+                        dreamerBot.OnCallbackQuery -= CartelSelectTransferAction;
+                        await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Кому хотите осуществить перевод?", replyMarkup: whoDoesTheTranslateToWhoCartel);
+                        dreamerMessageText = $"Кому хотите осуществить перевод?";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        dreamerBot.OnCallbackQuery += CartelSelectTransferAction;
+                    }
+                    else
+                    {
+                        WhoDoesTheCartelTranslateToWho(0);
+                        dreamerBot.OnCallbackQuery -= CartelSelectTransferAction;
+                        await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Кому хотите осуществить перевод?", replyMarkup: whoDoesTheTranslateToWhoCartel);
+                        dreamerMessageText = $"Кому хотите осуществить перевод?";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        dreamerBot.OnCallbackQuery += CartelSelectTransferAction;
+                    }
+
+                    break;
+
+                //Проверяем текущие квесты
+                case "Квесты":
+                    if (missionPool.Count == 0)
+                    {
+                        await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Здраствуйте, Активных квестов нет");
+                        dreamerMessageText = $"Здраствуйте, Активных квестов нет";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < missionPool.Count; i++)
+                        {
+                            await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"{missionPool[i]}");
+                            dreamerMessageText = $"{missionPool[i]}";
+                            Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        }
+                    }
+                    break;
+
+                //Проверяем зрелость плантаций
+                case "Плантации":
+                    CartelPlantationSelectionKeyboardInline();
+                    dreamerBot.OnCallbackQuery -= CartelHittingThePlantation;
+                    await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Ваше хранилище содержит {cartelCocaCash}т. коки.\nВыберите необходимую плантацию", replyMarkup: cartelPlantationSelectionKeyboard);
+                    dreamerMessageText = $"Ваше хранилище содержит {cartelCocaCash}т. коки.\nВыберите необходимую плантацию";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    dreamerBot.OnCallbackQuery += CartelHittingThePlantation;
+                    break;
+
+                //Действия с химиком
+                case "Химик":
+                    if (cartelChemistTry)
+                    {
+                        if (!cartelChemistNowTry)
+                        {
+                            await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"\"Какой нах*й химик б**?\"");
+                            Thread.Sleep(1000);
+                            await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Извиняемся, химик уже неделю в кокаиновом запое, пока к сожалению не может вам помочь :-(");
+                        }
+                        else
+                        {
+                            comparisonChemistDateFromStartTime = DateTime.Now;
+                            if (chemistBool1 == true && chemistBool2 == true && chemistBool3 == true && chemistBool4 == true)
+                            {
+                                CartelChemistShoppingKeyboardInline(0);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == false && chemistBool2 == true && chemistBool3 == true && chemistBool4 == true)
+                            {
+                                CartelChemistShoppingKeyboardInline(1);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == true && chemistBool2 == false && chemistBool3 == true && chemistBool4 == true)
+                            {
+                                CartelChemistShoppingKeyboardInline(2);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == true && chemistBool2 == true && chemistBool3 == false && chemistBool4 == true)
+                            {
+                                CartelChemistShoppingKeyboardInline(3);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == true && chemistBool2 == true && chemistBool3 == true && chemistBool4 == false)
+                            {
+                                CartelChemistShoppingKeyboardInline(4);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == false && chemistBool2 == false && chemistBool3 == true && chemistBool4 == true)
+                            {
+                                CartelChemistShoppingKeyboardInline(5);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == false && chemistBool2 == true && chemistBool3 == false && chemistBool4 == true)
+                            {
+                                CartelChemistShoppingKeyboardInline(6);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == false && chemistBool2 == true && chemistBool3 == true && chemistBool4 == false)
+                            {
+                                CartelChemistShoppingKeyboardInline(7);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == true && chemistBool2 == false && chemistBool3 == false && chemistBool4 == true)
+                            {
+                                CartelChemistShoppingKeyboardInline(8);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == true && chemistBool2 == false && chemistBool3 == true && chemistBool4 == false)
+                            {
+                                CartelChemistShoppingKeyboardInline(9);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == true && chemistBool2 == true && chemistBool3 == false && chemistBool4 == false)
+                            {
+                                CartelChemistShoppingKeyboardInline(10);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == true && chemistBool2 == false && chemistBool3 == false && chemistBool4 == false)
+                            {
+                                CartelChemistShoppingKeyboardInline(11);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == false && chemistBool2 == true && chemistBool3 == false && chemistBool4 == false)
+                            {
+                                CartelChemistShoppingKeyboardInline(12);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == false && chemistBool2 == false && chemistBool3 == true && chemistBool4 == false)
+                            {
+                                CartelChemistShoppingKeyboardInline(13);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else if (chemistBool1 == false && chemistBool2 == false && chemistBool3 == false && chemistBool4 == true)
+                            {
+                                CartelChemistShoppingKeyboardInline(14);
+                                dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                                dreamerMessageText = $"Какого химика хотите преобрести?";
+                                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                                dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                            }
+                            else
+                            {
+                                await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Все химики закончились");
+                                dreamerMessageText = $"Все химики закончились";
+                            }
+                            //await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"ПОЖАЛУЙСТА хватить нажимать кнопку \"Химик\", он до сих пор в кокаиновом запое, выйдет из него явно не скоро :-(");
+                        }
+                    }
+                    else
+                    {
+                        CartelChemistShoppingKeyboardInline(0);
+                        dreamerBot.OnCallbackQuery -= CartelSelectChemist;
+                        await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Какого химика хотите преобрести?", replyMarkup: chemistShoppingCartel);
+                        dreamerMessageText = $"Какого химика хотите преобрести?";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        dreamerBot.OnCallbackQuery += CartelSelectChemist;
+                    }
+                    
+                    break;
+
+
+
+            }
+        }
+
         /// <summary>
         /// Метод скачивания документа
         /// </summary>
@@ -1475,8 +2267,8 @@ namespace WildLandsBot
         {
             cartelOperationsMenu = new ReplyKeyboardMarkup(new[]
             {
-                new[] {new KeyboardButton("Кошелек"), new KeyboardButton("Переводы")},
-                new[] {new KeyboardButton("Квесты"), new KeyboardButton("Плантации")},
+                new[] {new KeyboardButton("Кошелек"), new KeyboardButton("Переводы"), new KeyboardButton("Квесты") },
+                new[] {new KeyboardButton("Плантации"), new KeyboardButton("Химик")},
             })
             {
                 OneTimeKeyboard = false
@@ -1485,7 +2277,7 @@ namespace WildLandsBot
         }
 
         /// <summary>
-        /// Меню переводов картеля
+        /// Меню суммы переводов картеля
         /// </summary>
         private void WhoDoesTheCartelTranslateTo()
         {
@@ -1494,6 +2286,177 @@ namespace WildLandsBot
                 new[] {InlineKeyboardButton.WithCallbackData("5", "5"), InlineKeyboardButton.WithCallbackData("10","10")},
                 new[] {InlineKeyboardButton.WithCallbackData("15","15"), InlineKeyboardButton.WithCallbackData("20","20") },
             });
+
+        }
+
+
+
+        /// <summary>
+        /// Меню покупки химика
+        /// </summary>
+        private void CartelChemistShoppingKeyboardInline(int chemistShoppingCartelInKey)
+        {
+            switch (chemistShoppingCartelInKey)
+            {
+                case 0:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 1\n\nЦена химика: {cartelСhemistPrice1}\nЗагрузка коки: {cartelLoadingCocaToTheChemist1}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist1}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist1}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment1}", "Chemist1"), InlineKeyboardButton.WithCallbackData($"Химик 2\n\nЦена химика: {cartelСhemistPrice2}\nЗагрузка коки: {cartelLoadingCocaToTheChemist2}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist2}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist2}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment2}", "Chemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 3\n\nЦена химика: {cartelСhemistPrice3}\nЗагрузка коки: {cartelLoadingCocaToTheChemist3}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist3}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist3}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment3}", "Chemist3"), InlineKeyboardButton.WithCallbackData($"Химик 4\n\nЦена химика: {cartelСhemistPrice4}\nЗагрузка коки: {cartelLoadingCocaToTheChemist4}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist4}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist4}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment4}", "Chemist4") },
+                    });
+                    break;
+
+                case 1:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 2\n\nЦена химика: {cartelСhemistPrice2}\nЗагрузка коки: {cartelLoadingCocaToTheChemist2}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist2}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist2}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment2}", "Chemist2"),  InlineKeyboardButton.WithCallbackData($"Химик 3\n\nЦена химика: {cartelСhemistPrice3}\nЗагрузка коки: {cartelLoadingCocaToTheChemist3}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist3}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist3}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment3}", "Chemist3")},
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 4\n\nЦена химика: {cartelСhemistPrice4}\nЗагрузка коки: {cartelLoadingCocaToTheChemist4}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist4}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist4}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment4}", "Chemist4") },
+                    });
+                    break;
+
+                case 2:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 1\n\nЦена химика: {cartelСhemistPrice1}\nЗагрузка коки: {cartelLoadingCocaToTheChemist1}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist1}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist1}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment1}", "Chemist1"), InlineKeyboardButton.WithCallbackData($"Химик 3\n\nЦена химика: {cartelСhemistPrice3}\nЗагрузка коки: {cartelLoadingCocaToTheChemist3}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist3}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist3}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment3}", "Chemist3") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 4\n\nЦена химика: {cartelСhemistPrice4}\nЗагрузка коки: {cartelLoadingCocaToTheChemist4}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist4}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist4}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment4}", "Chemist4") },
+                    });
+                    break;
+
+                case 3:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 1\n\nЦена химика: {cartelСhemistPrice1}\nЗагрузка коки: {cartelLoadingCocaToTheChemist1}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist1}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist1}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment1}", "Chemist1"), InlineKeyboardButton.WithCallbackData($"Химик 2\n\nЦена химика: {cartelСhemistPrice2}\nЗагрузка коки: {cartelLoadingCocaToTheChemist2}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist2}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist2}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment2}", "Chemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 4\n\nЦена химика: {cartelСhemistPrice4}\nЗагрузка коки: {cartelLoadingCocaToTheChemist4}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist4}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist4}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment4}", "Chemist4") },
+                    });
+                    break;
+
+                case 4:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 1\n\nЦена химика: {cartelСhemistPrice1}\nЗагрузка коки: {cartelLoadingCocaToTheChemist1}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist1}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist1}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment1}", "Chemist1"), InlineKeyboardButton.WithCallbackData($"Химик 2\n\nЦена химика: {cartelСhemistPrice2}\nЗагрузка коки: {cartelLoadingCocaToTheChemist2}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist2}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist2}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment2}", "Chemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 3\n\nЦена химика: {cartelСhemistPrice3}\nЗагрузка коки: {cartelLoadingCocaToTheChemist3}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist3}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist3}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment3}", "Chemist3") },
+                    });
+                    break;
+
+                case 5:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 3\n\nЦена химика: {cartelСhemistPrice3}\nЗагрузка коки: {cartelLoadingCocaToTheChemist3}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist3}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist3}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment3}", "Chemist3") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 4\n\nЦена химика: {cartelСhemistPrice4}\nЗагрузка коки: {cartelLoadingCocaToTheChemist4}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist4}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist4}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment4}", "Chemist4") },
+                    });
+                    break;
+
+                case 6:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 2\n\nЦена химика: {cartelСhemistPrice2}\nЗагрузка коки: {cartelLoadingCocaToTheChemist2}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist2}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist2}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment2}", "Chemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 4\n\nЦена химика: {cartelСhemistPrice4}\nЗагрузка коки: {cartelLoadingCocaToTheChemist4}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist4}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist4}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment4}", "Chemist4") },
+                    });
+                    break;
+
+                case 7:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 2\n\nЦена химика: {cartelСhemistPrice2}\nЗагрузка коки: {cartelLoadingCocaToTheChemist2}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist2}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist2}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment2}", "Chemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 3\n\nЦена химика: {cartelСhemistPrice3}\nЗагрузка коки: {cartelLoadingCocaToTheChemist3}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist3}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist3}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment3}", "Chemist3") },
+                    });
+                    break;
+
+                case 8:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 1\n\nЦена химика: {cartelСhemistPrice1}\nЗагрузка коки: {cartelLoadingCocaToTheChemist1}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist1}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist1}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment1}", "Chemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 4\n\nЦена химика: {cartelСhemistPrice4}\nЗагрузка коки: {cartelLoadingCocaToTheChemist4}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist4}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist4}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment4}", "Chemist4") },
+                    });
+                    break;
+
+                case 9:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 1\n\nЦена химика: {cartelСhemistPrice1}\nЗагрузка коки: {cartelLoadingCocaToTheChemist1}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist1}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist1}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment1}", "Chemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 3\n\nЦена химика: {cartelСhemistPrice3}\nЗагрузка коки: {cartelLoadingCocaToTheChemist3}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist3}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist3}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment3}", "Chemist3") },
+                    });
+                    break;
+
+                case 10:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 1\n\nЦена химика: {cartelСhemistPrice1}\nЗагрузка коки: {cartelLoadingCocaToTheChemist1}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist1}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist1}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment1}", "Chemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 2\n\nЦена химика: {cartelСhemistPrice2}\nЗагрузка коки: {cartelLoadingCocaToTheChemist2}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist2}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist2}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment2}", "Chemist2") },
+                    });
+                    break;
+
+                case 11:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 1\n\nЦена химика: {cartelСhemistPrice1}\nЗагрузка коки: {cartelLoadingCocaToTheChemist1}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist1}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist1}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment1}", "Chemist1") },
+                    });
+                    break;
+
+                case 12:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 2\n\nЦена химика: {cartelСhemistPrice2}\nЗагрузка коки: {cartelLoadingCocaToTheChemist2}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist2}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist2}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment2}", "Chemist2") },
+                    });
+                    break;
+
+                case 13:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 3\n\nЦена химика: {cartelСhemistPrice3}\nЗагрузка коки: {cartelLoadingCocaToTheChemist3}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist3}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist3}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment3}", "Chemist3") },
+                    });
+                    break;
+
+                case 14:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData($"Химик 4\n\nЦена химика: {cartelСhemistPrice4}\nЗагрузка коки: {cartelLoadingCocaToTheChemist4}\nВремя обработки 1 т. коки: {cartelCocaProcessingTimeByChemist4}\nмасса коки после обработки: {cartelMassOfCocaAfterTreatmentByAChemist4}\nцена 1 т. коки после обработки: {cartelPriceOfCocaAfterChemicalTreatment4}", "Chemist4") },
+                    });
+                    break;
+
+                case 15:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] { InlineKeyboardButton.WithCallbackData($"Отправить коку на обработку", "BuyingAChemist"), InlineKeyboardButton.WithCallbackData($"Замена химика новым", "ReplacingAChemistWithANewOne") },
+                    });
+                    break;
+
+                case 16:
+                    chemistShoppingCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] { InlineKeyboardButton.WithCallbackData($"Отправить коку на обработку", "SubmitCocaForProcessing") },
+                    });
+                    break;
+
+            }
+
+
+        }
+
+        /// <summary>
+        /// Меню кому картель хочет перевести
+        /// </summary>
+        private void WhoDoesTheCartelTranslateToWho(int whoTranslateCartelInKey)
+        {
+            switch (whoTranslateCartelInKey)
+            {
+                case 1:
+                    whoDoesTheTranslateToWhoCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Единство", "Unity"), InlineKeyboardButton.WithCallbackData("Черный рынок","BlackMarket")},
+                        new[] {InlineKeyboardButton.WithCallbackData("Химик","Chemist")},
+                    });
+                    break;
+
+                default:
+                    whoDoesTheTranslateToWhoCartel = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Единство", "Unity"), InlineKeyboardButton.WithCallbackData("Черный рынок", "BlackMarket") },
+                    });
+                    break;
+            }
+
+            
 
         }
 
@@ -2051,7 +3014,7 @@ namespace WildLandsBot
         {
             string tokenDreamer = "Dreamer.txt";
 
-            cartelCashBalance = 200;
+            cartelCashBalance = 2000;
             cartelCashBalanceIntermediateStorage = 200;
             cartelCashBalanceCheck = 200;
             percentForTranslation = 0.1;
@@ -2123,25 +3086,60 @@ namespace WildLandsBot
             cartelDeliveryTimeTrucks = 1;
             cartelDeliveryTimeHelicopters = 1;
             cartelDeliveryTimeAircraft = 1;
-            cartelStartTimeMission1 = 1;
-            cartelStartTimeMission2 = 1;
-            cartelStartTimeMission3 = 1;
-            cartelFailedTimeMission1 = 240;
-            cartelFailedTimeMission2 = 300;
-            cartelFailedTimeMission3 = 360;
+            cartelStartTimeMission1 = 5;
+            cartelStartTimeMission2 = 10;
+            cartelStartTimeMission3 = 15;
+            cartelFailedTimeMission1 = 20;
+            cartelFailedTimeMission2 = 25;
+            cartelFailedTimeMission3 = 30;
             cartelTributePaymentTime = 1;
             tribute = 20;
             missionPool = new List<string>();
             cartelMissionCompleted1 = false;
             cartelMissionCompleted2 = false;
             cartelMissionCompleted3 = false;
+
+            //новые параметры
+            cartelChemistTry = false;
+            cartelChemistNowTry = false;
+            cartelСhemistPrice1 = 105;
+            cartelLoadingCocaToTheChemist1 = 10;
+            cartelCocaProcessingTimeByChemist1 = 5;
+            cartelMassOfCocaAfterTreatmentByAChemist1 = 0.5;
+            cartelPriceOfCocaAfterChemicalTreatment1 = 20;
+            cartelСhemistPrice2 = 145;
+            cartelLoadingCocaToTheChemist2 = 16;
+            cartelCocaProcessingTimeByChemist2 = 5;
+            cartelMassOfCocaAfterTreatmentByAChemist2 = 1;
+            cartelPriceOfCocaAfterChemicalTreatment2 = 15;
+            cartelСhemistPrice3 = 140;
+            cartelLoadingCocaToTheChemist3 = 10;
+            cartelCocaProcessingTimeByChemist3 = 3;
+            cartelMassOfCocaAfterTreatmentByAChemist3 = 0.5;
+            cartelPriceOfCocaAfterChemicalTreatment3 = 18.5;
+            cartelСhemistPrice4 = 160;
+            cartelLoadingCocaToTheChemist4 = 10;
+            cartelCocaProcessingTimeByChemist4 = 15;
+            cartelMassOfCocaAfterTreatmentByAChemist4 = 1;
+            cartelPriceOfCocaAfterChemicalTreatment4 = 35;
+            translationsID = 0;
+            comparisonChemistDateFromStart = dateStart;
+            comparisonChemistDateFromStartTime = comparisonChemistDateFromStart;
+            cartelNowTimeChemist = 1;
+            chemistBool1 = true;
+            chemistBool2 = true;
+            chemistBool3 = true;
+            chemistBool4 = true;
+            cartelChemistSaleDate = dateStart;
+            cartelChemistPaymentTime = 1;
+
             CartelDeserialization();
             Console.WriteLine(dateStart);
             Console.WriteLine(dateStart.AddMinutes(1));
             Console.WriteLine(dateStart.AddHours(1));
             dreamerBot = new TelegramBotClient(NewDoc(tokenDreamer));
-            dreamerBot.OnMessage += MessageListener;
 
+            dreamerBot.OnMessage += MessageListener;
             dreamerBot.StartReceiving();
 
 
@@ -2164,12 +3162,12 @@ namespace WildLandsBot
             unityGettingMission2 = false;
             unityGettingMission3 = false;
             unitySupplementaryMission2 = false;
-            unityStartTimeMission1 = 1;
-            unityStartTimeMission2 = 1;
-            unityStartTimeMission3 = 1;
-            unityFailedTimeMission1 = 240;
-            unityFailedTimeMission2 = 300;
-            unityFailedTimeMission3 = 360;
+            unityStartTimeMission1 = 5;
+            unityStartTimeMission2 = 10;
+            unityStartTimeMission3 = 15;
+            unityFailedTimeMission1 = 20;
+            unityFailedTimeMission2 = 25;
+            unityFailedTimeMission3 = 30;
             unitySalaryPaymentTime = 1;
             unityMissionPool = new List<string>();
             unityMissionCompleted1 = false;
@@ -3203,6 +4201,8 @@ namespace WildLandsBot
             }
             return token;
         }
+
+
     }
 }
 

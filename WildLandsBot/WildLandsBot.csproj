@@ -83,6 +83,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Chemist_Bot.cs" />
+    <Compile Include="Click.cs" />
     <Compile Include="Dreamer_Bot_And_General_Baro_Bot.cs" />
     <Compile Include="Karen_Bowman_Bot.cs" />
     <Compile Include="MainWindow.xaml.cs">
