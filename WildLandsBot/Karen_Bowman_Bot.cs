@@ -266,7 +266,7 @@ namespace WildLandsBot
                                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 Выполнена");
                                 ghostsMessageText = $"Миссия 1 Выполнена";
                                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                                await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete1ID);
+                                //await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete1ID);
                                 ghostsMissionPool.Remove($"Миссия 1");
                                 ghostsMissionCompleted1 = true;
                             }
@@ -278,7 +278,7 @@ namespace WildLandsBot
                                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 Выполнена");
                                 ghostsMessageText = $"Миссия 2 Выполнена";
                                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                                await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete2ID);
+                                //await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete2ID);
                                 ghostsMissionPool.Remove($"Миссия 2");
                                 ghostsMissionCompleted2 = true;
                             }
@@ -290,7 +290,7 @@ namespace WildLandsBot
                                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 Выполнена");
                                 ghostsMessageText = $"Миссия 3 Выполнена";
                                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                                await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete3ID);
+                                //await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionComplete3ID);
                                 ghostsMissionPool.Remove($"Миссия 3");
                                 ghostsMissionCompleted3 = true;
                             }
@@ -364,7 +364,7 @@ namespace WildLandsBot
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 1");
                 ghostsMessageText = $"Получена миссия 1";
                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMission1ID);
+                //await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMission1ID);
                 ghostsGettingMission1 = true;
 
                 if (ghostsMissionPool.Contains("Миссия 1") == false)
@@ -392,7 +392,7 @@ namespace WildLandsBot
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 3");
                 ghostsMessageText = $"Получена миссия 3";
                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMission3ID);
+                //await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMission3ID);
                 ghostsGettingMission3 = true;
 
                 if (ghostsMissionPool.Contains("Миссия 3") == false)
@@ -408,7 +408,7 @@ namespace WildLandsBot
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 провалена");
                 ghostsMessageText = $"Миссия 1 провалена";
                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID1);
+                //await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID1);
                 ghostsMissionPool.Remove($"Миссия 1");
             }
 
@@ -418,7 +418,7 @@ namespace WildLandsBot
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 провалена");
                 ghostsMessageText = $"Миссия 2 провалена";
                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID2);
+                //await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID2);
                 ghostsMissionPool.Remove($"Миссия 2");
             }
 
@@ -428,7 +428,7 @@ namespace WildLandsBot
                 await karenBowmanBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 провалена");
                 ghostsMessageText = $"Миссия 3 провалена";
                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID3);
+                //await karenBowmanBot.SendAudioAsync(e.Message.Chat.Id, ghostsMissionFailedID3);
                 ghostsMissionPool.Remove($"Миссия 3");
             }
 
@@ -522,7 +522,7 @@ namespace WildLandsBot
                 await karenBowmanBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Получена миссия 2");
                 ghostsMessageText = $"Получена миссия 2";
                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                await karenBowmanBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, ghostsMission2ID);
+                //await karenBowmanBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, ghostsMission2ID);
                 ghostsGettingMission2 = true;
 
                 if (ghostsMissionPool.Contains("Миссия 2") == false)
@@ -536,7 +536,7 @@ namespace WildLandsBot
                 await karenBowmanBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ты точно уверен, что это хороший выбор? Привет семье");
                 ghostsMessageText = $"Ты точно уверен, что это хороший выбор? Привет семье";
                 Logging(GhostsKarenBowmanBotMessageLog, ghostsMessageText, "Карен Боуман", 4);
-                await karenBowmanBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, ghostsMissionAbandonmentID2);
+                //await karenBowmanBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, ghostsMissionAbandonmentID2);
                 ghostsGettingMission2 = true;
             }
         }

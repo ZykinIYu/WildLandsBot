@@ -267,7 +267,7 @@ namespace WildLandsBot
                                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 Выполнена");
                                 insurgentsMessageText = $"Миссия 1 Выполнена";
                                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                                await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete1ID);
+                                //await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete1ID);
                                 insurgentsMissionPool.Remove($"Миссия 1");
                                 insurgentsMissionCompleted1 = true;
                             }
@@ -279,7 +279,7 @@ namespace WildLandsBot
                                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 Выполнена");
                                 insurgentsMessageText = $"Миссия 2 Выполнена";
                                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                                await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete2ID);
+                                //await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete2ID);
                                 insurgentsMissionPool.Remove($"Миссия 2");
                                 insurgentsMissionCompleted2 = true;
                             }
@@ -291,7 +291,7 @@ namespace WildLandsBot
                                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 Выполнена");
                                 insurgentsMessageText = $"Миссия 3 Выполнена";
                                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                                await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete3ID);
+                                //await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionComplete3ID);
                                 insurgentsMissionPool.Remove($"Миссия 3");
                                 insurgentsMissionCompleted3 = true;
                             }
@@ -365,7 +365,7 @@ namespace WildLandsBot
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 1");
                 insurgentsMessageText = $"Получена миссия 1";
                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMission1ID);
+                //await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMission1ID);
                 insurgentsGettingMission1 = true;
 
                 if (insurgentsMissionPool.Contains("Миссия 1") == false)
@@ -392,7 +392,7 @@ namespace WildLandsBot
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Получена миссия 3");
                 insurgentsMessageText = $"Получена миссия 3";
                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMission3ID);
+                //await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMission3ID);
                 insurgentsGettingMission3 = true;
 
                 if (insurgentsMissionPool.Contains("Миссия 3") == false)
@@ -408,7 +408,7 @@ namespace WildLandsBot
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 1 провалена");
                 insurgentsMessageText = $"Миссия 1 провалена";
                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID1);
+                //await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID1);
                 insurgentsMissionPool.Remove($"Миссия 1");
             }
 
@@ -418,7 +418,7 @@ namespace WildLandsBot
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 2 провалена");
                 insurgentsMessageText = $"Миссия 2 провалена";
                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID2);
+                //await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID2);
                 insurgentsMissionPool.Remove($"Миссия 2");
             }
 
@@ -428,7 +428,7 @@ namespace WildLandsBot
                 await pacKatariBot.SendTextMessageAsync(e.Message.Chat.Id, $"Миссия 3 провалена");
                 insurgentsMessageText = $"Миссия 3 провалена";
                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID3);
+                //await pacKatariBot.SendAudioAsync(e.Message.Chat.Id, insurgentsMissionFailedID3);
                 insurgentsMissionPool.Remove($"Миссия 3");
             }
 
@@ -522,7 +522,7 @@ namespace WildLandsBot
                 await pacKatariBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Получена миссия 2");
                 insurgentsMessageText = $"Получена миссия 2";
                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                await pacKatariBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, insurgentsMission2ID);
+                //await pacKatariBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, insurgentsMission2ID);
                 insurgentsGettingMission2 = true;
 
                 if (insurgentsMissionPool.Contains("Миссия 2") == false)
@@ -536,7 +536,7 @@ namespace WildLandsBot
                 await pacKatariBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Ты точно уверен, что это хороший выбор? Привет семье");
                 insurgentsMessageText = $"Ты точно уверен, что это хороший выбор? Привет семье";
                 Logging(InsurgentPacKatariBotMessageLog, insurgentsMessageText, "Пак Катари", 3);
-                await pacKatariBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, insurgentsMissionAbandonmentID2);
+                //await pacKatariBot.SendAudioAsync(ev.CallbackQuery.Message.Chat.Id, insurgentsMissionAbandonmentID2);
                 insurgentsGettingMission2 = true;
             }
         }
