@@ -787,6 +787,9 @@ namespace WildLandsBot
         /// </summary>
         private InlineKeyboardMarkup cartelBuyingOrDownloadingAChemistKeyboard;
 
+
+        private InlineKeyboardMarkup cartelTransportationOfCocaKeyboard;
+
         /// <summary>
         /// переменная показывающая смогло ли Единство выполнить миссию 1
         /// </summary>
@@ -2567,17 +2570,6 @@ namespace WildLandsBot
                     Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
                 }
             }
-            else
-            if (ev.CallbackQuery.Data == "CocaTransportation")
-            {
-                dreamerBot.DeleteMessageAsync(ev.CallbackQuery.Message.Chat.Id, ev.CallbackQuery.Message.MessageId);
-                CocaTransportationKeyboardInline();
-                dreamerBot.OnCallbackQuery -= CartelSendingTheHarvestedCoca;
-                await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Каким видом транспорта будете отправлять коку?\nСвободных грузовиков: {cartelNumberTrucks}, водитель возмет {cartelpercentForTranslationTrucks * 100} % с продажи коки, вместимость {cartelNumberCocaTrucks} т. коки\nСвободных вертолетов: {cartelNumberHelicopters}, пилот возмет {cartelpercentForTranslationHelicopters * 100} % с продажи коки, вместимость {cartelNumberCocaHelicopters} т. коки\nСвободных самолетов: {cartelNumberAircraft}, пилот возмет {cartelpercentForTranslationAircraft * 100} % с продажи коки, вместимость {cartelNumberCocaAircraft} т. коки\nВодители и пилоты транспортируют груз, только если ТС полностью заполнено кокой", replyMarkup: cartelCocaTransportationKeyboard);
-                dreamerMessageText = $"Каким видом транспорта будете отправлять коку?\nСвободных грузовиков: {cartelNumberTrucks}, водитель возмет {cartelpercentForTranslationTrucks * 100} % с продажи коки, вместимость {cartelNumberCocaTrucks} т. коки\nСвободных вертолетов: {cartelNumberHelicopters}, пилот возмет {cartelpercentForTranslationHelicopters * 100} % с продажи коки, вместимость {cartelNumberCocaHelicopters} т. коки\nСвободных самолетов: {cartelNumberAircraft}, пилот возмет {cartelpercentForTranslationAircraft * 100} % с продажи коки, вместимость {cartelNumberCocaAircraft} т. коки\nВодители и пилоты транспортируют груз, только если ТС полностью заполнено кокой";
-                Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                dreamerBot.OnCallbackQuery += CartelSendingTheHarvestedCoca;
-            }
         }
 
         /// <summary>
@@ -2793,16 +2785,75 @@ namespace WildLandsBot
                     break;
 
                 case "Транспортировка коки":
-                    CartelPlantationSelectionKeyboardInline();
-                    dreamerBot.OnCallbackQuery -= CartelHittingThePlantation;
-                    await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Ваше хранилище содержит {cartelCocaCash}т. коки.\nВыберите необходимую плантацию", replyMarkup: cartelPlantationSelectionKeyboard);
-                    dreamerMessageText = $"Ваше хранилище содержит {cartelCocaCash}т. коки.\nВыберите необходимую плантацию";
-                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
-                    dreamerBot.OnCallbackQuery += CartelHittingThePlantation;
+
+                    if (cartelCocaCash < cartelNumberCocaTrucks && cartelCocaCashChemist1 < cartelNumberCocaTrucks && cartelCocaCashChemist2 < cartelNumberCocaTrucks && cartelCocaCashChemist3 < cartelNumberCocaTrucks && cartelCocaCashChemist4 < cartelNumberCocaTrucks)
+                    {
+                        var chemistText = $"Вам пока нечего перевозить\n" +
+                            $"Баланс коки: {cartelCocaCash}\n" +
+                            $"Баланс коки переработанной химиком 1: {cartelCocaCashChemist1}\n" +
+                            $"Баланс коки переработанной химиком 2: {cartelCocaCashChemist2}\n" +
+                            $"Баланс коки переработанной химиком 3: {cartelCocaCashChemist3}\n" +
+                            $"Баланс коки переработанной химиком 4: {cartelCocaCashChemist4}\n";
+                        await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, chemistText);
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        break;
+                    }
+                    else if (cartelCocaCashChemist1 < cartelNumberCocaTrucks && cartelCocaCashChemist2 < cartelNumberCocaTrucks && cartelCocaCashChemist3 < cartelNumberCocaTrucks && cartelCocaCashChemist4 < cartelNumberCocaTrucks)
+                    {
+                        CocaTransportationKeyboardInline();
+                        dreamerBot.OnCallbackQuery -= CartelSendingTheHarvestedCoca;
+                        await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, $"Каким видом транспорта будете отправлять коку?\nСвободных грузовиков: {cartelNumberTrucks}, водитель возмет {cartelpercentForTranslationTrucks * 100} % с продажи коки, вместимость {cartelNumberCocaTrucks} т. коки\nСвободных вертолетов: {cartelNumberHelicopters}, пилот возмет {cartelpercentForTranslationHelicopters * 100} % с продажи коки, вместимость {cartelNumberCocaHelicopters} т. коки\nСвободных самолетов: {cartelNumberAircraft}, пилот возмет {cartelpercentForTranslationAircraft * 100} % с продажи коки, вместимость {cartelNumberCocaAircraft} т. коки\nВодители и пилоты транспортируют груз, только если ТС полностью заполнено кокой", replyMarkup: cartelCocaTransportationKeyboard);
+                        dreamerMessageText = $"Каким видом транспорта будете отправлять коку?\nСвободных грузовиков: {cartelNumberTrucks}, водитель возмет {cartelpercentForTranslationTrucks * 100} % с продажи коки, вместимость {cartelNumberCocaTrucks} т. коки\nСвободных вертолетов: {cartelNumberHelicopters}, пилот возмет {cartelpercentForTranslationHelicopters * 100} % с продажи коки, вместимость {cartelNumberCocaHelicopters} т. коки\nСвободных самолетов: {cartelNumberAircraft}, пилот возмет {cartelpercentForTranslationAircraft * 100} % с продажи коки, вместимость {cartelNumberCocaAircraft} т. коки\nВодители и пилоты транспортируют груз, только если ТС полностью заполнено кокой";
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        dreamerBot.OnCallbackQuery += CartelSendingTheHarvestedCoca;
+                        break;
+                    }
+                    else if (cartelCocaCash < cartelNumberCocaTrucks && (cartelCocaCashChemist1 >= cartelNumberCocaTrucks || cartelCocaCashChemist2 >= cartelNumberCocaTrucks || cartelCocaCashChemist3 >= cartelNumberCocaTrucks || cartelCocaCashChemist4 >= cartelNumberCocaTrucks))
+                    {
+
+                    }
+                    else
+                    {
+                        CartelTransportationOfCoca(1);
+                        dreamerBot.OnCallbackQuery -= ChoiceOfSendingCoca;
+                        dreamerMessageText = $"Какую хотите отправить коку? Сырую или переработанную?";
+                        await dreamerBot.SendTextMessageAsync(e.Message.Chat.Id, dreamerMessageText, replyMarkup: cartelTransportationOfCocaKeyboard);                       
+                        Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                        dreamerBot.OnCallbackQuery += ChoiceOfSendingCoca;
+                        break;
+                    }
+
                     break;
 
 
 
+            }
+        }
+
+        /// <summary>
+        /// Метод определяющий действия кнопок выбора транспортировки сырой или переработанной коки
+        /// </summary>
+        /// <param name="sc"></param>
+        /// <param name="ev"></param>
+        async private void ChoiceOfSendingCoca(object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev)
+        {
+            var dreamerMessageText = $"NULL";
+            var message = ev.CallbackQuery.Message;
+
+            switch (ev.CallbackQuery.Data)
+            {
+                case "TransportationOfRawCoca":
+                    CocaTransportationKeyboardInline();
+                    dreamerBot.OnCallbackQuery -= CartelSendingTheHarvestedCoca;
+                    await dreamerBot.SendTextMessageAsync(ev.CallbackQuery.Message.Chat.Id, $"Каким видом транспорта будете отправлять коку?\nСвободных грузовиков: {cartelNumberTrucks}, водитель возмет {cartelpercentForTranslationTrucks * 100} % с продажи коки, вместимость {cartelNumberCocaTrucks} т. коки\nСвободных вертолетов: {cartelNumberHelicopters}, пилот возмет {cartelpercentForTranslationHelicopters * 100} % с продажи коки, вместимость {cartelNumberCocaHelicopters} т. коки\nСвободных самолетов: {cartelNumberAircraft}, пилот возмет {cartelpercentForTranslationAircraft * 100} % с продажи коки, вместимость {cartelNumberCocaAircraft} т. коки\nВодители и пилоты транспортируют груз, только если ТС полностью заполнено кокой", replyMarkup: cartelCocaTransportationKeyboard);
+                    dreamerMessageText = $"Каким видом транспорта будете отправлять коку?\nСвободных грузовиков: {cartelNumberTrucks}, водитель возмет {cartelpercentForTranslationTrucks * 100} % с продажи коки, вместимость {cartelNumberCocaTrucks} т. коки\nСвободных вертолетов: {cartelNumberHelicopters}, пилот возмет {cartelpercentForTranslationHelicopters * 100} % с продажи коки, вместимость {cartelNumberCocaHelicopters} т. коки\nСвободных самолетов: {cartelNumberAircraft}, пилот возмет {cartelpercentForTranslationAircraft * 100} % с продажи коки, вместимость {cartelNumberCocaAircraft} т. коки\nВодители и пилоты транспортируют груз, только если ТС полностью заполнено кокой";
+                    Logging(CartelDreamerBotMessageLog, dreamerMessageText, "Мечтатель", 1);
+                    dreamerBot.OnCallbackQuery += CartelSendingTheHarvestedCoca;
+                    break;
+
+                case "TransportationOfProcessedCoca":
+
+                    break;
             }
         }
 
@@ -3300,6 +3351,123 @@ namespace WildLandsBot
         }
 
         /// <summary>
+        /// Меню кому картель хочет перевести
+        /// </summary>
+        private void CartelTransportationOfCoca(int intCartelTransportationOfCoca)
+        {
+            switch (intCartelTransportationOfCoca)
+            {
+
+                case 1:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка сырой коки", "TransportationOfRawCoca") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка переработанной коки", "TransportationOfProcessedCoca") },
+                    });
+                    break;
+
+                case 2:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 1", "TransportationOfProcessedCocaByAChemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 2", "TransportationOfProcessedCocaByAChemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 3", "TransportationOfProcessedCocaByAChemist3") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 4", "TransportationOfProcessedCocaByAChemist4") },
+                    });
+                    break;
+
+                case 3:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 2", "TransportationOfProcessedCocaByAChemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 3", "TransportationOfProcessedCocaByAChemist3") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 4", "TransportationOfProcessedCocaByAChemist4") },
+                    });
+                    break;
+
+                case 4:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 1", "TransportationOfProcessedCocaByAChemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 3", "TransportationOfProcessedCocaByAChemist3") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 4", "TransportationOfProcessedCocaByAChemist4") },
+                    });
+                    break;
+
+                case 5:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 1", "TransportationOfProcessedCocaByAChemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 2", "TransportationOfProcessedCocaByAChemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 4", "TransportationOfProcessedCocaByAChemist4") },
+                    });
+                    break;
+
+                case 6:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 1", "TransportationOfProcessedCocaByAChemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 2", "TransportationOfProcessedCocaByAChemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 3", "TransportationOfProcessedCocaByAChemist3") },
+                    });
+                    break;
+
+                case 7:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 3", "TransportationOfProcessedCocaByAChemist3") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 4", "TransportationOfProcessedCocaByAChemist4") },
+                    });
+                    break;
+
+                case 8:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 2", "TransportationOfProcessedCocaByAChemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 4", "TransportationOfProcessedCocaByAChemist4") },
+                    });
+                    break;
+
+                case 9:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 2", "TransportationOfProcessedCocaByAChemist2") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 3", "TransportationOfProcessedCocaByAChemist3") },
+                    });
+                    break;
+
+                case 10:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 1", "TransportationOfProcessedCocaByAChemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 4", "TransportationOfProcessedCocaByAChemist4") },
+                    });
+                    break;
+
+                case 11:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 1", "TransportationOfProcessedCocaByAChemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 3", "TransportationOfProcessedCocaByAChemist3") },
+                    });
+                    break;
+
+                case 12:
+                    cartelTransportationOfCocaKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 1", "TransportationOfProcessedCocaByAChemist1") },
+                        new[] {InlineKeyboardButton.WithCallbackData("Транспортировка обработанной коки химиком 2", "TransportationOfProcessedCocaByAChemist2") },
+                    });
+                    break;
+
+
+            }
+
+
+
+        }
+
+        /// <summary>
         /// Меню принятия/отказа дополнительной миссии
         /// </summary>
         private void AcceptOrRefuseAMission()
@@ -3318,7 +3486,7 @@ namespace WildLandsBot
             cartelPlantationSelectionKeyboard = new InlineKeyboardMarkup(new[]
             {
                 new[] {InlineKeyboardButton.WithCallbackData("Зеленая плантация", "GreenPlantation"), InlineKeyboardButton.WithCallbackData("Желтая плантация", "YellowPlantation") },
-                new[] {InlineKeyboardButton.WithCallbackData("Красная плантация", "RedPlantation"), InlineKeyboardButton.WithCallbackData("Перевозка коки", "CocaTransportation") },
+                new[] {InlineKeyboardButton.WithCallbackData("Красная плантация", "RedPlantation")},
             });
 
         }
